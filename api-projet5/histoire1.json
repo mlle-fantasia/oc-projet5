@@ -1,0 +1,42 @@
+[
+  {"mot": "loup","genre":"1","pluriel":"0", "type": "sujet" },
+  {"mot": "prince","genre":"1","pluriel":"0", "type": "sujet" },
+  {"mot": "petit garçon","genre":"1","pluriel":"0", "type": "sujet" },
+  {"mot": "petite fille","genre":"2","pluriel":"0", "type": "sujet" },
+
+
+  {"mot": "dans une forêt loingtaine", "type": "lieu"},
+  {"mot": "dans un immense chateau vide", "type": "lieu"},
+  {"mot": "pendant les vacances scolaires", "type": "lieu"},
+  {"mot": "à la plage", "type": "lieu"},
+
+  {"mot": "qui avait mal aux dents", "type": "qui"},
+  {"mot": "qui voulait découvrir le monde", "type": "qui"},
+  {"mot": "qui rendait visite à sa grand mère", "type": "qui"},
+  {"mot": "qui jouait à pokémon go", "type": "qui"},
+
+  {"mot": "Que vous avez de grandes dents !" , "type": "parole" },
+  {"mot": "Hé ! qu'est ce que tu fais là tout seul ? viens on va jouer !", "type": "parole" },
+  {"mot": "Ce projet a été spécialement conçu pour ceux qui débutent dans la programmation ;) ", "type": "parole"},
+  {"mot": "Ce lieu est remplis de créatures mystérieuses", "type": "parole" },
+  {"mot": "Mais où est donc or ni car ?" , "type": "parole"},
+  {"mot": "Si mon tonton tond ton tonton, mon tonton tondu sera" , "type": "parole"},
+  {"mot": "Ici ce trouve le puit éternel, si tu tombes dedant... tu seras mouillé ", "type": "parole" },
+
+  {"mot": "rencontra", "type": "verbe" , "suite":"sujet"},
+  {"mot": "dit", "type": "verbe", "suite":"parole"},
+  {"mot": "répondi", "type": "verbe", "suite":"parole"},
+  {"mot": "mangea", "type": "verbe", "suite":"objet"},
+  {"mot": "trouva", "type": "verbe", "suite":"objet"},
+
+  {"mot": "une pomme","genre":"2","pluriel":"0", "type": "objet", "suite":"adjectif" },
+  {"mot": "du bois vert","genre":"1","pluriel":"0", "type": "objet", "suite":"adjectif"},
+  {"mot": "une tasse à café","genre":"2","pluriel":"0", "type": "objet", "suite":"adjectif"},
+  {"mot": "un baton","genre":"1","pluriel":"0", "type": "objet", "suite":"adjectif"},
+  {"mot": "des petits cailloux","genre":"1","pluriel":"1", "type": "objet", "suite":"adjectif"},
+
+  {"mot": "extraodinaire", "type": "adjectif" },
+  {"mot": "magique", "type": "adjectif"},
+  {"mot": "au couleur de l'arc en ciel", "type": "adjectif"},
+  {"mot": "fletri", "type": "adjectif"}
+]

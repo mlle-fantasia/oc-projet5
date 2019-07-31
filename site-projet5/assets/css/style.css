@@ -1,0 +1,200 @@
+/********** style général *******/
+.btn-primary{
+    border-radius: 20px;
+    background-color: #72b890;
+    border-color: #72b890;
+}
+.btn-primary:hover{
+    background-color: #c05d8e;
+    border-color: #c05d8e;
+}
+/********** header *****************/
+.header {
+    background-image: url("../images/64792527.jpg");
+    background-size: cover;
+    min-height: 90vh;
+    margin-bottom: 50px;
+}
+.text-header-titre{
+    font-size: 25px;
+    text-transform: uppercase;
+}
+.container-text-header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20vh;
+    height: 40vh;
+    padding: 15px;
+    color: #fff;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 5px 5px;
+}
+.btn-acces-generateur a{
+    color: white;
+}
+
+/********** zone avantages *****************/
+.avantage{
+    background-color: white;
+    padding: 20px;
+    border: solid 1px gray;
+    border-radius: 7px 7px;
+    box-shadow: 0 1px 6px 0;
+    margin-top: -150px;
+    margin-bottom: 100px;
+}
+.container-text-avantage{
+    text-align: center;
+    padding: 10px 0 20px 0;
+}
+.titre-avantage{
+    text-align: center;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+.actualite-img{
+    width: 100%;
+    border-radius: 50% 50%;
+}
+
+
+
+.actualite-titre{
+    margin-top: 10px;
+}
+.actualite{
+    text-align: center;
+}
+
+.actualite-img{
+    width: 50%;
+    margin: auto;
+
+}
+
+/************** livre ***************/
+.container-histoire{
+    text-align: center;
+    margin-bottom:100px;
+}
+.livre{
+    justify-content: center;
+}
+.page{
+    width: 40%;
+    height: 70vh;
+    border: solid 1px gray;
+}
+.page-image{
+    overflow: hidden;
+    -webkit-border-radius:
+            40px 0 0 40px / 20px 0 0 20px;
+    -moz-border-radius:
+            40px 0 0 40px / 20px 0 0 20px;
+    border-radius:
+            40px 0 0 40px / 20px 0 0 20px;
+    box-shadow: 1px 4px 8px 0;
+}
+.page-text{
+    -webkit-border-radius:
+            0 40px 40px 0 / 0 20px 20px 0;
+    -moz-border-radius:
+            0 40px 40px 0 / 0 20px 20px 0;
+    border-radius:
+            0 40px 40px 0 / 0 20px 20px 0;
+    box-shadow: -1px 4px 8px 0;
+}
+.img-livre{
+    width: 100%;
+}
+.text-livre{
+    padding: 10px 20px;
+    text-align: left;
+}
+.text-livre {
+    font-weight: 700;
+}
+
+
+/************** footer ************************/
+footer{
+    background-color: #2e2621;
+    height: 100px;
+    margin-top: 50px;
+}
+footer a {
+    color: white;
+}
+.navbar-nav{
+    flex-direction: row;
+}
+.nav-item{
+   padding: 5px;
+}
+
+/**************** test ***************/
+
+#book{
+    width:800px;
+    height:500px;
+}
+
+#book .turn-page{
+    background-color:white;
+}
+
+#book .cover{
+    background:#333;
+}
+
+#book .cover h1{
+    color:white;
+    text-align:center;
+    font-size:50px;
+    line-height:500px;
+    margin:0px;
+}
+
+#book .loader{
+    background-image:url(loader.gif);
+    width:24px;
+    height:24px;
+    display:block;
+    position:absolute;
+    top:238px;
+    left:188px;
+}
+
+#book .data{
+    text-align:center;
+    font-size:40px;
+    color:#999;
+    line-height:500px;
+}
+
+#controls{
+    width:800px;
+    text-align:center;
+    margin:20px 0px;
+    font:30px arial;
+}
+
+#controls input, #controls label{
+    font:30px arial;
+}
+
+#book .odd{
+    background-image:-webkit-linear-gradient(left, #FFF 95%, #ddd 100%);
+    background-image:-moz-linear-gradient(left, #FFF 95%, #ddd 100%);
+    background-image:-o-linear-gradient(left, #FFF 95%, #ddd 100%);
+    background-image:-ms-linear-gradient(left, #FFF 95%, #ddd 100%);
+}
+
+#book .even{
+    background-image:-webkit-linear-gradient(right, #FFF 95%, #ddd 100%);
+    background-image:-moz-linear-gradient(right, #FFF 95%, #ddd 100%);
+    background-image:-o-linear-gradient(right, #FFF 95%, #ddd 100%);
+    background-image:-ms-linear-gradient(right, #FFF 95%, #ddd 100%);
+}
