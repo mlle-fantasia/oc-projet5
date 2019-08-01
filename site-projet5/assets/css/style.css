@@ -85,7 +85,10 @@
 .page{
     width: 40%;
     height: 70vh;
-    border: solid 1px gray;
+    border: 1px solid gray;
+}
+.cover{
+    box-shadow: 5px 5px 5px;
 }
 .page-image{
     overflow: hidden;

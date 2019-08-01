@@ -1,4 +1,23 @@
 $(document).ready(function() {
+    let numberOfPages = 1000;
+    $('#book').turn({acceleration: true,
+        pages: numberOfPages,
+        elevation: 50,
+        gradients: !$.isTouch,
+        when: {
+            turning: function(e, page, view) {
+
+                // Gets the range of pages that the book needs right now
+                let range = $(this).turn('range', page);
+                console.log(range);
+                // Check if each page is within the book
+                for (page = range[0]; page<=range[1]; page++)
+                    addPage(page, $(this));
+
+            },
+
+        }
+    });
 
     let index = 1;
 
@@ -6,7 +25,15 @@ $(document).ready(function() {
     let sujet2 = "";
     let sujetAUtiliser = "";
 
+    $('#btn-turn-page').click(function (){
+        console.log('click');
+        $('#book').turn('next');
+    });
+
     $("#start-story").click(async function(){
+        if(index === 1 ) {
+            animationTournerLaPage();
+        }
 
         let phrase = "";
         if(index === 1){phrase += "Il était une fois "}
@@ -64,7 +91,7 @@ $(document).ready(function() {
                 let $newPhrase = $( "<p class='text-livre text-livre"+index+"'></p>" );
                 $(".page-text").append( $( $newPhrase ) );
                 $(".text-livre"+index).html(phrase);
-                //animationApparitionText(index);
+                animationApparitionText(index);
                 index ++;
                 $("#start-story").html("continuer l'histoire");
             }
@@ -75,6 +102,25 @@ $(document).ready(function() {
 
 });
 
+function addPage(page, book) {
+    let image = '29462393s.jpg';
+    // 	First check if the page is already in the book
+    if (!book.turn('hasPage', page)) {
+        // Create an element for this page
+        var element = $('<div />', {'class': 'page '+((page%2===0) ? 'odd page-text' : 'even page-image'), 'id': 'page-'+page}).html('<i class="loader"></i>');
+        let elText = $('<p />', {'class' :'text-livre', 'id':'text-livre' });
+        let elImg = $('<img />', {'class' :'img-livre', 'id':'img-livre', 'src': 'assets/images/'+image });
+        page%2===0 ? element.append(elText) : element.append(elImg);
+
+        // If not then add the page
+        book.turn('addPage', element, page);
+        // Let's assum that the data is comming from the server and the request takes 1s.
+        setTimeout(function(){
+            elText.html('');
+        }, 1000);
+    }
+}
+
 function animationApparitionText(index){
     var textWrapper = document.querySelector('.text-livre'+index);
     textWrapper.innerHTML = textWrapper.textContent.replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>");
@@ -84,14 +130,14 @@ function animationApparitionText(index){
             targets: '.text-livre'+index+' .letter',
             opacity: [0,1],
             easing: "easeInOutQuad",
-            duration: 1000,
+            duration: 500,
             delay: function(el, i) {
                 return 100 * (i+1)
             }
         }).add({
         targets: '.text-livre',
         opacity: 0,
-        duration: 9999999999999999999999999999,
+        duration: Infinity,
         easing: "easeOutExpo",
 
     });
@@ -99,5 +145,6 @@ function animationApparitionText(index){
 
 function animationTournerLaPage(){
    console.log("page suivante");
+    $('#book').turn('next');
 }
 
