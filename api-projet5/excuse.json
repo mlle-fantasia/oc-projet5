@@ -1,0 +1,20 @@
+[
+	{ "mot": "un loup", "genre": "1", "pluriel": "0", "type": "sujet" },
+	{ "mot": "mon chien", "genre": "1", "pluriel": "0", "type": "sujet" },
+	{ "mot": "mon petit garçon", "genre": "1", "pluriel": "0", "type": "sujet" },
+	{ "mot": "ma fille", "genre": "2", "pluriel": "0", "type": "sujet" },
+	{ "mot": "ma grand mère", "genre": "2", "pluriel": "0", "type": "sujet" },
+
+	{ "mot": "mangé", "type": "verbe", "suite": "objet", "avec": "avoir" },
+	{ "mot": "disparut", "type": "verbe", "suite": "parole" , "avec": "avoir" },
+	{ "mot": "été arrêté par la police", "type": "verbe", "suite": "parole", "avec": "avoir"  },
+	{ "mot": "brulé", "type": "verbe", "suite": "objet", "avec": "avoir"  },
+	{ "mot": "renversé", "type": "verbe", "suite": "objet", "avec": "avoir"  },
+	{ "mot": "morte", "type": "verbe", "suite": "objet", "avec": "etre"  },
+
+	{ "mot": "mes documents", "genre": "2", "pluriel": "0", "type": "objet", "suite": "adjectif" },
+	{ "mot": "du bois vert", "genre": "1", "pluriel": "0", "type": "objet", "suite": "adjectif" },
+	{ "mot": "une tasse à café", "genre": "2", "pluriel": "0", "type": "objet", "suite": "adjectif" },
+	{ "mot": "mon compte rendu", "genre": "1", "pluriel": "0", "type": "objet", "suite": "adjectif" },
+	{ "mot": "des petits cailloux", "genre": "1", "pluriel": "1", "type": "objet", "suite": "adjectif" }
+]

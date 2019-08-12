@@ -4,6 +4,7 @@ const app = express();
 app.use(cors({origin: '*'}));
 
 var histoire1 = require("./histoire1.json");
+var excuse = require("./excuse.json");
 
 const tabsujet =  histoire1.filter((objet)=>{
     return objet.type === "sujet";
@@ -71,6 +72,33 @@ app.get('/histoire/:index', function (req, res) {
     }
     res.send(phrase);
 
+});
+
+const tabsujetExcuse =  excuse.filter((objet)=>{
+    return objet.type === "sujet";
+});
+const tabverbeExcuse =  excuse.filter((objet)=>{
+    return objet.type === "verbe";
+});
+const tabobjetExcuse =  excuse.filter((objet)=>{
+    return objet.type === "objet";
+});
+
+app.get('/excuse/:index', function (req, res){
+    let excuses = [];
+    console.log(req.params.index);
+    for(let i=0; i<req.params.index; i++){
+        let excuse = [];
+        let sujet =  tabsujetExcuse[Math.floor(tabsujetExcuse.length * Math.random())];
+        excuse.push(sujet);
+        let verbe =  tabverbeExcuse[Math.floor(tabverbeExcuse.length * Math.random())];
+        excuse.push(verbe);
+        let objet =  tabobjetExcuse[Math.floor(tabobjetExcuse.length * Math.random())];
+        excuse.push(objet);
+        excuses.push(excuse);
+    }
+    console.log(excuses);
+    res.send(excuses);
 });
 
 
