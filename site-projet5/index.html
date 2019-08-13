@@ -125,10 +125,23 @@
                 </div>
             </div>
             <div>
-                <label for="nbphrase">Nombre de phrase générées en même temps : </label>
-                <input type="range" id="nbphrase" name="nbphrase" min="1" max="5" step="1" value="1"><output name="nbphrase"></output>
+                <!--<label for="nbphrase">Nombre de phrase générées : </label>-->
+                <select name="nbphrase" id="nbphrase">
+                    <option value="1">Nombre de phrase générées : 1 </option>
+                    <option value="2">Nombre de phrase générées : 2 </option>
+                    <option value="3">Nombre de phrase générées : 3 </option>
+                    <option value="4">Nombre de phrase générées : 4 </option>
+                    <option value="5">Nombre de phrase générées : 5 </option>
+                </select>
+
             </div>
+            <button id="previous-page" class="btn btn-primary btn-previous-story mt-3" disabled><<</button>
             <button id="start-story" class="btn btn-primary btn-start-story mt-3"> Commencer l'histoire</button>
+            <button id="next-page" class="btn btn-primary btn-next-story mt-3" disabled> >></button>
+            <div>
+                <button id="end-story" class="btn btn-primary btn-end-story mt-3" >Fin de l'histoire</button>
+
+            </div>
 
         </div>
 
