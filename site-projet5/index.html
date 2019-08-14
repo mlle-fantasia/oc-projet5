@@ -48,6 +48,21 @@
     </header>
 
     <section id="avantage">
+        <div class="container">
+            <div class="row">
+                <h2 class="titre-avantage">Nos générateurs sont là pour vous faciliter la vie, <br/>ils sont gratuits, utilisez les sans modération ! </h2>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 class="titre-avantage">Les avantages de notre générateur d'histoires: </h2>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="">Les avantages de notre générateur d'excuse: </h4>
+                </div>
+            </div>
+        </div>
+
+
         <div class="container-fluid ">
             <div class="row">
             <div class="col-md-6 avantage">
@@ -126,7 +141,7 @@
             </div>
             <div>
                 <!--<label for="nbphrase">Nombre de phrase générées : </label>-->
-                <select name="nbphrase" id="nbphrase">
+                <select class="select-histoire" name="nbphrase" id="nbphrase">
                     <option value="1">Nombre de phrase générées : 1 </option>
                     <option value="2">Nombre de phrase générées : 2 </option>
                     <option value="3">Nombre de phrase générées : 3 </option>
@@ -151,14 +166,25 @@
 
     <section id="excuses">
         <div class="container container-excuse">
-            <div class="excuse" id="excuse-text">
 
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <h2 class="test">Je suis désolé...</h2>
+                    <div class="excuse" id="excuse-text">
+                    </div>
+                    <div>
+                        <select class="select-excuse" name="nbExcuse" id="nbExcuse">
+                            <option value="1">Nombre d'excuse à générer : 1 </option>
+                            <option value="2">Nombre d'excuse à générer : 2 </option>
+                            <option value="3">Nombre d'excuse à générer : 3 </option>
+                            <option value="4">Nombre d'excuse à générer : 4 </option>
+                            <option value="5">Nombre d'excuse à générer : 5 </option>
+                        </select>
+                        <button id="downloadExcuse" class="btn btn-primary btn-start-excuse "> Générer excuse</button>
+                    </div>
+                </div>
             </div>
-            <div>
-                <label for="nbExcuse">Nombre de phrase générées en même temps : </label>
-                <input type="range" id="nbExcuse" name="nbExcuse" min="1" max="5" step="1" value="1"><output name="nbExcuse"></output>
-            </div>
-            <button id="downloadExcuse" class="btn btn-primary btn-start-story mt-3"> Générer excuse</button>
+
 
         </div>
     </section>

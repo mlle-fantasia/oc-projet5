@@ -73,7 +73,9 @@ app.get('/histoire/:index', function (req, res) {
     res.send(phrase);
 
 });
-
+const tabsujetFormule = excuse.filter((objet)=>{
+    return objet.type === "formule";
+});
 const tabsujetExcuse =  excuse.filter((objet)=>{
     return objet.type === "sujet";
 });
@@ -83,18 +85,29 @@ const tabverbeExcuse =  excuse.filter((objet)=>{
 const tabobjetExcuse =  excuse.filter((objet)=>{
     return objet.type === "objet";
 });
+const tabobjet2Excuse =  excuse.filter((objet)=>{
+    return objet.type === "objet2";
+});
 
 app.get('/excuse/:index', function (req, res){
     let excuses = [];
     console.log(req.params.index);
     for(let i=0; i<req.params.index; i++){
         let excuse = [];
+        let formule =  tabsujetFormule[Math.floor(tabsujetFormule.length * Math.random())];
+        excuse.push(formule);
         let sujet =  tabsujetExcuse[Math.floor(tabsujetExcuse.length * Math.random())];
         excuse.push(sujet);
         let verbe =  tabverbeExcuse[Math.floor(tabverbeExcuse.length * Math.random())];
         excuse.push(verbe);
-        let objet =  tabobjetExcuse[Math.floor(tabobjetExcuse.length * Math.random())];
-        excuse.push(objet);
+        console.log(verbe);
+        if(verbe.suite.length){
+            let objet =  tabobjetExcuse[Math.floor(tabobjetExcuse.length * Math.random())];
+            excuse.push(objet);
+            let objet2 =  tabobjet2Excuse[Math.floor(tabobjet2Excuse.length * Math.random())];
+            excuse.push(objet2);
+        }
+
         excuses.push(excuse);
     }
     console.log(excuses);

@@ -8,14 +8,6 @@
 	background-color: #c05d8e;
 	border-color: #c05d8e;
 }
-select{
-	border-radius: 20px;
-	background-color: #72b890;
-	border-color: #72b890;
-	color: #fff;
-	padding: 5px 10px;
-	margin-top: 20px;
-}
 /********** header *****************/
 .header {
 	background-image: url("../images/64792527.jpg");
@@ -132,10 +124,33 @@ select{
 	background-color: #345442;
 	border-color: #345442;
 }
+.select-histoire{
+	border-radius: 20px;
+	background-color: #72b890;
+	border-color: #72b890;
+	color: #fff;
+	padding: 5px 10px;
+	margin-top: 20px;
+}
 
+
+/************** excuse ************************/
 .excuse{
     border: solid 1px gray;
     min-height: 100px;
+}
+.select-excuse{
+	border-radius: 20px;
+	background-color: #3380b8;
+	border-color: #3380b8;
+	color: #fff;
+	padding: 5px 10px;
+	margin-top: 20px;
+}
+.btn-start-excuse{
+	background-color: #3380b8;
+	border-color: #3380b8;
+	padding: 4px 12px;
 }
 
 /************** footer ************************/
