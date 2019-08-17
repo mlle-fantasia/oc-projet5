@@ -29,6 +29,8 @@ $(document).ready(function() {
 
 	$("#start-story").click(async function() {
 
+        let nbphrase =  $('#nbPhrase').val();
+
 		if (index === 1) {
 			await animationTournerLaPage(index);
 		}
@@ -39,7 +41,7 @@ $(document).ready(function() {
 		}
 		$.ajax({
 			type: "GET",
-			url: "http://localhost:5001/histoire/" + index,
+			url: "http://localhost:5001/histoire/" + index +"/"+nbphrase,
 			success:  function(response) {
 				if (index > 4 && (index - 1) % 4 === 0) {
 					  animationTournerLaPage(index);

@@ -3,10 +3,10 @@ $(document).ready(function() {
 	$("#downloadExcuse").click(async function() {
         $('#excuse-text').html('');
 
-		let index =  $('#nbExcuse').val();
+		let nbExcuse =  $('#nbExcuse').val();
 		$.ajax({
 			type: "GET",
-			url: "http://localhost:5001/excuse/" + index,
+			url: "http://localhost:5001/excuse/" + nbExcuse,
 			success: function(response) {
 				console.log(response);
 

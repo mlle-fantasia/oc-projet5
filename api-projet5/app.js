@@ -28,51 +28,76 @@ const tabadjectif =  histoire1.filter((objet)=>{
     return objet.type === "adjectif";
 });
 
-app.get('/histoire/:index', function (req, res) {
+app.get('/histoire/:index/:nbPhrase', function (req, res) {
     console.log(req.params.index);
-    let phrase = [];
-    if(req.params.index === "1"){
+    let phrases = [];
 
-        let sujet =  tabsujet[Math.floor(tabsujet.length * Math.random())];
-        phrase.push(sujet);
+    if(req.params.nbPhrase === "1"){
+        if(req.params.index === "1"){
+            choosePhrase1(phrases);
+        }
+        else{
+            choosePhrase2(phrases);
+        }
+    }else{
+        let phrase1 =[];
+        phrases.push(choosePhrase1(phrase1));
 
-        let lieu =  tablieu[Math.floor(tablieu.length * Math.random())];
-        phrase.push(lieu);
-
-        let qui =  tabqui[Math.floor(tabqui.length * Math.random())];
-        phrase.push(qui);
-
-    }
-    else{
-
-        let verbe =  tabverbe[Math.floor(tabverbe.length * Math.random())];
-        phrase.push(verbe);
-        
-        let suiteVerbe = verbe.suite;
-        console.log(suiteVerbe);
-        switch (suiteVerbe) {
-            case 'sujet':
-                let sujet =  tabsujet[Math.floor(tabsujet.length * Math.random())];
-                phrase.push(sujet);
-                break;
-            case 'objet':
-                let objet =  tabobjet[Math.floor(tabobjet.length * Math.random())];
-                phrase.push(objet);
-                let adj =  tabadjectif[Math.floor(tabadjectif.length * Math.random())];
-                phrase.push(adj);
-                break;
-            case 'parole':
-                let parole =  tabparole[Math.floor(tabparole.length * Math.random())];
-                phrase.push(parole);
-                break;
+        for(let i = 0 ; i < parseInt(req.params.nbPhrase)-1 ; i++){
+            let phrase = [];
+            phrases.push(choosePhrase2(phrase));
         }
 
-            
-
     }
-    res.send(phrase);
+    console.log("phrases",phrases);
+    res.send(phrases);
 
 });
+
+function choosePhrase1(phrase){
+    let sujet =  tabsujet[Math.floor(tabsujet.length * Math.random())];
+    phrase.push(sujet);
+
+    let lieu =  tablieu[Math.floor(tablieu.length * Math.random())];
+    phrase.push(lieu);
+
+    let qui =  tabqui[Math.floor(tabqui.length * Math.random())];
+    phrase.push(qui);
+
+    return phrase;
+}
+
+function choosePhrase2(phrase){
+
+    let verbe =  tabverbe[Math.floor(tabverbe.length * Math.random())];
+    phrase.push(verbe);
+
+    let suiteVerbe = verbe.suite;
+    switch (suiteVerbe) {
+        case 'sujet':
+            let sujet =  tabsujet[Math.floor(tabsujet.length * Math.random())];
+            phrase.push(sujet);
+            break;
+        case 'objet':
+            let objet =  tabobjet[Math.floor(tabobjet.length * Math.random())];
+            phrase.push(objet);
+            let adj =  tabadjectif[Math.floor(tabadjectif.length * Math.random())];
+            phrase.push(adj);
+            break;
+        case 'parole':
+            let parole =  tabparole[Math.floor(tabparole.length * Math.random())];
+            phrase.push(parole);
+            break;
+    }
+    return phrase;
+}
+
+
+
+
+
+
+
 const tabsujetFormule = excuse.filter((objet)=>{
     return objet.type === "formule";
 });
@@ -91,7 +116,6 @@ const tabobjet2Excuse =  excuse.filter((objet)=>{
 
 app.get('/excuse/:index', function (req, res){
     let excuses = [];
-    console.log(req.params.index);
     for(let i=0; i<req.params.index; i++){
         let excuse = [];
         let formule =  tabsujetFormule[Math.floor(tabsujetFormule.length * Math.random())];
