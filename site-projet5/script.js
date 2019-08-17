@@ -43,56 +43,132 @@ $(document).ready(function() {
 			type: "GET",
 			url: "http://localhost:5001/histoire/" + index +"/"+nbphrase,
 			success:  function(response) {
-				if (index > 4 && (index - 1) % 4 === 0) {
-					  animationTournerLaPage(index);
-				}
-				console.log(response);
-				if (index > 1) {
-					sujetAUtiliser.genre === "2" ? (phrase += " La ") : (phrase += " Le ");
-					phrase += sujetAUtiliser.mot + " ";
-					if (sujet2) {
-						sujetAUtiliser === sujet1 ? (sujetAUtiliser = sujet2) : (sujetAUtiliser = sujet1);
+                console.log(response);
+                console.log("index1",index);
+				for(let i = 0 ; i< response.length; i++){
+					let tabUnePhrase = response[i] ;
+
+                    if (index > 4 && (index - 1) % 4 === 0) {
+                    	animationTournerLaPage(index);
+                    }
+
+                    if (index > 1) {
+						sujetAUtiliser.genre === "2" ? (phrase += " La ") : (phrase += " Le ");
+						phrase += sujetAUtiliser.mot + " ";
+						if (sujet2) {
+							sujetAUtiliser === sujet1 ? (sujetAUtiliser = sujet2) : (sujetAUtiliser = sujet1);
+						}
 					}
-				}
-				for (let i = 0; i < response.length; i++) {
-					if (response[i].type === "sujet" && index > 1) {
-						if (response[i].mot === sujet1.mot) {
-							sujet2 = response[i];
-							sujetAUtiliser = sujet2;
-							response[i].genre === "2" ? (phrase += "une autre ") : (phrase += "un autre ");
+console.log(tabUnePhrase);
+                    for(let j = 0 ; j< tabUnePhrase.length; j++){
+                        let objUnMot = tabUnePhrase[j];
+
+
+						if (objUnMot.type === "sujet" && index >1) {
+							if (objUnMot.mot === sujet1.mot) {
+								sujet2 = objUnMot;
+								sujetAUtiliser = sujet2;
+                                objUnMot.genre === "2" ? (phrase += "une autre ") : (phrase += "un autre ");
+							} else {
+                                objUnMot.genre === "2" ? (phrase += "une ") : (phrase += "un ");
+							}
+						}
+
+                        if (objUnMot.genre && index === 1) {
+                            objUnMot.genre === "2" ? (phrase += "une ") : (phrase += "un ");
+							sujet1 = objUnMot;
+							sujetAUtiliser = sujet1;
+                        }
+                        phrase += objUnMot.mot;
+                        if (objUnMot.type === "sujet" && index > 1) {
+							if (objUnMot.mot === sujet1.mot) {
+								let sujet1tmp = sujet1.mot;
+								sujet1.mot = "premier " + sujet1tmp;
+								let sujet2tmp = sujet2.mot;
+								sujet2.mot = "deuxième " + sujet2tmp;
+							}
+                        }
+                        if (j === tabUnePhrase.length - 1) {
+							let tabmot = objUnMot.mot.split(" ");
+							if (tabmot[tabmot.length - 1] !== "?" && tabmot[tabmot.length - 1] !== "!") {
+								phrase += ".";
+							}
 						} else {
-							response[i].genre === "2" ? (phrase += "une ") : (phrase += "un ");
+							phrase += " ";
 						}
-					}
-					if (response[i].genre && index === 1) {
-						response[i].genre === "2" ? (phrase += "une ") : (phrase += "un ");
-						sujet1 = response[i];
-						sujetAUtiliser = sujet1;
-					}
-					phrase += response[i].mot;
-					if (response[i].type === "sujet" && index > 1) {
-						if (response[i].mot === sujet1.mot) {
-							let sujet1tmp = sujet1.mot;
-							sujet1.mot = "premier " + sujet1tmp;
-							let sujet2tmp = sujet2.mot;
-							sujet2.mot = "deuxième " + sujet2tmp;
-						}
-					}
-					if (i === response.length - 1) {
-						let tabmot = response[i].mot.split(" ");
-						if (tabmot[tabmot.length - 1] !== "?" && tabmot[tabmot.length - 1] !== "!") {
-							phrase += ".";
-						}
-					} else {
-						phrase += " ";
-					}
+
+                    }
+
+					index++;
+                    console.log("index2",index);
+                    let $newPhrase = $("<p class='text-livre text-livre" + index + "'></p>");
+                    $(".page-text").append($($newPhrase));
+                    $(".text-livre" + index).html(phrase);
+                    //animationApparitionText(index);
+                    phrase = "";
+
+                    $("#start-story").html("continuer l'histoire");
 				}
-				let $newPhrase = $("<p class='text-livre text-livre" + index + "'></p>");
-				$(".page-text").append($($newPhrase));
-				$(".text-livre" + index).html(phrase);
-				//animationApparitionText(index);
-				index++;
-				$("#start-story").html("continuer l'histoire");
+
+
+
+
+
+
+
+
+
+
+				// if (index > 4 && (index - 1) % 4 === 0) {
+				// 	  animationTournerLaPage(index);
+				// }
+				// console.log(response);
+				// if (index > 1) {
+				// 	sujetAUtiliser.genre === "2" ? (phrase += " La ") : (phrase += " Le ");
+				// 	phrase += sujetAUtiliser.mot + " ";
+				// 	if (sujet2) {
+				// 		sujetAUtiliser === sujet1 ? (sujetAUtiliser = sujet2) : (sujetAUtiliser = sujet1);
+				// 	}
+				// }
+				// for (let i = 0; i < response.length; i++) {
+				//- 	if (response[i].type === "sujet" && index > 1) {
+				//- 		if (response[i].mot === sujet1.mot) {
+				//- 			sujet2 = response[i];
+				//- 			sujetAUtiliser = sujet2;
+				//- 			response[i].genre === "2" ? (phrase += "une autre ") : (phrase += "un autre ");
+				//- 		} else {
+				//- 			response[i].genre === "2" ? (phrase += "une ") : (phrase += "un ");
+				//- 		}
+				//- 	}
+				//- 	if (response[i].genre && index === 1) {
+				//-		response[i].genre === "2" ? (phrase += "une ") : (phrase += "un ");
+				//- 		sujet1 = response[i];
+				//- 		sujetAUtiliser = sujet1;
+				//- 	}
+				//- 	phrase += response[i].mot;
+				// 	if (response[i].type === "sujet" && index > 1) {
+				// 		if (response[i].mot === sujet1.mot) {
+				// 			let sujet1tmp = sujet1.mot;
+				// 			sujet1.mot = "premier " + sujet1tmp;
+				// 			let sujet2tmp = sujet2.mot;
+				// 			sujet2.mot = "deuxième " + sujet2tmp;
+				// 		}
+				// 	}
+				// 	if (i === response.length - 1) {
+				// 		let tabmot = response[i].mot.split(" ");
+				// 		if (tabmot[tabmot.length - 1] !== "?" && tabmot[tabmot.length - 1] !== "!") {
+				// 			phrase += ".";
+				// 		}
+				// 	} else {
+				// 		phrase += " ";
+				// 	}
+				// }
+				// let $newPhrase = $("<p class='text-livre text-livre" + index + "'></p>");
+				// $(".page-text").append($($newPhrase));
+				// $(".text-livre" + index).html(phrase);
+				// //animationApparitionText(index);
+				// index++;
+				// $("#start-story").html("continuer l'histoire");
 			}
 		});
 

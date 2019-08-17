@@ -29,23 +29,31 @@ const tabadjectif =  histoire1.filter((objet)=>{
 });
 
 app.get('/histoire/:index/:nbPhrase', function (req, res) {
-    console.log(req.params.index);
+    console.log("index : ",req.params.index);
+    console.log("nbphrase : ",req.params.nbPhrase);
     let phrases = [];
 
     if(req.params.nbPhrase === "1"){
+        let phrase =[];
         if(req.params.index === "1"){
-            choosePhrase1(phrases);
+            phrases.push(choosePhrase1(phrase));
         }
         else{
-            choosePhrase2(phrases);
+            phrases.push(choosePhrase2(phrase));
         }
     }else{
-        let phrase1 =[];
-        phrases.push(choosePhrase1(phrase1));
-
-        for(let i = 0 ; i < parseInt(req.params.nbPhrase)-1 ; i++){
-            let phrase = [];
-            phrases.push(choosePhrase2(phrase));
+        if(req.params.index === "1"){
+            let phrase1 =[];
+            phrases.push(choosePhrase1(phrase1));
+            for(let i = 0 ; i < parseInt(req.params.nbPhrase)-1 ; i++){
+                let phrase = [];
+                phrases.push(choosePhrase2(phrase));
+            }
+        }else{
+            for(let i = 0 ; i < parseInt(req.params.nbPhrase) ; i++){
+                let phrase = [];
+                phrases.push(choosePhrase2(phrase));
+            }
         }
 
     }
