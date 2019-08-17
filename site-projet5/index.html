@@ -14,13 +14,12 @@
 
 <body>
 
-    <header class="">
+    <header class="header" id="top-histoire">
         <div class="container-fluid">
-            <div class="row">
-            <div class="col-md-6 header">
 
-            <div class="row">
-                <div class="col-md-5 container-text-header">
+
+
+                <div class="col-md-4 container-text-header">
                     <div class="text-header">
                         <h1 class="text-header-titre">Générateur d'histoires du soir</h1>
                         <p> Utilisez notre générateur pour créer des histoires originales ! </p>
@@ -28,44 +27,19 @@
                                 générateur</a></button>
                     </div>
                 </div>
-            </div>
-            </div>
-            <div class="col-md-6 header-excuse">
-                <div class="row">
-                    <div class="col-md-5 container-text-header">
-                        <div class="text-header">
-                            <h1 class="text-header-titre">Générateur d'excuse</h1>
-                            <p> Utilisez notre générateur pour créer des excuses imparables ! </p>
-                            <button class="btn btn-primary btn-acces-generateur mt-3"><a href="#excuses">accéder au
-                                générateur</a></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
+
+            <button class="btn btn-primary btn-acces-generateur-ex mt-3"><a href="#top-excuse">
+                Générateur d'éxcuse v </a></button>
+
+
 
         </div>
     </header>
 
     <section id="avantage">
         <div class="container">
-            <div class="row">
-                <h2 class="titre-avantage">Nos générateurs sont là pour vous faciliter la vie, <br/>ils sont gratuits, utilisez les sans modération ! </h2>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <h2 class="titre-avantage">Les avantages de notre générateur d'histoires: </h2>
-                </div>
-                <div class="col-md-6">
-                    <h4 class="">Les avantages de notre générateur d'excuse: </h4>
-                </div>
-            </div>
-        </div>
+            <div class="row avantage">
 
-
-        <div class="container-fluid ">
-            <div class="row">
-            <div class="col-md-6 avantage">
             <div class="row container-text-avantage">
                 <div class="col-md-8 offset-md-2">
                     <h2 class="titre-avantage">Les avantages de notre générateur d'histoires: </h2>
@@ -95,38 +69,8 @@
                 </div>
 
             </div>
-            </div>
-            <div class="col-md-6">
-                <div class="row container-text-avantage">
-                    <div class="col-md-8 offset-md-2">
-                        <h2 class="titre-avantage">Les avantages de notre générateur d'excuses : </h2>
-                        <p>Ne soyez jamais à court d'excuse en cas de retard ou de manquemant à vos promesse ! Notre
-                            générateur vous permet de créer des excuses uniques et imparables</p>
-                    </div>
-                </div>
-                <div class="row d-flex align-items-stretch ">
-                    <div class="col-md-4 mb-4">
-                        <div class="actualite d-flex flex-column">
-                            <img class="actualite-img" src="assets/images/fourmie.jpg" alt="une fourmi">
-                            <p class="actualite-titre ">Economique</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="actualite d-flex flex-column">
-                            <img class="actualite-img" src="assets/images/lievre.jpg" alt="un lièvre">
-                            <p class="actualite-titre ">efficace</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="actualite d-flex flex-column">
-                            <img class="actualite-img" src="assets/images/rire2.jpg"
-                                 alt="une mère et sa fille qui rient aux éclats">
-                            <p class="actualite-titre ">Amusant</p>
-                        </div>
-                    </div>
 
-                </div>
-            </div>
+
             </div>
         </div>
     </section>
@@ -141,7 +85,7 @@
             </div>
             <div>
                 <!--<label for="nbphrase">Nombre de phrase générées : </label>-->
-                <select class="select-histoire" name="nbphrase" id="nbphrase">
+                <select class="select-histoire" name="nbPhrase" id="nbPhrase">
                     <option value="1">Nombre de phrase générées : 1 </option>
                     <option value="2">Nombre de phrase générées : 2 </option>
                     <option value="3">Nombre de phrase générées : 3 </option>
@@ -163,6 +107,53 @@
 
     </section>
 
+
+    <div class="container-fluid header-excuse" id="top-excuse">
+            <div class="col-md-4 container-text-header">
+                <div class="text-header">
+                    <h1 class="text-header-titre">Générateur d'excuse</h1>
+                    <p> Utilisez notre générateur pour créer des excuses imparables ! </p>
+                    <button class="btn btn-primary btn-acces-generateur mt-3"><a href="#excuses">accéder au
+                    générateur</a></button>
+                </div>
+            </div>
+        <button class="btn btn-primary btn-acces-generateur-hi mt-3"><a href="#top-histoire">
+        Générateur d'histoire ^ </a></button>
+    </div>
+
+    <section class="container avantage-excuse">
+
+            <div class="row container-text-avantage">
+                <div class="col-md-8 offset-md-2">
+                    <h2 class="titre-avantage">Les avantages de notre générateur d'excuses : </h2>
+                    <p>Ne soyez jamais à court d'excuse en cas de retard ou de manquemant à vos promesse ! Notre
+                        générateur vous permet de créer des excuses uniques et imparables</p>
+                </div>
+            </div>
+            <div class="row d-flex align-items-stretch ">
+                <div class="col-md-4 offset-md-2 mb-4">
+                    <div class="actualite d-flex flex-column">
+                        <img class="actualite-img" src="assets/images/lievre.jpg" alt="une fourmi">
+                        <p class="actualite-titre ">rapide</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="actualite d-flex flex-column">
+                        <img class="actualite-img" src="assets/images/lievre.jpg" alt="un lièvre">
+                        <p class="actualite-titre ">imparable</p>
+                    </div>
+                </div>
+                <!--<div class="col-md-4 mb-4">-->
+                    <!--<div class="actualite d-flex flex-column">-->
+                        <!--<img class="actualite-img" src="assets/images/rire2.jpg"-->
+                             <!--alt="une mère et sa fille qui rient aux éclats">-->
+                        <!--<p class="actualite-titre ">Amusant</p>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+            </div>
+
+    </section>
 
     <section id="excuses">
         <div class="container container-excuse">

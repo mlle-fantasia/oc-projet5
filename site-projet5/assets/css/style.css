@@ -15,13 +15,54 @@
     background-position: center;
 	min-height: 90vh;
 	margin-bottom: 50px;
+	padding-top: 80px;
 }
+.header:after{
+	position: absolute;
+	right: 0;
+	bottom: 49px;
+	content: "salut";
+	display : inline-block;
+	height : 0;
+	width : 0;
+	border-bottom : 200px solid #fff9e8;
+	border-left : 400px solid transparent;
+}
+.btn-acces-generateur-ex{
+	position: absolute;
+	right: 20px;
+	bottom: 70px;
+	z-index: 10;
+}
+
 .header-excuse{
+	position: relative;
     background-image: url("../images/chat.jpg");
     background-size: cover;
     background-position: center;
     min-height: 90vh;
     margin-bottom: 50px;
+	padding-top: 80px;
+}
+.header-excuse:after{
+	position: absolute;
+	right: 0;
+	top:0;
+	content: "salut";
+	display : inline-block;
+	height : 0;
+	width : 0;
+	border-top : 200px solid #fff9e8;
+	border-left : 400px solid transparent;
+}
+.btn-acces-generateur-hi{
+	position: absolute;
+	right: 20px;
+	top: 20px;
+	z-index: 10;
+}
+.btn-acces-generateur-hi a, .btn-acces-generateur-ex a  {
+	color: white;
 }
 .text-header-titre {
 	font-size: 25px;
@@ -31,8 +72,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin-top: 20vh;
-    margin-left: 30px;
+    margin-left: 80px;
 	height: 40vh;
 	padding: 15px;
 	color: #fff;
@@ -46,8 +86,12 @@
 
 /********** zone avantages *****************/
 .avantage {
-	border-right: solid 1px gray;
+	background-color: #fff;
 	margin-bottom: 100px;
+	border: solid 1px gray;
+	border-radius:  10px;
+	box-shadow: 1px 1px 6px ;
+
 }
 .container-text-avantage {
 	text-align: center;
@@ -76,6 +120,10 @@
 }
 
 /************** livre ***************/
+#histoire{
+	padding-top: 50px;
+	min-height: 100vh;
+}
 .container-histoire {
 	text-align: center;
 	margin-bottom: 100px;
@@ -135,6 +183,19 @@
 
 
 /************** excuse ************************/
+.avantage-excuse{
+	background-color: #fff;
+	margin-bottom: 100px;
+	border: solid 1px gray;
+	border-radius:  10px;
+	box-shadow: 1px 1px 6px ;
+
+}
+
+.container-excuse{
+	margin-bottom: 200px;
+	margin-top: 200px;
+}
 .excuse{
     border: solid 1px gray;
     min-height: 100px;
@@ -169,7 +230,7 @@ footer a {
 	padding: 5px;
 }
 
-/**************** test ***************/
+/**************** book ***************/
 
 #book {
 	width: 800px;
