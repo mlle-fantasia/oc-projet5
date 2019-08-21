@@ -229,7 +229,10 @@ footer a {
 .nav-item {
 	padding: 5px;
 }
-
+.btn-dark{
+	border-radius: 28px;
+	padding: 2px 12px;
+}
 /**************** book ***************/
 
 #book {

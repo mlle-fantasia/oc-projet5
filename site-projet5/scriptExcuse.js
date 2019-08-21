@@ -54,5 +54,17 @@ $(document).ready(function() {
 			}
 		});
 	});
+
+	$('#btn-sda').click(()=>{
+
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:5001/sda",
+            success: function(response) {
+                console.log(response);
+            }
+        })
+
+    })
 });
 

@@ -6,6 +6,7 @@ app.use(cors({origin: '*'}));
 var histoire1 = require("./histoire1.json");
 var excuse = require("./excuse.json");
 var excuse2 = require("./excuse2.json");
+var sdaDico = require("./sda.json");
 
 const tabsujet =  histoire1.filter((objet)=>{
     return objet.type === "sujet";
@@ -175,6 +176,21 @@ app.get('/excuse/:index', function (req, res){
     }
     console.log(tabobjetExcuse);
     res.send(excuses);
+});
+
+
+
+
+
+app.get('/sda', function (req, res){
+    let sda = "";
+    for(let i=0; i<5; i++){
+        let extrait =  sdaDico[Math.floor(sdaDico.length * Math.random())];
+        sda += extrait.mot;
+        sda += " ";
+    }
+
+    res.send(sda);
 });
 
 
