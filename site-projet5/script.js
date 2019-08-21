@@ -53,7 +53,11 @@ $(document).ready(function() {
                     }
 
                     if (index > 1) {
-						sujetAUtiliser.genre === "2" ? (phrase += " La ") : (phrase += " Le ");
+                        console.log("sujetAUtiliser",sujetAUtiliser);
+                        console.log("sujet1",sujet1);
+                        console.log("sujet2",sujet2);
+
+                        sujetAUtiliser.genre === "2" ? (phrase += " La ") : (phrase += " Le ");
 						phrase += sujetAUtiliser.mot + " ";
 						if (sujet2) {
 							sujetAUtiliser === sujet1 ? (sujetAUtiliser = sujet2) : (sujetAUtiliser = sujet1);
@@ -112,63 +116,6 @@ console.log(tabUnePhrase);
 
 
 
-
-
-
-
-
-
-
-				// if (index > 4 && (index - 1) % 4 === 0) {
-				// 	  animationTournerLaPage(index);
-				// }
-				// console.log(response);
-				// if (index > 1) {
-				// 	sujetAUtiliser.genre === "2" ? (phrase += " La ") : (phrase += " Le ");
-				// 	phrase += sujetAUtiliser.mot + " ";
-				// 	if (sujet2) {
-				// 		sujetAUtiliser === sujet1 ? (sujetAUtiliser = sujet2) : (sujetAUtiliser = sujet1);
-				// 	}
-				// }
-				// for (let i = 0; i < response.length; i++) {
-				//- 	if (response[i].type === "sujet" && index > 1) {
-				//- 		if (response[i].mot === sujet1.mot) {
-				//- 			sujet2 = response[i];
-				//- 			sujetAUtiliser = sujet2;
-				//- 			response[i].genre === "2" ? (phrase += "une autre ") : (phrase += "un autre ");
-				//- 		} else {
-				//- 			response[i].genre === "2" ? (phrase += "une ") : (phrase += "un ");
-				//- 		}
-				//- 	}
-				//- 	if (response[i].genre && index === 1) {
-				//-		response[i].genre === "2" ? (phrase += "une ") : (phrase += "un ");
-				//- 		sujet1 = response[i];
-				//- 		sujetAUtiliser = sujet1;
-				//- 	}
-				//- 	phrase += response[i].mot;
-				// 	if (response[i].type === "sujet" && index > 1) {
-				// 		if (response[i].mot === sujet1.mot) {
-				// 			let sujet1tmp = sujet1.mot;
-				// 			sujet1.mot = "premier " + sujet1tmp;
-				// 			let sujet2tmp = sujet2.mot;
-				// 			sujet2.mot = "deuxième " + sujet2tmp;
-				// 		}
-				// 	}
-				// 	if (i === response.length - 1) {
-				// 		let tabmot = response[i].mot.split(" ");
-				// 		if (tabmot[tabmot.length - 1] !== "?" && tabmot[tabmot.length - 1] !== "!") {
-				// 			phrase += ".";
-				// 		}
-				// 	} else {
-				// 		phrase += " ";
-				// 	}
-				// }
-				// let $newPhrase = $("<p class='text-livre text-livre" + index + "'></p>");
-				// $(".page-text").append($($newPhrase));
-				// $(".text-livre" + index).html(phrase);
-				// //animationApparitionText(index);
-				// index++;
-				// $("#start-story").html("continuer l'histoire");
 			}
 		});
 
@@ -203,7 +150,9 @@ console.log(tabUnePhrase);
     $("#end-story").click(()=>{
     	console.log("endstory", endStory);
     	if(endStory){ //clic sur "nouvelle histoire"
+
             let cover = tabCovers[Math.floor(tabCovers.length * Math.random())];
+            console.log(cover);
             $("#img-livre").attr("src", "assets/images/" + cover);
             $("#end-story").html("Fin de l'histoire");
             $("#start-story").html("Commencer l'histoire");

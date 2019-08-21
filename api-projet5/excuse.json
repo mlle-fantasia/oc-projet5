@@ -14,8 +14,8 @@
 
 	{ "mot": "mangé", "type": "verbe", "suite": "objet", "avec": "avoir" },
 	{ "mot": "caché", "type": "verbe", "suite": "objet", "avec": "avoir" },
-	{ "mot": "disparut", "type": "verbe", "suite": "" , "avec": "avoir" },
-	{ "mot": "été arrêté par la police", "type": "verbe", "suite": "", "avec": "avoir"  },
+	{ "mot": "disparu", "type": "verbe", "suite": "" , "avec": "avoir" },
+	{ "mot": "été arrêté# par la police", "type": "verbe", "suite": "", "avec": "avoir"  },
 	{ "mot": "brulé", "type": "verbe", "suite": "objet", "avec": "avoir"  },
 	{ "mot": "renversé", "type": "verbe", "suite": "objet", "avec": "avoir"  },
 	{ "mot": "mort", "type": "verbe", "suite": "", "avec": "etre"  },
@@ -28,7 +28,7 @@
 	{ "mot": "des petits cailloux", "genre": "1", "pluriel": "1", "type": "objet"},
 
 	{ "mot": "un tractopelle",  "type": "objet2" },
-	{ "mot": "une alumette", "type": "objet2"},
+	{ "mot": "une allumette", "type": "objet2"},
 	{ "mot": "un téléphone",  "type": "objet2"},
 	{ "mot": "la voiture", "type": "objet2"}
 ]

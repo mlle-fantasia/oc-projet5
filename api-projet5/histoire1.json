@@ -5,7 +5,7 @@
 	{ "mot": "petite fille", "genre": "2", "pluriel": "0", "type": "sujet" },
 
 	{ "mot": "dans une forêt lointaine", "type": "lieu" },
-	{ "mot": "dans un immense chateau vide", "type": "lieu" },
+	{ "mot": "dans un immense château vide", "type": "lieu" },
 	{ "mot": "pendant les vacances scolaires", "type": "lieu" },
 	{ "mot": "à la plage", "type": "lieu" },
 

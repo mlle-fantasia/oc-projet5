@@ -15,6 +15,9 @@ $(document).ready(function() {
                     console.log(response[i]);
                 	let excuse = response[i];
                     for(let i=0; i < excuse.length; i++){
+                        if($('#genre').prop('checked', true)){
+                            console.log('je suis une fille');
+                        }
                         if(excuse[i].type === "verbe"){
                             excuse[i].avec === "avoir" ? phraseExcuse += "a " : phraseExcuse += "est "
                         }
