@@ -253,8 +253,7 @@ footer a {
 	margin: 0px;
 }
 
-#book .loader {
-	background-image: url(loader.gif);
+#book {
 	width: 24px;
 	height: 24px;
 	display: block;
