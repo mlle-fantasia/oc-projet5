@@ -15,16 +15,36 @@ $(document).ready(function() {
                     console.log(response[i]);
                 	let excuse = response[i];
                     for(let i=0; i < excuse.length; i++){
-                        if($('#genre').prop('checked', true)){
-                            console.log('je suis une fille');
-                        }
                         if(excuse[i].type === "verbe"){
-                            excuse[i].avec === "avoir" ? phraseExcuse += "a " : phraseExcuse += "est "
+                            if(excuse[i-1].mot === 'j'){
+                                excuse[i].avec === "avoir" ? phraseExcuse += "'ai " : phraseExcuse += "e suis "
+                            }else{
+                                excuse[i].avec === "avoir" ? phraseExcuse += "a " : phraseExcuse += "est "
+                            }
+
                         }
-                        if(excuse[i].type === "objet2"){
-                            phraseExcuse += "avec ";
+                        if(excuse[i].type === "capacite"){
+                            phraseExcuse += "ainsi, ";
                         }
                         phraseExcuse += excuse[i].mot;
+
+                        if(excuse[i].type === "formule"){
+                            if($('#genre').prop('checked')) {
+                                if(excuse[i].feminin === "1"){
+                                    phraseExcuse += "e";
+                                }
+                            }
+                            phraseExcuse += ",";
+                        }
+                        if(excuse[i].type === "temps"){
+                            console.log(excuse[i].pluriel);
+                            excuse[i].pluriel === "1" ? phraseExcuse += " ont été pour moi" : phraseExcuse += " a été pour moi";
+                        }
+                        if(excuse[i].type === "calificatiftemps"){
+                            if(excuse[i-1].genre === "2") phraseExcuse += "e";
+                            if(excuse[i-1].pluriel === "1")  phraseExcuse += "s";
+                            phraseExcuse += " en effet,";
+                        }
                         phraseExcuse += " ";
                     }
                     $('#excuse-text').append('<p>'+phraseExcuse+'</p>');

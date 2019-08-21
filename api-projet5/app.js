@@ -5,6 +5,7 @@ app.use(cors({origin: '*'}));
 
 var histoire1 = require("./histoire1.json");
 var excuse = require("./excuse.json");
+var excuse2 = require("./excuse2.json");
 
 const tabsujet =  histoire1.filter((objet)=>{
     return objet.type === "sujet";
@@ -106,20 +107,35 @@ function choosePhrase2(phrase){
 
 
 
-const tabsujetFormule = excuse.filter((objet)=>{
+const tabsujetFormule = excuse2.filter((objet)=>{
     return objet.type === "formule";
 });
-const tabsujetExcuse =  excuse.filter((objet)=>{
+const tabsujetExcuse =  excuse2.filter((objet)=>{
     return objet.type === "sujet";
 });
-const tabverbeExcuse =  excuse.filter((objet)=>{
+const tabverbeExcuse =  excuse2.filter((objet)=>{
     return objet.type === "verbe";
 });
-const tabobjetExcuse =  excuse.filter((objet)=>{
-    return objet.type === "objet";
+const tabobjetExcuse =  excuse2.filter((objet)=>{
+    return objet.type === "objet1" || objet.type === "objet2";
 });
-const tabobjet2Excuse =  excuse.filter((objet)=>{
+const tabobjet1Excuse =  excuse2.filter((objet)=>{
+    return objet.type === "objet1";
+});
+const tabobjet2Excuse =  excuse2.filter((objet)=>{
     return objet.type === "objet2";
+});
+const tabcalificatiftempsExcuse =  excuse2.filter((objet)=>{
+    return objet.type === "calificatiftemps";
+});
+const tabpromesseExcuse =  excuse2.filter((objet)=>{
+    return objet.type === "promesse";
+});
+const tabtempsExcuse =  excuse2.filter((objet)=>{
+    return objet.type === "temps";
+});
+const tabcapaciteExcuse =  excuse2.filter((objet)=>{
+    return objet.type === "capacite";
 });
 
 app.get('/excuse/:index', function (req, res){
@@ -128,21 +144,36 @@ app.get('/excuse/:index', function (req, res){
         let excuse = [];
         let formule =  tabsujetFormule[Math.floor(tabsujetFormule.length * Math.random())];
         excuse.push(formule);
+        let temps =  tabtempsExcuse[Math.floor(tabtempsExcuse.length * Math.random())];
+        excuse.push(temps);
+        let calificatiftemps =  tabcalificatiftempsExcuse[Math.floor(tabcalificatiftempsExcuse.length * Math.random())];
+        excuse.push(calificatiftemps);
         let sujet =  tabsujetExcuse[Math.floor(tabsujetExcuse.length * Math.random())];
         excuse.push(sujet);
         let verbe =  tabverbeExcuse[Math.floor(tabverbeExcuse.length * Math.random())];
         excuse.push(verbe);
-        console.log(verbe);
         if(verbe.suite.length){
-            let objet =  tabobjetExcuse[Math.floor(tabobjetExcuse.length * Math.random())];
-            excuse.push(objet);
-            let objet2 =  tabobjet2Excuse[Math.floor(tabobjet2Excuse.length * Math.random())];
-            excuse.push(objet2);
+            if(verbe.suite === "objet"){
+                let objet =  tabobjetExcuse[Math.floor(tabobjetExcuse.length * Math.random())];
+                excuse.push(objet);
+            }
+            if(verbe.suite === "objet1"){
+                let objet1 =  tabobjet1Excuse[Math.floor(tabobjet1Excuse.length * Math.random())];
+                excuse.push(objet1);
+            }
+            if(verbe.suite === "objet2"){
+                let objet2 =  tabobjet2Excuse[Math.floor(tabobjet2Excuse.length * Math.random())];
+                excuse.push(objet2);
+            }
         }
+        let capacite =  tabcapaciteExcuse[Math.floor(tabcapaciteExcuse.length * Math.random())];
+        excuse.push(capacite);
+        let promesse =  tabpromesseExcuse[Math.floor(tabpromesseExcuse.length * Math.random())];
+        excuse.push(promesse);
 
         excuses.push(excuse);
     }
-    console.log(excuses);
+    console.log(tabobjetExcuse);
     res.send(excuses);
 });
 
