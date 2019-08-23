@@ -1,6 +1,7 @@
 const webpack = require("webpack");
 const path = require("path");
 const devMode = process.env.NODE_ENV !== 'production';
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 let config = {
   entry: "./src/index.js",
@@ -15,9 +16,14 @@ let config = {
       loader: "babel-loader"
     }, ]
   },
-    externals: {
-        jquery: 'jQuery'
-    },
+  plugins: [
+    new CleanWebpackPlugin(),
+    new webpack.ProvidePlugin({
+        $: 'jquery',
+        jQuery: 'jquery',
+        'windows.jQuery': 'jquery',
+    }),
+  ],
   devServer: {
     contentBase: path.resolve(__dirname, "./public"),
     historyApiFallback: true,

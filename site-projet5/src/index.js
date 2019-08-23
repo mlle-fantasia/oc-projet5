@@ -1,5 +1,5 @@
-import scriptHistoire from "../public/assets/js/script.js";
-import scriptExcuse from "../public/assets/js/scriptExcuse.js";
+import scriptHistoire from "../bootstrap-webpack-jquery-boilerplate/src/js/script.js";
+import scriptExcuse from "../bootstrap-webpack-jquery-boilerplate/src/js/scriptExcuse.js";
 import $ from 'jquery';
 
 const tabImages = ["28787901.jpg", "23317214.jpg", "29462393s.jpg", "35245278.jpg"];
@@ -7,6 +7,11 @@ const tabCovers = ["livre-enfant-couv.jpg", "bird.jpg", "poule.jpg", "dino.jpg",
 
 
 $(document).ready(function() {
+
+    $('#alert').click(() => {
+        alert('jQuery works!');
+    });
+
     let index = 1;
     let endStory = false;
     let lastPage = 0 ;
