@@ -8,11 +8,72 @@
 	{ "mot": "dans un immense château vide", "type": "lieu" },
 	{ "mot": "pendant les vacances scolaires", "type": "lieu" },
 	{ "mot": "à la plage", "type": "lieu" },
+	{ "mot": "dans le marché du village", "type": "lieu" },
+	{ "mot": "au bord d'un lac gelé", "type": "lieu" },
+	{ "mot": "au pays des merveilles", "type": "lieu" },
+
+	{ "mot": "un trou", "type": "lieu2" },
+	{ "mot": "une grotte magique", "type": "lieu2" },
+	{ "mot": "un lieu secret", "type": "lieu2" },
+	{ "mot": "un endroit inconnu", "type": "lieu2" },
+	{ "mot": "l'autre côté du miroir", "type": "lieu2" },
+	{ "mot": "des sables mouvants", "type": "lieu2" },
+	{ "mot": "un temple indien", "type": "lieu2" },
 
 	{ "mot": "qui avait mal aux dents", "type": "qui" },
 	{ "mot": "qui voulait découvrir le monde", "type": "qui" },
 	{ "mot": "qui rendait visite à sa grand mère", "type": "qui" },
 	{ "mot": "qui jouait à pokémon go", "type": "qui" },
+	{ "mot": "qui sautait sur place sans arrêt", "type": "qui" },
+	{ "mot": "qui était pressé", "type": "qui" },
+
+
+	{ "mot": "avait l'habitude de", "type": "initialisation",  "suite": "verbe1" },
+	{ "mot": "adorait", "type": "initialisation" ,  "suite": "verbe1" },
+	{ "mot": "aimait", "type": "initialisation",  "suite": "verbe1" },
+	{ "mot": "vivait", "type": "initialisation",  "suite": "lieu" },
+
+
+	{ "mot": "les gens", "type": "personnage"},
+	{ "mot": "sa petite soeur", "type": "personnage"  },
+	{ "mot": "sa maman", "type": "personnage"},
+	{ "mot": "un grimlins", "type": "personnage"},
+	{ "mot": "un chasseur", "type": "personnage" },
+
+	{ "mot": "mais un jour", "type": "declencheur",  "suite": "verbe2" },
+	{ "mot": "jusqu'a ce que par hasard", "type": "declencheur" ,  "suite": "verbe2" },
+	{ "mot": "mais il se passa une chose innatendu", "type": "declencheur",  "suite": "verbe2" },
+	{ "mot": "quand soudain", "type": "declencheur",  "suite": "verbe2" },
+	{ "mot": "jusqu'au jour où", "type": "declencheur",  "suite": "verbe2" },
+
+	{ "mot": "trouva", "type": "verbe2", "suite": "objet" },
+	{ "mot": "ramassa", "type": "verbe2", "suite": "objet" },
+	{ "mot": "rencontra", "type": "verbe2", "suite": "personnage" , "suite2": "qui"},
+	{ "mot": "fut abordé par", "type": "verbe2", "suite": "personnage", "suite2": "qui" },
+	{ "mot": "tomba sur", "type": "verbe2", "suite": "objet" },
+	{ "mot": "tomba sur", "type": "verbe2", "suite": "personnage", "suite2": "qui" },
+	{ "mot": "tomba dans", "type": "verbe2", "suite": "lieu2" },
+	{ "mot": "découvri", "type": "verbe2", "suite": "lieu2" },
+
+	{ "mot": "se promener", "type": "verbe1", "suite": "lieu" },
+	{ "mot": "manger", "type": "verbe1", "suite": "nourriture" },
+	{ "mot": "jouer avec ses amis", "type": "verbe1", "suite": "lieu" },
+	{ "mot": "jouer avec", "type": "verbe1", "suite": "objet" },
+	{ "mot": "se moquer des gens", "type": "verbe1", "suite": "qui" },
+	{ "mot": "regarder", "type": "verbe1", "suite": "personnage" , "suite2": "qui"},
+	{ "mot": "discuter avec", "type": "verbe1", "suite": "personnage" },
+	{ "mot": "cuisiner", "type": "verbe1", "suite": "nourriture" , "suite2": "personnage" },
+
+
+	{ "mot": "des gauffres au nutella", "type": "nourriture" },
+	{ "mot": "des glaces", "type": "nourriture" },
+	{ "mot": "des bonbons oranges", "type": "nourriture" },
+	{ "mot": "du chocolat", "type": "nourriture"},
+	{ "mot": "des omelettes aux oeufs et aux hebes de provence", "type": "nourriture"},
+	{ "mot": "des lasagnes", "type": "nourriture"},
+	{ "mot": "des pâtes aux beurre et au parmesant", "type": "nourriture" },
+	{ "mot": "de la choucroute", "type": "nourriture"},
+
 
 	{ "mot": "Que vous avez de grandes dents !", "type": "parole" },
 	{ "mot": "Hé ! qu'est ce que tu fais là tout seul ? viens on va jouer !", "type": "parole" },
@@ -22,11 +83,13 @@
 	{ "mot": "Si mon tonton tond ton tonton, mon tonton tondu sera", "type": "parole" },
 	{ "mot": "Ici ce trouve le puit éternel, si tu tombes dedant... tu seras mouillé ", "type": "parole" },
 
-	{ "mot": "rencontra", "type": "verbe", "suite": "sujet" },
+	{ "mot": "rencontra", "type": "verbe", "suite": "personnage" , "suite2": "qui" },
 	{ "mot": "dit", "type": "verbe", "suite": "parole" },
 	{ "mot": "répondi", "type": "verbe", "suite": "parole" },
 	{ "mot": "mangea", "type": "verbe", "suite": "objet" },
 	{ "mot": "trouva", "type": "verbe", "suite": "objet" },
+	{ "mot": "se rendi", "type": "verbe", "suite": "lieu"  , "suite2": "pour"},
+	{ "mot": "se mis en quète de", "type": "verbe", "suite": "objet" , "suite2": "pour"},
 
 	{ "mot": "une pomme", "genre": "2", "pluriel": "0", "type": "objet", "suite": "adjectif" },
 	{ "mot": "du bois vert", "genre": "1", "pluriel": "0", "type": "objet", "suite": "adjectif" },
@@ -37,5 +100,14 @@
 	{ "mot": "extraodinaire", "type": "adjectif" },
 	{ "mot": "magique", "type": "adjectif" },
 	{ "mot": "au couleur de l'arc en ciel", "type": "adjectif" },
-	{ "mot": "fletri", "type": "adjectif" }
+	{ "mot": "fletri", "type": "adjectif" },
+
+	{ "mot": "pour le rendre à son propriétaire", "type": "pour" },
+	{ "mot": "pour aller au festival des gens heureux", "type": "pour" },
+	{ "mot": "pour sauver la planète du réchauffement climatique", "type": "pour" },
+	{ "mot": "pour ne plus avoir mal à la tête", "type": "pour" },
+	{ "mot": "pour trouver un job", "type": "pour" },
+	{ "mot": "pour pouvoir jouer à minecraft", "type": "pour" },
+	{ "mot": "pour détruire l'anneau unique et sauver la terre du milieu", "type": "pour" },
+	{ "mot": "pour y voir plus clair", "type": "pour" }
 ]
