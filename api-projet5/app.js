@@ -181,11 +181,32 @@ app.get('/excuse/:index', function (req, res){
 
 
 
+/*********************************************************************************************************************/
+/*********************************************************************************************************************/
+/*********************************************************************************************************************/
+/*********************************************************************************************************************/
+
+
 
 app.get('/sda', function (req, res){
+    const structurePhrasesda =[
+        ["debut", "temps", "sujet", "verbe", "mais"],
+        ["sujet", "adj", "qui", "verbe", "car"],
+        ["temps", "sujet", "qui", "verbeparole","parole", "lieu"],
+        ["debut", "temps", "lieu", "car", "mais"],
+        ["temps", "lieu","sujet", "verbe", "mais", "car"],
+        ["lieu", "sujet", "verbe", "pour", "mais"],
+        ["sujet","verbeparole", "parole", "sujet","verbeparole", "parole", "car"],
+        ["lieu", "sujet","verbeparole", "parole", "car", "mais"]
+    ];
     let sda = "";
-    for(let i=0; i<5; i++){
-        let extrait =  sdaDico[Math.floor(sdaDico.length * Math.random())];
+    let structure =  structurePhrasesda[Math.floor(structurePhrasesda.length * Math.random())];
+
+    for (let i = 0; i<structure.length; i++) {
+        let tabtype =  sdaDico.filter((objet)=>{
+            return objet.type === structure[i];
+        });
+        let extrait = tabtype[Math.floor(tabtype.length * Math.random())];
         sda += extrait.mot;
         sda += " ";
     }
