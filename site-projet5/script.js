@@ -258,11 +258,26 @@ function elementDeclancheur(data, sujet){
 
 function elementAction(data, sujet){
     let phrase ="";
-    sujet.genre === "2" ? (phrase += "la ") : (phrase += "le ");
-    phrase += sujet.mot+" ";
+    if(data[0].type === "verbe3"){
+        phrase ="alors, ";
+        sujet.genre === "2" ? (phrase += "la ") : (phrase += "le ");
+        phrase += sujet.mot+" ";
+    }
+
     for(let j = 0 ; j< data.length; j++){
         let objMot = data[j];
+        if(objMot.type === "parole" && data[j-1].type === "personnage"){
+            phrase += " qui lui dit : "
+        }
+        if(objMot.type === "objet" && data[j-1].type === "personnage"){
+            phrase += " qui lui donna "
+        }
         phrase += objMot.mot;
+        if(objMot.type === "initialisationaction"){
+            sujet.genre === "2" ? (phrase += " la ") : (phrase += " le ");
+            phrase += sujet.mot+" ";
+		}
+
         if (j === data.length - 1) {
             let tabmot = objMot.mot.split(" ");
             if (tabmot[tabmot.length - 1] !== "?" && tabmot[tabmot.length - 1] !== "!") {

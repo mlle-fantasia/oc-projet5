@@ -20,13 +20,14 @@ const tabqui =  histoire1.filter((objet)=>{
 const tabverbe =  histoire1.filter((objet)=>{
     return objet.type === "verbe";
 });
-
+const tabpersonnage =  histoire1.filter((objet)=>{
+    return objet.type === "personnage";
+});
 
 app.get('/histoire/:index/:nbPhrase', function (req, res) {
     let phrases = [];
     let index =  parseInt(req.params.index);
-    console.log(index);
-    console.log(req.params.nbPhrase);
+
     for(let i = 1 ; i <= parseInt(req.params.nbPhrase) ; i++){
 
         if(i === 1 && index === 1){
@@ -44,8 +45,12 @@ app.get('/histoire/:index/:nbPhrase', function (req, res) {
             phrases.push(choosePhraseDeclencheur(phrase));
             index++;
         }
-        else if(index > 4 ){
-            console.log("coucou");
+        else if(index === 5 ){
+            let phrase =[];
+            phrases.push(choosePhraseAction1(phrase));
+            index++;
+        }
+        else if(index > 5 ){
             let phrase =[];
             phrases.push(choosePhraseAction(phrase));
             index++;
@@ -135,12 +140,15 @@ function choosePhraseDeclencheur(phrase){
     return phrase;
 }
 
-function choosePhraseAction(phrase){
+function choosePhraseAction1(phrase){
+    const tabVerbe3 =  histoire1.filter((objet)=>{
+        return objet.type === "verbe3";
+    });
 
-    let verbe =  tabverbe[Math.floor(tabverbe.length * Math.random())];
-    phrase.push(verbe);
+    let verbe3 =  tabVerbe3[Math.floor(tabVerbe3.length * Math.random())];
+    phrase.push(verbe3);
 
-    let motActuel = verbe;
+    let motActuel = verbe3;
 
     while (motActuel.suite){
         let suite = motActuel.suite ;
@@ -152,8 +160,8 @@ function choosePhraseAction(phrase){
         motActuel = motSuite;
 
     }
-    if(verbe.suite2){
-        let suite2 = verbe.suite2;
+    if(verbe3.suite2){
+        let suite2 = verbe3.suite2;
         let tabSuite2 =  histoire1.filter((objet)=>{
             return objet.type === suite2;
         });
@@ -161,23 +169,53 @@ function choosePhraseAction(phrase){
         phrase.push(motSuite2);
     }
 
+    return phrase;
+}
 
-    // switch (suiteVerbe) {
-    //     case 'sujet':
-    //         let sujet =  tabsujet[Math.floor(tabsujet.length * Math.random())];
-    //         phrase.push(sujet);
-    //         break;
-    //     case 'objet':
-    //         let objet =  tabobjet[Math.floor(tabobjet.length * Math.random())];
-    //         phrase.push(objet);
-    //         let adj =  tabadjectif[Math.floor(tabadjectif.length * Math.random())];
-    //         phrase.push(adj);
-    //         break;
-    //     case 'parole':
-    //         let parole =  tabparole[Math.floor(tabparole.length * Math.random())];
-    //         phrase.push(parole);
-    //         break;
+function choosePhraseAction(phrase){
+    const tabSuite2 = ["qui","parole","objet", "lieu"];
+    const tabDebutAction =  histoire1.filter((objet)=>{
+        return objet.type === "initialisationaction";
+    });
+    let debutAction =  tabDebutAction[Math.floor(tabDebutAction.length * Math.random())];
+    phrase.push(debutAction);
+
+    let verbe =  tabverbe[Math.floor(tabverbe.length * Math.random())];
+    phrase.push(verbe);
+
+    let typeSuite2 =  tabSuite2[Math.floor(tabSuite2.length * Math.random())];
+
+    if(verbe.suite === "personnage"){
+        let personnage =  tabpersonnage[Math.floor(tabpersonnage.length * Math.random())];
+        phrase.push(personnage);
+        console.log(typeSuite2);
+        const tabsuite =  histoire1.filter((objet)=>{
+            return objet.type === typeSuite2;
+        });
+        let suite2 =  tabsuite[Math.floor(tabsuite.length * Math.random())];
+        phrase.push(suite2);
+        console.log(phrase);
+    }else {
+        let motActuel = verbe;
+        while (motActuel.suite) {
+            let suite = motActuel.suite;
+            let tabSuite = histoire1.filter((objet) => {
+                return objet.type === suite;
+            });
+            let motSuite = tabSuite[Math.floor(tabSuite.length * Math.random())];
+            phrase.push(motSuite);
+            motActuel = motSuite;
+        }
+    }
+    // if(verbe.suite2){
+    //     let suite2 = verbe.suite2;
+    //     let tabSuite2 =  histoire1.filter((objet)=>{
+    //         return objet.type === suite2;
+    //     });
+    //     let motSuite2 =  tabSuite2[Math.floor(tabSuite2.length * Math.random())];
+    //     phrase.push(motSuite2);
     // }
+
     return phrase;
 }
 
