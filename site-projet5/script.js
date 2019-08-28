@@ -163,12 +163,10 @@ $(document).ready(function() {
     });
 
     $("#end-story").click(()=>{
-    	console.log("endstory", endStory);
     	if(endStory){ //clic sur "nouvelle histoire"
 
             let cover = tabCovers[Math.floor(tabCovers.length * Math.random())];
-            console.log(cover);
-            $("#img-livre").attr("src", "assets/images/" + cover);
+            $("#img-livre").attr("src", "./assets/images/" + cover);
             $("#end-story").html("Fin de l'histoire");
             $("#start-story").html("Commencer l'histoire");
             $("#start-story").prop('disabled', false);
@@ -200,7 +198,12 @@ function phraseIntro(data, phrase1){
             objMot.genre === "2" ? (phrase1.phrase += "une ") : (phrase1.phrase += "un ");
             phrase1.sujet1 = objMot;
         }
-        phrase1.phrase += objMot.mot;
+        if(objMot.type === "qui"){
+            phrase1.sujet1.genre === "2" ? phrase1.phrase += objMot.mot[1] : phrase1.phrase += objMot.mot[0];
+        }else{
+            phrase1.phrase += objMot.mot;
+        }
+
         (j === data.length - 1) ? phrase1.phrase += "." : phrase1.phrase += " ";
     }
 
@@ -240,10 +243,21 @@ function elementDeclancheur(data, sujet){
 
     for(let j = 0 ; j< data.length; j++){
         let objMot = data[j];
-        phrase += objMot.mot;
+
+        if(objMot.type === "qui" || objMot.type === "adjectif"){
+            sujet.genre === "2" ? phrase += objMot.mot[1] : phrase += objMot.mot[0];
+        }else{
+            phrase += objMot.mot;
+        }
+
         if (j === data.length - 1) {
-            let tabmot = objMot.mot.split(" ");
-            if (tabmot[tabmot.length - 1] !== "?" && tabmot[tabmot.length - 1] !== "!") {
+            if(objMot.type === "parole") {
+                let tabmot = objMot.mot.split(" ");
+                if (tabmot[tabmot.length - 1] !== "?" && tabmot[tabmot.length - 1] !== "!") {
+                    phrase += ".";
+                }
+            }
+            else{
                 phrase += ".";
             }
         } else {
@@ -275,15 +289,24 @@ function elementAction(data, sujet){
         if(objMot.type === "objet" && data[j-1].type === "personnage"){
             phrase += " qui lui donna "
         }
-        phrase += objMot.mot;
+        if(objMot.type === "qui" || objMot.type === "adjectif" || objMot.type === "initialisationaction" ){
+            sujet.genre === "2" ? phrase += objMot.mot[1] : phrase += objMot.mot[0];
+        }else{
+            phrase += objMot.mot;
+        }
+
         if(objMot.type === "initialisationaction"){
             sujet.genre === "2" ? (phrase += " la ") : (phrase += " le ");
-            phrase += sujet.mot+" ";
 		}
 
         if (j === data.length - 1) {
-            let tabmot = objMot.mot.split(" ");
-            if (tabmot[tabmot.length - 1] !== "?" && tabmot[tabmot.length - 1] !== "!") {
+            if(objMot.type === "parole") {
+                let tabmot = objMot.mot.split(" ");
+                if (tabmot[tabmot.length - 1] !== "?" && tabmot[tabmot.length - 1] !== "!") {
+                    phrase += ".";
+                }
+            }
+            else{
                 phrase += ".";
             }
         } else {
