@@ -88,10 +88,7 @@
 .avantage {
 	background-color: #fff;
 	margin-bottom: 100px;
-	border: solid 1px gray;
-	border-radius:  10px;
-	box-shadow: 1px 1px 6px ;
-
+	border-bottom: solid 1px gray;
 }
 .container-text-avantage {
 	text-align: center;
@@ -120,6 +117,13 @@
 }
 
 /************** livre ***************/
+.background-book{
+	background-image: url("../images/livreVierge.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+	padding: 16px;
+	background-position: center;
+}
 #histoire{
 	padding-top: 50px;
 	min-height: 100vh;
@@ -134,7 +138,7 @@
 .page {
 	width: 40%;
 	height: 70vh;
-	border: 1px solid gray;
+	border: 1px solid #cacaca;
 }
 .cover {
 	box-shadow: 5px 5px 5px;
@@ -142,16 +146,16 @@
 .page-image {
 	overflow: hidden;
 	padding: 20px;
-	-webkit-border-radius: 40px 0 0 40px / 20px 0 0 20px;
-	-moz-border-radius: 40px 0 0 40px / 20px 0 0 20px;
-	border-radius: 40px 0 0 40px / 20px 0 0 20px;
-	box-shadow: 1px 4px 8px 0;
+	-webkit-border-radius: 40px 0 0 40px / 10px 0 0 10px;
+	-moz-border-radius: 40px 0 0 40px / 10px 0 0 10px;
+	border-radius: 40px 0 0 40px / 10px 0 0 10px;
+
 }
 .page-text {
-	-webkit-border-radius: 0 40px 40px 0 / 0 20px 20px 0;
-	-moz-border-radius: 0 40px 40px 0 / 0 20px 20px 0;
-	border-radius: 0 40px 40px 0 / 0 20px 20px 0;
-	box-shadow: -1px 4px 8px 0;
+	-webkit-border-radius: 0 40px 40px 0 / 0 10px 10px 0;
+	-moz-border-radius: 0 40px 40px 0 / 0 10px 10px 0;
+	border-radius: 0 40px 40px 0 / 0 10px 10px 0;
+
 }
 .img-livre {
 	width: 100%;
@@ -186,10 +190,7 @@
 .avantage-excuse{
 	background-color: #fff;
 	margin-bottom: 100px;
-	border: solid 1px gray;
-	border-radius:  10px;
-	box-shadow: 1px 1px 6px ;
-
+	border-bottom: solid 1px gray;
 }
 
 .container-excuse{

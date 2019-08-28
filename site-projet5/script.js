@@ -33,6 +33,7 @@ $(document).ready(function() {
 
 		if (index === 1) {
 			await animationTournerLaPage(index);
+            $("#background-book").addClass('background-book');
 		}
 
 		let phrase = "";
@@ -168,6 +169,7 @@ console.log(tabUnePhrase);
             }
             $("#start-story").prop('disabled', true);
             $("#end-story").html("Nouvelle histoire");
+            $("#background-book").removeClass('background-book');
             endStory = true;
 		}
 
