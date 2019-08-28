@@ -16,6 +16,7 @@
  * benefit and not for any commercial purpose or for monetary gain.
  * 
  **/
+import jQuery from "jquery";
 
 (function($) {
 

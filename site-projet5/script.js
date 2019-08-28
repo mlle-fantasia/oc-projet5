@@ -1,4 +1,8 @@
-const tabImages = ["28787901.jpg", "23317214.jpg", "29462393s.jpg", "35245278.jpg"];
+import $ from "jquery";
+import "./assets/js/turn";
+//import 'regenerator-runtime/runtime';
+
+const tabImages = ["image1.jpg", "image2.jpg", "image3.jpg", "image4.jpg"];
 const tabCovers = ["livre-enfant-couv.jpg", "bird.jpg", "poule.jpg", "dino.jpg", "loupartiste.jpg", "ecole.jpg"];
 
 $(document).ready(function() {
@@ -10,7 +14,7 @@ $(document).ready(function() {
     let sujetAUtiliser = "";
     let numberOfPages = 1000;
     let cover = tabCovers[Math.floor(tabCovers.length * Math.random())];
-	$("#img-livre").attr("src", "assets/images/" + cover);
+	$("#img-livre").attr("src", "./assets/images/" + cover);
 
 	$("#book").turn({
 		acceleration: true,
@@ -72,53 +76,11 @@ $(document).ready(function() {
                     }
 
 
-
-
-
                     if (index > 5 && (index - 1) % 5 === 0) {
                     	animationTournerLaPage(index);
                     }
 
-                    // if (index > 1) {
-                    //     console.log("sujetAUtiliser",sujetAUtiliser);
-                    //     console.log("sujet1",sujet1);
-                    //     console.log("sujet2",sujet2);
-					//
-                    //     sujetAUtiliser.genre === "2" ? (phrase += " La ") : (phrase += " Le ");
-					// 	phrase += sujetAUtiliser.mot + " ";
-					// 	if (sujet2) {
-					// 		sujetAUtiliser === sujet1 ? (sujetAUtiliser = sujet2) : (sujetAUtiliser = sujet1);
-					// 	}
-					// }
-					// console.log(tabUnePhrase);
-                    // for(let j = 0 ; j< tabUnePhrase.length; j++){
-                    //     let objUnMot = tabUnePhrase[j];
-					//
-					//
-					// 	if (objUnMot.type === "sujet" && index >1) {
-					// 		if (objUnMot.mot === sujet1.mot) {
-					// 			sujet2 = objUnMot;
-					// 			sujetAUtiliser = sujet2;
-                    //             objUnMot.genre === "2" ? (phrase += "une autre ") : (phrase += "un autre ");
-					// 		} else {
-                    //             objUnMot.genre === "2" ? (phrase += "une ") : (phrase += "un ");
-					// 		}
-					// 	}
-					//
-                    //     if (objUnMot.type === "sujet" && index > 1) {
-					// 		if (objUnMot.mot === sujet1.mot) {
-					// 			let sujet1tmp = sujet1.mot;
-					// 			sujet1.mot = "premier " + sujet1tmp;
-					// 			let sujet2tmp = sujet2.mot;
-					// 			sujet2.mot = "deuxième " + sujet2tmp;
-					// 		}
-                    //     }
-					//
-					//
-                    // }
 
-					// index++;
-                    // console.log("index2",index);
                     let $newPhrase = $("<p class='text-livre text-livre" + index + "'></p>");
                     let currentPage = $("#book").turn("page");
                     $("#page-"+currentPage).append($($newPhrase));

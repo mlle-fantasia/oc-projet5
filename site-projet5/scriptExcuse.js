@@ -1,3 +1,6 @@
+import $ from "jquery";
+
+
 $(document).ready(function() {
 
 	$("#downloadExcuse").click(async function() {
