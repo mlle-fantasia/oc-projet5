@@ -120,7 +120,8 @@ $(document).ready(function() {
 					// index++;
                     // console.log("index2",index);
                     let $newPhrase = $("<p class='text-livre text-livre" + index + "'></p>");
-                    $(".page-text").append($($newPhrase));
+                    let currentPage = $("#book").turn("page");
+                    $("#page-"+currentPage).append($($newPhrase));
                     $(".text-livre" + index).html(phrase);
                     //animationApparitionText(index);
                     phrase = "";
