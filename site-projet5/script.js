@@ -2,14 +2,14 @@ const tabImages = ["28787901.jpg", "23317214.jpg", "29462393s.jpg", "35245278.jp
 const tabCovers = ["livre-enfant-couv.jpg", "bird.jpg", "poule.jpg", "dino.jpg", "loupartiste.jpg", "ecole.jpg"];
 
 $(document).ready(function() {
-    let index = 1;
-    let endStory = false;
-    let lastPage = 0 ;
-    let sujet1 = "";
-    let sujet2 = "";
-    let sujetAUtiliser = "";
-    let numberOfPages = 1000;
-    let cover = tabCovers[Math.floor(tabCovers.length * Math.random())];
+	let index = 1;
+	let endStory = false;
+	let lastPage = 0;
+	let sujet1 = "";
+	let sujet2 = "";
+	let sujetAUtiliser = "";
+	let numberOfPages = 1000;
+	let cover = tabCovers[Math.floor(tabCovers.length * Math.random())];
 	$("#img-livre").attr("src", "assets/images/" + cover);
 
 	$("#book").turn({
@@ -28,297 +28,337 @@ $(document).ready(function() {
 	});
 
 	$("#start-story").click(async function() {
-
-        let nbphrase =  $('#nbPhrase').val();
+		let nbphrase = $("#nbPhrase").val();
 		let phrase = "";
 
-        if (index === 1) {
-            await animationTournerLaPage(index);
-            $("#background-book").addClass('background-book');
-        }
+		if (index === 1) {
+			await animationTournerLaPage(index);
+			$("#background-book").addClass("background-book");
+		}
 
 		$.ajax({
 			type: "GET",
-			url: "http://localhost:5001/histoire/" + index +"/"+nbphrase,
+			url: "http://localhost:5001/histoire/" + index + "/" + nbphrase,
 			success: function(response) {
-                console.log(response);
-                console.log("index1",index);
-				for(let i = 0 ; i< response.length; i++){
-                    let tabUnePhrase = response[i] ;
+				console.log(response);
+				console.log("index1", index);
+				for (let i = 0; i < response.length; i++) {
+					let tabUnePhrase = response[i];
 
-                    if (index === 1) {
-                        let phrase1 = {
-                            "phrase" : "",
-                            "sujet1" : ""
-                        };
-                       phraseIntro(tabUnePhrase, phrase1);
-                       phrase = phrase1.phrase;
-                       sujet1 = phrase1.sujet1;
-                       sujetAUtiliser = phrase1.sujet1;
-                       index++;
-                    }
-                    else if (index > 1 && index < 4) {
-                        phrase += situationInitiale(tabUnePhrase, sujetAUtiliser );
-                        index++;
-                    }
-                    else if (index === 4) {
-                        phrase += elementDeclancheur(tabUnePhrase, sujetAUtiliser );
-                        index++;
-                    }
-                    else if ( index > 4) {
-                        phrase += elementAction(tabUnePhrase, sujetAUtiliser );
-                        index++;
+					if (index === 1) {
+						let phrase1 = {
+							phrase: "",
+							sujet1: ""
+						};
+						phraseIntro(tabUnePhrase, phrase1);
+						phrase = phrase1.phrase;
+						sujet1 = phrase1.sujet1;
+						sujetAUtiliser = phrase1.sujet1;
+						index++;
+					} else if (index > 1 && index < 4) {
+						phrase += situationInitiale(tabUnePhrase, sujetAUtiliser);
+						index++;
+					} else if (index === 4) {
+						phrase += elementDeclancheur(tabUnePhrase, sujetAUtiliser);
+						index++;
+					} else if (index > 4) {
+						phrase += elementAction(tabUnePhrase, sujetAUtiliser);
+						index++;
+					}
 
-                    }
+					if (index > 5 && (index - 1) % 5 === 0) {
+						animationTournerLaPage(index);
+					}
 
-
-
-
-
-                    if (index > 5 && (index - 1) % 5 === 0) {
-                    	animationTournerLaPage(index);
-                    }
-
-                    // if (index > 1) {
-                    //     console.log("sujetAUtiliser",sujetAUtiliser);
-                    //     console.log("sujet1",sujet1);
-                    //     console.log("sujet2",sujet2);
+					// if (index > 1) {
+					//     console.log("sujetAUtiliser",sujetAUtiliser);
+					//     console.log("sujet1",sujet1);
+					//     console.log("sujet2",sujet2);
 					//
-                    //     sujetAUtiliser.genre === "2" ? (phrase += " La ") : (phrase += " Le ");
+					//     sujetAUtiliser.genre === "2" ? (phrase += " La ") : (phrase += " Le ");
 					// 	phrase += sujetAUtiliser.mot + " ";
 					// 	if (sujet2) {
 					// 		sujetAUtiliser === sujet1 ? (sujetAUtiliser = sujet2) : (sujetAUtiliser = sujet1);
 					// 	}
 					// }
 					// console.log(tabUnePhrase);
-                    // for(let j = 0 ; j< tabUnePhrase.length; j++){
-                    //     let objUnMot = tabUnePhrase[j];
+					// for(let j = 0 ; j< tabUnePhrase.length; j++){
+					//     let objUnMot = tabUnePhrase[j];
 					//
 					//
 					// 	if (objUnMot.type === "sujet" && index >1) {
 					// 		if (objUnMot.mot === sujet1.mot) {
 					// 			sujet2 = objUnMot;
 					// 			sujetAUtiliser = sujet2;
-                    //             objUnMot.genre === "2" ? (phrase += "une autre ") : (phrase += "un autre ");
+					//             objUnMot.genre === "2" ? (phrase += "une autre ") : (phrase += "un autre ");
 					// 		} else {
-                    //             objUnMot.genre === "2" ? (phrase += "une ") : (phrase += "un ");
+					//             objUnMot.genre === "2" ? (phrase += "une ") : (phrase += "un ");
 					// 		}
 					// 	}
 					//
-                    //     if (objUnMot.type === "sujet" && index > 1) {
+					//     if (objUnMot.type === "sujet" && index > 1) {
 					// 		if (objUnMot.mot === sujet1.mot) {
 					// 			let sujet1tmp = sujet1.mot;
 					// 			sujet1.mot = "premier " + sujet1tmp;
 					// 			let sujet2tmp = sujet2.mot;
 					// 			sujet2.mot = "deuxième " + sujet2tmp;
 					// 		}
-                    //     }
+					//     }
 					//
 					//
-                    // }
+					// }
 
 					// index++;
-                    // console.log("index2",index);
-                    let $newPhrase = $("<p class='text-livre text-livre" + index + "'></p>");
-                    let currentPage = $("#book").turn("page");
-                    $("#page-"+currentPage).append($($newPhrase));
-                    $(".text-livre" + index).html(phrase);
-                    //animationApparitionText(index);
-                    phrase = "";
+					// console.log("index2",index);
+					let $newPhrase = $("<p class='text-livre text-livre" + index + "'></p>");
+					let currentPage = $("#book").turn("page");
+					$("#page-" + currentPage).append($($newPhrase));
+					$(".text-livre" + index).html(phrase);
+					//animationApparitionText(index);
+					phrase = "";
 
-                    $("#start-story").html("continuer l'histoire");
+					$("#start-story").html("continuer l'histoire");
 				}
-
-
-
 			}
 		});
+	});
 
-
-    });
-
-    $("#previous-page").click(()=>{
-        $("#book").turn("previous");
-        $("#start-story").prop('disabled', true);
-        $('#next-page').prop('disabled', false);
-        let currentPage = $("#book").turn("page");
-        console.log("currentpage : ",currentPage );
-        if(currentPage < 4){
-            console.log("currentpage2 : ",currentPage );
-            $('#previous-page').prop('disabled', true);
-        }
-        lastPage +=1;
-    });
-    $("#next-page").click(()=>{
-        $("#book").turn("next");
-        $('#previous-page').prop('disabled', false);
-        let currentPage = $("#book").turn("page");
-        console.log(currentPage);
-        console.log(index);
-        lastPage -=1;
-        if(lastPage === 0){
-            $("#start-story").prop('disabled', false);
-            $('#next-page').prop('disabled', true);
-        }
-    });
-
-    $("#end-story").click(()=>{
-    	if(endStory){ //clic sur "nouvelle histoire"
-
-            let cover = tabCovers[Math.floor(tabCovers.length * Math.random())];
-            $("#img-livre").attr("src", "./assets/images/" + cover);
-            $("#end-story").html("Fin de l'histoire");
-            $("#start-story").html("Commencer l'histoire");
-            $("#start-story").prop('disabled', false);
-            $('#next-page').prop('disabled', true);
-            endStory = false;
-            index =1;
-
-		}else{ //clic sur "fin de l'histoire"
-            let currentPage = $("#book").turn("page");
-            for(let i =1; i<currentPage;i++){
-                $("#book").turn("previous");
-            }
-            $("#start-story").prop('disabled', true);
-            $("#end-story").html("Nouvelle histoire");
-            $("#background-book").removeClass('background-book');
-            endStory = true;
+	$("#previous-page").click(() => {
+		$("#book").turn("previous");
+		$("#start-story").prop("disabled", true);
+		$("#next-page").prop("disabled", false);
+		let currentPage = $("#book").turn("page");
+		console.log("currentpage : ", currentPage);
+		if (currentPage < 4) {
+			console.log("currentpage2 : ", currentPage);
+			$("#previous-page").prop("disabled", true);
 		}
+		lastPage += 1;
+	});
+	$("#next-page").click(() => {
+		$("#book").turn("next");
+		$("#previous-page").prop("disabled", false);
+		let currentPage = $("#book").turn("page");
+		console.log(currentPage);
+		console.log(index);
+		lastPage -= 1;
+		if (lastPage === 0) {
+			$("#start-story").prop("disabled", false);
+			$("#next-page").prop("disabled", true);
+		}
+	});
 
-    });
+	$("#end-story").click(() => {
+		if (endStory) {
+			//clic sur "nouvelle histoire"
 
-
+			let cover = tabCovers[Math.floor(tabCovers.length * Math.random())];
+			$("#img-livre").attr("src", "./assets/images/" + cover);
+			$("#end-story").html("Fin de l'histoire");
+			$("#start-story").html("Commencer l'histoire");
+			$("#start-story").prop("disabled", false);
+			$("#next-page").prop("disabled", true);
+			endStory = false;
+			index = 1;
+		} else {
+			//clic sur "fin de l'histoire"
+			let currentPage = $("#book").turn("page");
+			for (let i = 1; i < currentPage; i++) {
+				$("#book").turn("previous");
+			}
+			$("#start-story").prop("disabled", true);
+			$("#end-story").html("Nouvelle histoire");
+			$("#background-book").removeClass("background-book");
+			endStory = true;
+		}
+	});
 });
 
-function phraseIntro(data, phrase1){
-    phrase1.phrase += "Il était une fois ";
-    for(let j = 0 ; j< data.length; j++){
-        let objMot = data[j];
-        if (objMot.genre) {
-            objMot.genre === "2" ? (phrase1.phrase += "une ") : (phrase1.phrase += "un ");
-            phrase1.sujet1 = objMot;
-        }
-        if(objMot.type === "qui"){
-            phrase1.sujet1.genre === "2" ? phrase1.phrase += objMot.mot[1] : phrase1.phrase += objMot.mot[0];
-        }else{
-            phrase1.phrase += objMot.mot;
-        }
+function phraseIntro(data, phrase1) {
+	phrase1.phrase += "Il était une fois ";
+	for (let j = 0; j < data.length; j++) {
+		let objMot = data[j];
+		if (objMot.genre) {
+			objMot.genre === "2" ? (phrase1.phrase += "une ") : (phrase1.phrase += "un ");
+			phrase1.sujet1 = objMot;
+		}
+		if (objMot.type === "qui") {
+			phrase1.sujet1.genre === "2" ? (phrase1.phrase += objMot.mot[1]) : (phrase1.phrase += objMot.mot[0]);
+		} else {
+			phrase1.phrase += objMot.mot;
+		}
 
-        (j === data.length - 1) ? phrase1.phrase += "." : phrase1.phrase += " ";
-    }
+		j === data.length - 1 ? (phrase1.phrase += ".") : (phrase1.phrase += " ");
+	}
 
-    return phrase1;
+	return phrase1;
 }
-function situationInitiale(data, sujet){
+function situationInitiale(data, sujet) {
 	let phrase2 = "";
 	let pour = false;
-    sujet.genre === "2" ? (phrase2 += "la ") : (phrase2 += "le ");
-    phrase2 += sujet.mot;
-    phrase2 += " ";
-    for(let j = 0 ; j< data.length; j++){
-        let objMot = data[j];
-        phrase2 += objMot.mot;
-        if(objMot.suite2){
-        	if(objMot.suite2 === "personnage"){
-        		pour = true
+	sujet.genre === "2" ? (phrase2 += "la ") : (phrase2 += "le ");
+	phrase2 += sujet.mot;
+	phrase2 += " ";
+	for (let j = 0; j < data.length; j++) {
+		let objMot = data[j];
+
+		if (objMot.suite2) {
+			if (objMot.suite2 === "personnage") {
+				pour = true;
 			}
 		}
-		if(objMot.type === "nourriture" && pour){phrase2 += " pour "}
-		if (j === data.length - 1) {
-			let tabmot = objMot.mot.split(" ");
-			if (tabmot[tabmot.length - 1] !== "?" && tabmot[tabmot.length - 1] !== "!") {
-                phrase2 += ".";
+		if (objMot.type === "qui") {
+			if (objMot.mot === "se moquer des gens") {
+				phrase2 += objMot.mot[2];
+			}
+			if (data[j - 1] === "personnage") {
+				if (data[j - 1].genre === "1") {
+					if (data[j - 1].pluriel === "1") {
+						phrase2 += objMot.mot[2];
+					} else {
+						phrase2 += objMot.mot[0];
+					}
+				}
+				if (data[j - 1].genre === "2") {
+					if (data[j - 1].pluriel === "1") {
+						phrase2 += objMot.mot[3];
+					} else {
+						phrase2 += objMot.mot[1];
+					}
+				}
 			}
 		} else {
-            phrase2 += " ";
+			phrase2 += objMot.mot;
+		}
+		if (objMot.type === "nourriture" && pour) {
+			phrase2 += " pour ";
+		}
+		if (j === data.length - 1) {
+			addpointendprase(objMot, phrase2);
+		} else {
+			phrase2 += " ";
 		}
 	}
 
-    return phrase2;
+	return phrase2;
 }
 
+function elementDeclancheur(data, sujet) {
+	let phrase = "";
 
-function elementDeclancheur(data, sujet){
-    let phrase ="";
+	for (let j = 0; j < data.length; j++) {
+		let objMot = data[j];
 
-    for(let j = 0 ; j< data.length; j++){
-        let objMot = data[j];
-
-        if(objMot.type === "qui" || objMot.type === "adjectif"){
-            sujet.genre === "2" ? phrase += objMot.mot[1] : phrase += objMot.mot[0];
-        }else{
-            phrase += objMot.mot;
-        }
-
-        if (j === data.length - 1) {
-            if(objMot.type === "parole") {
-                let tabmot = objMot.mot.split(" ");
-                if (tabmot[tabmot.length - 1] !== "?" && tabmot[tabmot.length - 1] !== "!") {
-                    phrase += ".";
-                }
-            }
-            else{
-                phrase += ".";
-            }
-        } else {
-            phrase += " ";
-        }
-        if(j===0){
-            sujet.genre === "2" ? (phrase += "la ") : (phrase += "le ");
-            phrase += sujet.mot;
-            phrase += " ";
-		}
-    }
-    return phrase;
-}
-
-
-function elementAction(data, sujet){
-    let phrase ="";
-    if(data[0].type === "verbe3"){
-        phrase ="alors, ";
-        sujet.genre === "2" ? (phrase += "la ") : (phrase += "le ");
-        phrase += sujet.mot+" ";
-    }
-
-    for(let j = 0 ; j< data.length; j++){
-        let objMot = data[j];
-        if(objMot.type === "parole" && data[j-1].type === "personnage"){
-            phrase += " qui lui dit : "
-        }
-        if(objMot.type === "objet" && data[j-1].type === "personnage"){
-            phrase += " qui lui donna "
-        }
-        if(objMot.type === "qui" || objMot.type === "adjectif" || objMot.type === "initialisationaction" ){
-            sujet.genre === "2" ? phrase += objMot.mot[1] : phrase += objMot.mot[0];
-        }else{
-            phrase += objMot.mot;
-        }
-
-        if(objMot.type === "initialisationaction"){
-            sujet.genre === "2" ? (phrase += " la ") : (phrase += " le ");
+		if (objMot.type === "qui" || objMot.type === "adjectif") {
+			phrase = accordercomplement(data, j, sujet, phrase);
+		} else {
+			phrase += objMot.mot;
 		}
 
-        if (j === data.length - 1) {
-            if(objMot.type === "parole") {
-                let tabmot = objMot.mot.split(" ");
-                if (tabmot[tabmot.length - 1] !== "?" && tabmot[tabmot.length - 1] !== "!") {
-                    phrase += ".";
-                }
-            }
-            else{
-                phrase += ".";
-            }
-        } else {
-            phrase += " ";
-        }
-
-    }
-
-    return phrase;
+		if (j === data.length - 1) {
+			phrase = addpointendprase(objMot, phrase);
+		} else {
+			phrase += " ";
+		}
+		if (j === 0) {
+			sujet.genre === "2" ? (phrase += "la ") : (phrase += "le ");
+			phrase += sujet.mot;
+			phrase += " ";
+		}
+	}
+	return phrase;
 }
 
+function elementAction(data, sujet) {
+	let phrase = "";
+	if (data[0].type === "verbe3") {
+		phrase = "alors, ";
+		sujet.genre === "2" ? (phrase += "la ") : (phrase += "le ");
+		phrase += sujet.mot + " ";
+	}
 
+	for (let j = 0; j < data.length; j++) {
+		let objMot = data[j];
+		if (objMot.type === "parole" && data[j - 1].type === "personnage") {
+			if (data[j - 1].pluriel === "1") {
+				phrase += " qui lui dirent : ";
+			} else {
+				phrase += " qui lui dit : ";
+			}
+		}
+		if (objMot.type === "objet" && data[j - 1].type === "personnage") {
+			if (data[j - 1].pluriel === "1") {
+				phrase += " qui lui donnèrent ";
+			} else {
+				phrase += " qui lui donna ";
+			}
+		}
+		if (objMot.type === "qui" || objMot.type === "adjectif" || objMot.type === "initialisationaction") {
+			phrase = accordercomplement(data, j, sujet, phrase);
+		} else {
+			phrase += objMot.mot;
+		}
+
+		if (objMot.type === "initialisationaction") {
+			sujet.genre === "2" ? (phrase += " la ") : (phrase += " le ");
+			phrase += sujet.mot + " ";
+		}
+
+		if (j === data.length - 1) {
+			if (objMot.type === "parole") {
+				let tabmot = objMot.mot.split(" ");
+				if (tabmot[tabmot.length - 1] !== "?" && tabmot[tabmot.length - 1] !== "!") {
+					phrase += ".";
+				}
+			} else {
+				phrase += ".";
+			}
+		} else {
+			phrase += " ";
+		}
+	}
+
+	return phrase;
+}
+
+function addpointendprase(objMot, phrase) {
+	if (objMot.type === "parole") {
+		let tabmot = objMot.mot.split(" ");
+		if (tabmot[tabmot.length - 1] !== "?" && tabmot[tabmot.length - 1] !== "!") {
+			phrase += ".";
+		}
+	} else {
+		phrase += ".";
+	}
+	return phrase;
+}
+function accordercomplement(data, j, sujet, phrase) {
+	console.log(data[j]);
+	if (j === 0) {
+		sujet.genre === "2" ? (phrase += data[j].mot[1]) : (phrase += data[j].mot[0]);
+	} else {
+		if (data[j - 1].genre === "1") {
+			if (data[j - 1].pluriel === "1") {
+				phrase += data[j].mot[2];
+			} else {
+				phrase += data[j].mot[0];
+			}
+		}
+		if (data[j - 1].genre === "2") {
+			if (data[j - 1].pluriel === "1") {
+				phrase += data[j].mot[3];
+			} else {
+				phrase += data[j].mot[1];
+			}
+		}
+	}
+	/* if (data.type === "personnage") {
+		data.genre === "2" ? (phrase += objMot.mot[1]) : (phrase += objMot.mot[0]);
+	} else {
+		sujet.genre === "2" ? (phrase += objMot.mot[1]) : (phrase += objMot.mot[0]);
+	} */
+	return phrase;
+}
 
 function addPage(page, book) {
 	let image = tabImages[Math.floor(tabImages.length * Math.random())];
@@ -364,14 +404,13 @@ function animationApparitionText(index) {
 }
 
 function animationTournerLaPage(index) {
-    $("#book").turn("next");
+	$("#book").turn("next");
 	let currentPage = $("#book").turn("page");
-    $("#page-"+currentPage).html("");
-    return new Promise((resolve) => {
-        $("#book").bind("turned", function(event, page, view) {
-            currentPage < 4 ? $('#previous-page').prop('disabled', true): $('#previous-page').prop('disabled', false) ;
+	$("#page-" + currentPage).html("");
+	return new Promise(resolve => {
+		$("#book").bind("turned", function(event, page, view) {
+			currentPage < 4 ? $("#previous-page").prop("disabled", true) : $("#previous-page").prop("disabled", false);
 			resolve();
-        });
+		});
 	});
 }
-

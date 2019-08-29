@@ -20,45 +20,67 @@
 	{ "mot": "des sables mouvants", "type": "lieu2" },
 	{ "mot": "un temple indien", "type": "lieu2" },
 
-	{ "mot": ["qui avait mal aux dents","qui avait mal aux dents","qui avaient mal aux dents","qui avaient mal aux dents"], "type": "qui" },
-	{ "mot": ["qui voulait découvrir le monde","qui voulait découvrir le monde","qui voulaient découvrir le monde","qui voulaient découvrir le monde"], "type": "qui" },
-	{ "mot": ["qui rendait visite à sa grand mère","qui rendait visite à sa grand mère","qui rendaient visite à leur grand mère","qui rendaient visite à leur grand mère"], "type": "qui" },
-	{ "mot": ["qui jouait à pokémon go","qui jouait à pokémon go","qui jouaient à pokémon go","qui jouaient à pokémon go"], "type": "qui" },
-	{ "mot": ["qui sautait sur place sans arrêt","qui sautait sur place sans arrêt","qui sautaient sur place sans arrêt","qui sautaient sur place sans arrêt"], "type": "qui" },
-	{ "mot": ["qui était pressé","qui était pressée","qui était pressés","qui était pressées"], "type": "qui" },
+	{ "mot": ["qui avait mal aux dents", "qui avait mal aux dents", "qui avaient mal aux dents", "qui avaient mal aux dents"], "type": "qui" },
+	{
+		"mot": [
+			"qui voulait découvrir le monde",
+			"qui voulait découvrir le monde",
+			"qui voulaient découvrir le monde",
+			"qui voulaient découvrir le monde"
+		],
+		"type": "qui"
+	},
+	{
+		"mot": [
+			"qui rendait visite à sa grand mère",
+			"qui rendait visite à sa grand mère",
+			"qui rendaient visite à leur grand mère",
+			"qui rendaient visite à leur grand mère"
+		],
+		"type": "qui"
+	},
+	{ "mot": ["qui jouait à pokémon go", "qui jouait à pokémon go", "qui jouaient à pokémon go", "qui jouaient à pokémon go"], "type": "qui" },
+	{
+		"mot": [
+			"qui sautait sur place sans arrêt",
+			"qui sautait sur place sans arrêt",
+			"qui sautaient sur place sans arrêt",
+			"qui sautaient sur place sans arrêt"
+		],
+		"type": "qui"
+	},
+	{ "mot": ["qui était pressé", "qui était pressée", "qui étaient pressés", "qui étaient pressées"], "type": "qui" },
 
+	{ "mot": "avait l'habitude de", "type": "initialisation", "suite": "verbe1" },
+	{ "mot": "avait la manie de", "type": "initialisation", "suite": "verbe1" },
+	{ "mot": "adorait", "type": "initialisation", "suite": "verbe1" },
+	{ "mot": "aimait", "type": "initialisation", "suite": "verbe1" },
+	{ "mot": "vivait", "type": "initialisation", "suite": "lieu" },
 
-	{ "mot": "avait l'habitude de", "type": "initialisation",  "suite": "verbe1" },
-	{ "mot": "avait la manie de", "type": "initialisation",  "suite": "verbe1" },
-	{ "mot": "adorait", "type": "initialisation" ,  "suite": "verbe1" },
-	{ "mot": "aimait", "type": "initialisation",  "suite": "verbe1" },
-	{ "mot": "vivait", "type": "initialisation",  "suite": "lieu" },
+	{ "mot": "les gens", "type": "personnage", "genre": "1", "pluriel": "1" },
+	{ "mot": "sa petite soeur", "type": "personnage", "genre": "2", "pluriel": "0" },
+	{ "mot": "sa maman", "type": "personnage", "genre": "2", "pluriel": "0" },
+	{ "mot": "un grimlins", "type": "personnage", "genre": "1", "pluriel": "0" },
+	{ "mot": "un chasseur", "type": "personnage", "genre": "1", "pluriel": "0" },
 
-
-	{ "mot": "les gens", "type": "personnage"},
-	{ "mot": "sa petite soeur", "type": "personnage"  },
-	{ "mot": "sa maman", "type": "personnage"},
-	{ "mot": "un grimlins", "type": "personnage"},
-	{ "mot": "un chasseur", "type": "personnage" },
-
-	{ "mot": "mais un jour", "type": "declencheur",  "suite": "verbe2" },
-	{ "mot": "jusqu'a ce que par hasard", "type": "declencheur" ,  "suite": "verbe2" },
-	{ "mot": "mais il se passa une chose innatendu", "type": "declencheur",  "suite": "verbe2" },
-	{ "mot": "quand soudain", "type": "declencheur",  "suite": "verbe2" },
-	{ "mot": "jusqu'au jour où", "type": "declencheur",  "suite": "verbe2" },
+	{ "mot": "mais un jour", "type": "declencheur", "suite": "verbe2" },
+	{ "mot": "jusqu'a ce que par hasard", "type": "declencheur", "suite": "verbe2" },
+	{ "mot": "mais il se passa une chose innatendu", "type": "declencheur", "suite": "verbe2" },
+	{ "mot": "quand soudain", "type": "declencheur", "suite": "verbe2" },
+	{ "mot": "jusqu'au jour où", "type": "declencheur", "suite": "verbe2" },
 
 	{ "mot": "se promener", "type": "verbe1", "suite": "lieu" },
 	{ "mot": "manger", "type": "verbe1", "suite": "nourriture" },
 	{ "mot": "jouer avec ses amis", "type": "verbe1", "suite": "lieu" },
 	{ "mot": "jouer avec", "type": "verbe1", "suite": "objet" },
 	{ "mot": "se moquer des gens", "type": "verbe1", "suite": "qui" },
-	{ "mot": "regarder", "type": "verbe1", "suite": "personnage" , "suite2": "qui"},
+	{ "mot": "regarder", "type": "verbe1", "suite": "personnage", "suite2": "qui" },
 	{ "mot": "discuter avec", "type": "verbe1", "suite": "personnage" },
-	{ "mot": "cuisiner", "type": "verbe1", "suite": "nourriture" , "suite2": "personnage" },
+	{ "mot": "cuisiner", "type": "verbe1", "suite": "nourriture", "suite2": "personnage" },
 
 	{ "mot": "trouva", "type": "verbe2", "suite": "objet" },
 	{ "mot": "ramassa", "type": "verbe2", "suite": "objet" },
-	{ "mot": "rencontra", "type": "verbe2", "suite": "personnage" , "suite2": "qui"},
+	{ "mot": "rencontra", "type": "verbe2", "suite": "personnage", "suite2": "qui" },
 	{ "mot": "fut abordé par", "type": "verbe2", "suite": "personnage", "suite2": "qui" },
 	{ "mot": "tomba sur", "type": "verbe2", "suite": "objet" },
 	{ "mot": "tomba sur", "type": "verbe2", "suite": "personnage", "suite2": "qui" },
@@ -68,21 +90,19 @@
 	{ "mot": "décida de partir", "type": "verbe3", "suite": "lieu", "suite2": "pour" },
 	{ "mot": "quitta", "type": "verbe3", "suite": "lieu", "suite2": "pour" },
 	{ "mot": "abandonna", "type": "verbe3", "suite": "personnage", "suite2": "pour" },
-	{ "mot": "se rendi", "type": "verbe3", "suite": "lieu"  , "suite2": "pour"},
-	{ "mot": "se mis en quète de", "type": "verbe3", "suite": "objet" , "suite2": "pour"},
-	{ "mot": "se sépara de", "type": "verbe3", "suite": "objet" , "suite2": "pour"},
-	{ "mot": "parti à l'aventure", "type": "verbe3", "suite": "lieu" , "suite2": "pour"},
-
+	{ "mot": "se rendi", "type": "verbe3", "suite": "lieu", "suite2": "pour" },
+	{ "mot": "se mis en quète de", "type": "verbe3", "suite": "objet", "suite2": "pour" },
+	{ "mot": "se sépara de", "type": "verbe3", "suite": "objet", "suite2": "pour" },
+	{ "mot": "parti à l'aventure", "type": "verbe3", "suite": "lieu", "suite2": "pour" },
 
 	{ "mot": "des gauffres au nutella", "type": "nourriture" },
 	{ "mot": "des glaces", "type": "nourriture" },
 	{ "mot": "des bonbons oranges", "type": "nourriture" },
-	{ "mot": "du chocolat", "type": "nourriture"},
-	{ "mot": "des omelettes aux oeufs et aux hebes de provence", "type": "nourriture"},
-	{ "mot": "des lasagnes", "type": "nourriture"},
+	{ "mot": "du chocolat", "type": "nourriture" },
+	{ "mot": "des omelettes aux oeufs et aux hebes de provence", "type": "nourriture" },
+	{ "mot": "des lasagnes", "type": "nourriture" },
 	{ "mot": "des pâtes aux beurre et au parmesant", "type": "nourriture" },
-	{ "mot": "de la choucroute", "type": "nourriture"},
-
+	{ "mot": "de la choucroute", "type": "nourriture" },
 
 	{ "mot": "Que vous avez de grandes dents !", "type": "parole" },
 	{ "mot": "Hé ! qu'est ce que tu fais là tout seul ? viens on va jouer !", "type": "parole" },
@@ -92,21 +112,69 @@
 	{ "mot": "Si mon tonton tond ton tonton, mon tonton tondu sera", "type": "parole" },
 	{ "mot": "Ici ce trouve le puit éternel, si tu tombes dedant... tu seras mouillé ", "type": "parole" },
 
-	{ "mot": ["durant son périple","durant son périple","durant son périple","durant son périple"], "type": "initialisationaction" },
-	{ "mot": ["au détour d'un chemin,","au détour d'un chemin,","au détour d'un chemin,","au détour d'un chemin,"], "type": "initialisationaction"},
-	{ "mot": ["une fois arrivé,","une fois arrivée,","une fois arrivés,","une fois arrivées,"], "type": "initialisationaction"},
-	{ "mot": ["d'aventure en avanture,","d'aventure en avanture,","d'aventure en avanture,","d'aventure en avanture,"], "type": "initialisationaction" },
-	{ "mot": ["avant d'arriver à destination,","avant d'arriver à destination,","avant d'arriver à destination,","avant d'arriver à destination,"], "type": "initialisationaction" },
-	{ "mot": ["une fois sur la route,","une fois sur la route,","une fois sur la route,","une fois sur la route,"], "type": "initialisationaction" },
-	{ "mot": ["après avoir réfléchi sur ce qui venait de lui arriver,","après avoir réfléchi sur ce qui venait de lui arriver,","après avoir réfléchi sur ce qui venait de lui arriver,","après avoir réfléchi sur ce qui venait de lui arriver,"], "type": "initialisationaction"},
-	{ "mot": ["avant de se remettre de ses émotions,","avant de se remettre de ses émotions,","avant de se remettre de ses émotions,","avant de se remettre de ses émotions,"], "type": "initialisationaction"},
-	{ "mot": ["pendant que ses amis jouaient sans lui,","pendant que ses amis jouaient sans elle,","pendant que leurs amis jouaient sans eux,","pendant que leurs amis jouaient sans eux,"], "type": "initialisationaction" },
-	{ "mot": ["à la nuit tombée,","à la nuit tombée,","à la nuit tombée,","à la nuit tombée,"], "type": "initialisationaction" },
-	{ "mot": ["à l'aube","à l'aube","à l'aube","à l'aube"], "type": "initialisationaction"},
-	{ "mot": ["à midi,","à midi,","à midi,","à midi,"], "type": "initialisationaction"},
-	{ "mot": ["en pleine journée,","en pleine journée,","en pleine journée,","en pleine journée,"], "type": "initialisationaction" },
-	{ "mot": ["pendant que tout le monde est endormi,","pendant que tout le monde est endormi,","pendant que tout le monde est endormi,","pendant que tout le monde est endormi,"], "type": "initialisationaction" },
-
+	{ "mot": ["durant son périple", "durant son périple", "durant son périple", "durant son périple"], "type": "initialisationaction" },
+	{
+		"mot": ["au détour d'un chemin,", "au détour d'un chemin,", "au détour d'un chemin,", "au détour d'un chemin,"],
+		"type": "initialisationaction"
+	},
+	{ "mot": ["une fois arrivé,", "une fois arrivée,", "une fois arrivés,", "une fois arrivées,"], "type": "initialisationaction" },
+	{
+		"mot": ["d'aventure en avanture,", "d'aventure en avanture,", "d'aventure en avanture,", "d'aventure en avanture,"],
+		"type": "initialisationaction"
+	},
+	{
+		"mot": [
+			"avant d'arriver à destination,",
+			"avant d'arriver à destination,",
+			"avant d'arriver à destination,",
+			"avant d'arriver à destination,"
+		],
+		"type": "initialisationaction"
+	},
+	{
+		"mot": ["une fois sur la route,", "une fois sur la route,", "une fois sur la route,", "une fois sur la route,"],
+		"type": "initialisationaction"
+	},
+	{
+		"mot": [
+			"après avoir réfléchi sur ce qui venait de lui arriver,",
+			"après avoir réfléchi sur ce qui venait de lui arriver,",
+			"après avoir réfléchi sur ce qui venait de lui arriver,",
+			"après avoir réfléchi sur ce qui venait de lui arriver,"
+		],
+		"type": "initialisationaction"
+	},
+	{
+		"mot": [
+			"avant de se remettre de ses émotions,",
+			"avant de se remettre de ses émotions,",
+			"avant de se remettre de ses émotions,",
+			"avant de se remettre de ses émotions,"
+		],
+		"type": "initialisationaction"
+	},
+	{
+		"mot": [
+			"pendant que ses amis jouaient sans lui,",
+			"pendant que ses amis jouaient sans elle,",
+			"pendant que leurs amis jouaient sans eux,",
+			"pendant que leurs amis jouaient sans eux,"
+		],
+		"type": "initialisationaction"
+	},
+	{ "mot": ["à la nuit tombée,", "à la nuit tombée,", "à la nuit tombée,", "à la nuit tombée,"], "type": "initialisationaction" },
+	{ "mot": ["à l'aube", "à l'aube", "à l'aube", "à l'aube"], "type": "initialisationaction" },
+	{ "mot": ["à midi,", "à midi,", "à midi,", "à midi,"], "type": "initialisationaction" },
+	{ "mot": ["en pleine journée,", "en pleine journée,", "en pleine journée,", "en pleine journée,"], "type": "initialisationaction" },
+	{
+		"mot": [
+			"pendant que tout le monde est endormi,",
+			"pendant que tout le monde est endormi,",
+			"pendant que tout le monde est endormi,",
+			"pendant que tout le monde est endormi,"
+		],
+		"type": "initialisationaction"
+	},
 
 	{ "mot": "rencontra", "type": "verbe", "suite": "personnage" },
 	{ "mot": "dit", "type": "verbe", "suite": "parole" },
@@ -114,11 +182,10 @@
 	{ "mot": "mangea", "type": "verbe", "suite": "nourriture", "suite2": "adjectif" },
 	{ "mot": "vit", "type": "verbe", "suite": "personnage" },
 	{ "mot": "découvrit", "type": "verbe", "suite": "personnage" },
-	{ "mot": "sauva", "type": "verbe", "suite": "personnage"  },
+	{ "mot": "sauva", "type": "verbe", "suite": "personnage" },
 	{ "mot": "aida", "type": "verbe", "suite": "personnage" },
-	{ "mot": "trouva", "type": "verbe", "suite": "objet" , "suite2": "adjectif"},
+	{ "mot": "trouva", "type": "verbe", "suite": "objet", "suite2": "adjectif" },
 	{ "mot": "demanda de l'aide à", "type": "verbe", "suite": "personnage" },
-
 
 	{ "mot": "une pierre philosophale", "genre": "2", "pluriel": "0", "type": "objet" },
 	{ "mot": "une pomme", "genre": "2", "pluriel": "0", "type": "objet", "suite": "adjectif" },
@@ -127,10 +194,13 @@
 	{ "mot": "un baton", "genre": "1", "pluriel": "0", "type": "objet", "suite": "adjectif" },
 	{ "mot": "des petits cailloux", "genre": "1", "pluriel": "1", "type": "objet", "suite": "adjectif" },
 
-	{ "mot": ["extraodinaire","extraodinaire","extraodinaires","extraodinaires"], "type": "adjectif" },
-	{ "mot": ["magique","magique","magiques","magiques"], "type": "adjectif" },
-	{ "mot": ["aux couleurx de l'arc en ciel","aux couleurx de l'arc en ciel","aux couleurx de l'arc en ciel","aux couleurx de l'arc en ciel"], "type": "adjectif" },
-	{ "mot": ["fletri","fletrie","fletris","fletrie"], "type": "adjectif" },
+	{ "mot": ["extraodinaire", "extraodinaire", "extraodinaires", "extraodinaires"], "type": "adjectif" },
+	{ "mot": ["magique", "magique", "magiques", "magiques"], "type": "adjectif" },
+	{
+		"mot": ["aux couleurx de l'arc en ciel", "aux couleurx de l'arc en ciel", "aux couleurx de l'arc en ciel", "aux couleurx de l'arc en ciel"],
+		"type": "adjectif"
+	},
+	{ "mot": ["fletri", "fletrie", "fletris", "fletrie"], "type": "adjectif" },
 
 	{ "mot": "pour le rendre à son propriétaire", "type": "pour" },
 	{ "mot": "pour aller au festival des gens heureux", "type": "pour" },
