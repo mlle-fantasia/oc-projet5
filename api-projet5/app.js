@@ -4,25 +4,24 @@ const app = express();
 app.use(cors({ origin: "*" }));
 
 var histoire1 = require("./histoire1.json");
-var excuse = require("./excuse.json");
 var excuse2 = require("./excuse2.json");
 var sdaDico = require("./sda.json");
 
-const tabsujet = histoire1.filter(objet => {
-	return objet.type === "sujet";
-});
-const tablieu = histoire1.filter(objet => {
-	return objet.type === "lieu";
-});
-const tabqui = histoire1.filter(objet => {
-	return objet.type === "qui";
-});
-const tabverbe = histoire1.filter(objet => {
-	return objet.type === "verbe";
-});
-const tabpersonnage = histoire1.filter(objet => {
-	return objet.type === "personnage";
-});
+// fait un tue dans le dictionnaire en fonction du type et choisi un mot au hasard
+// renvoie tout l'objet du mot
+function chooseMot(type, dico) {
+	const tabphrase = dico.filter(objet => {
+		return objet.type === type;
+	});
+	let mot = tabphrase[Math.floor(tabphrase.length * Math.random())];
+	return mot;
+}
+
+/*********************************************************************************************************************/
+/*********************************************************************************************************************/
+/***************** GENERATEUR HISTOIRE *******************************************************************************/
+/*********************************************************************************************************************/
+/*********************************************************************************************************************/
 
 app.get("/histoire/:index/:nbPhrase", function(req, res) {
 	let phrases = [];
@@ -47,17 +46,9 @@ app.get("/histoire/:index/:nbPhrase", function(req, res) {
 		}
 	}
 
-	//console.log("phrases",phrases);
 	res.send(phrases);
 });
 
-function chooseMot(type, dico) {
-	const tabphrase = dico.filter(objet => {
-		return objet.type === type;
-	});
-	let mot = tabphrase[Math.floor(tabphrase.length * Math.random())];
-	return mot;
-}
 function choosePhrase(types, index) {
 	let phrase = [],
 		continuer = true;
@@ -67,7 +58,7 @@ function choosePhrase(types, index) {
 		if (Array.isArray(type)) {
 			type = type[Math.floor(type.length * Math.random())];
 		}
-		let mot = chooseMot(type, "histoire1");
+		let mot = chooseMot(type, histoire1);
 		phrase.push(mot);
 		if (mot.suite) {
 			let suite2 = "";
@@ -76,7 +67,7 @@ function choosePhrase(types, index) {
 				continuer = false;
 			}
 			while (motActuel.suite) {
-				let motSuite = chooseMot(motActuel.suite);
+				let motSuite = chooseMot(motActuel.suite, histoire1);
 				phrase.push(motSuite);
 				motActuel = motSuite;
 
@@ -85,158 +76,11 @@ function choosePhrase(types, index) {
 				}
 			}
 			if (suite2.length) {
-				let motSuite2 = chooseMot(suite2);
+				let motSuite2 = chooseMot(suite2, histoire1);
 				phrase.push(motSuite2);
 			}
 		}
 	}
-	return phrase;
-}
-
-function choosePhrase1(phrase) {
-	let sujet = tabsujet[Math.floor(tabsujet.length * Math.random())];
-	phrase.push(sujet);
-
-	let lieu = tablieu[Math.floor(tablieu.length * Math.random())];
-	phrase.push(lieu);
-
-	let qui = tabqui[Math.floor(tabqui.length * Math.random())];
-	phrase.push(qui);
-
-	return phrase;
-}
-
-function choosePhraseInitialisation() {
-	let phrase = [];
-	const tabinitialisation = histoire1.filter(objet => {
-		return objet.type === "initialisation";
-	});
-	let motinitialisation = tabinitialisation[Math.floor(tabinitialisation.length * Math.random())];
-	phrase.push(motinitialisation);
-	let suite2 = "";
-	let motActuel = motinitialisation;
-
-	while (motActuel.suite) {
-		let suite = motActuel.suite;
-		let tabSuite = histoire1.filter(objet => {
-			return objet.type === suite;
-		});
-		let motSuite = tabSuite[Math.floor(tabSuite.length * Math.random())];
-		phrase.push(motSuite);
-		motActuel = motSuite;
-
-		if (motSuite.suite2) {
-			suite2 = motSuite.suite2;
-		}
-	}
-	if (suite2.length) {
-		let tabSuite2 = histoire1.filter(objet => {
-			return objet.type === suite2;
-		});
-		let motSuite2 = tabSuite2[Math.floor(tabSuite2.length * Math.random())];
-		phrase.push(motSuite2);
-	}
-
-	return phrase;
-}
-
-function choosePhraseDeclencheur(phrase) {
-	const tabDeclencheur = histoire1.filter(objet => {
-		return objet.type === "declencheur";
-	});
-	let motDeclencheur = tabDeclencheur[Math.floor(tabDeclencheur.length * Math.random())];
-	phrase.push(motDeclencheur);
-
-	const tabVerbe2 = histoire1.filter(objet => {
-		return objet.type === "verbe2";
-	});
-	let motVerbe2 = tabVerbe2[Math.floor(tabVerbe2.length * Math.random())];
-	phrase.push(motVerbe2);
-
-	let suite = motVerbe2.suite;
-	let tabSuite = histoire1.filter(objet => {
-		return objet.type === suite;
-	});
-	let motSuite = tabSuite[Math.floor(tabSuite.length * Math.random())];
-	phrase.push(motSuite);
-
-	if (motVerbe2.suite2) {
-		let suite2 = motVerbe2.suite2;
-		let tabSuite2 = histoire1.filter(objet => {
-			return objet.type === suite2;
-		});
-		let motSuite2 = tabSuite2[Math.floor(tabSuite2.length * Math.random())];
-		phrase.push(motSuite2);
-	}
-
-	return phrase;
-}
-
-function choosePhraseAction1(phrase) {
-	const tabVerbe3 = histoire1.filter(objet => {
-		return objet.type === "verbe3";
-	});
-
-	let verbe3 = tabVerbe3[Math.floor(tabVerbe3.length * Math.random())];
-	phrase.push(verbe3);
-
-	let motActuel = verbe3;
-
-	while (motActuel.suite) {
-		let suite = motActuel.suite;
-		let tabSuite = histoire1.filter(objet => {
-			return objet.type === suite;
-		});
-		let motSuite = tabSuite[Math.floor(tabSuite.length * Math.random())];
-		phrase.push(motSuite);
-		motActuel = motSuite;
-	}
-	if (verbe3.suite2) {
-		let suite2 = verbe3.suite2;
-		let tabSuite2 = histoire1.filter(objet => {
-			return objet.type === suite2;
-		});
-		let motSuite2 = tabSuite2[Math.floor(tabSuite2.length * Math.random())];
-		phrase.push(motSuite2);
-	}
-
-	return phrase;
-}
-
-function choosePhraseAction(phrase) {
-	const tabSuite2 = ["qui", "parole", "objet", "lieu"];
-	const tabDebutAction = histoire1.filter(objet => {
-		return objet.type === "initialisationaction";
-	});
-	let debutAction = tabDebutAction[Math.floor(tabDebutAction.length * Math.random())];
-	phrase.push(debutAction);
-
-	let verbe = tabverbe[Math.floor(tabverbe.length * Math.random())];
-	phrase.push(verbe);
-
-	let typeSuite2 = tabSuite2[Math.floor(tabSuite2.length * Math.random())];
-
-	if (verbe.suite === "personnage") {
-		let personnage = tabpersonnage[Math.floor(tabpersonnage.length * Math.random())];
-		phrase.push(personnage);
-		const tabsuite = histoire1.filter(objet => {
-			return objet.type === typeSuite2;
-		});
-		let suite2 = tabsuite[Math.floor(tabsuite.length * Math.random())];
-		phrase.push(suite2);
-	} else {
-		let motActuel = verbe;
-		while (motActuel.suite) {
-			let suite = motActuel.suite;
-			let tabSuite = histoire1.filter(objet => {
-				return objet.type === suite;
-			});
-			let motSuite = tabSuite[Math.floor(tabSuite.length * Math.random())];
-			phrase.push(motSuite);
-			motActuel = motSuite;
-		}
-	}
-
 	return phrase;
 }
 
@@ -245,35 +89,6 @@ function choosePhraseAction(phrase) {
 /************** GENERATEUR EXCUSES ***********************************************************************************/
 /*********************************************************************************************************************/
 /*********************************************************************************************************************/
-
-/* const tabsujetFormule = excuse2.filter(objet => {
-	return objet.type === "formule";
-});
-const tabsujetExcuse = excuse2.filter(objet => {
-	return objet.type === "sujet";
-});
-const tabverbeExcuse = excuse2.filter(objet => {
-	return objet.type === "verbe";
-}); */
-
-/* const tabobjet1Excuse = excuse2.filter(objet => {
-	return objet.type === "objet1";
-});
-const tabobjet2Excuse = excuse2.filter(objet => {
-	return objet.type === "objet2";
-}); */
-/* const tabcalificatiftempsExcuse = excuse2.filter(objet => {
-	return objet.type === "calificatiftemps";
-});
-const tabpromesseExcuse = excuse2.filter(objet => {
-	return objet.type === "promesse";
-});
-const tabtempsExcuse = excuse2.filter(objet => {
-	return objet.type === "temps";
-});
-const tabcapaciteExcuse = excuse2.filter(objet => {
-	return objet.type === "capacite";
-}); */
 
 app.get("/excuse/:index", function(req, res) {
 	let excuses = [];
@@ -305,31 +120,16 @@ app.get("/excuse/:index", function(req, res) {
 				excuse.push(mot);
 			}
 		}
-		/* let formule = tabsujetFormule[Math.floor(tabsujetFormule.length * Math.random())];
-		excuse.push(formule);
-		let temps = tabtempsExcuse[Math.floor(tabtempsExcuse.length * Math.random())];
-		excuse.push(temps);
-		let calificatiftemps = tabcalificatiftempsExcuse[Math.floor(tabcalificatiftempsExcuse.length * Math.random())];
-		excuse.push(calificatiftemps);
-		let sujet = tabsujetExcuse[Math.floor(tabsujetExcuse.length * Math.random())];
-		excuse.push(sujet);
-		let verbe = tabverbeExcuse[Math.floor(tabverbeExcuse.length * Math.random())];
-		excuse.push(verbe); */
 
-		/* let capacite = tabcapaciteExcuse[Math.floor(tabcapaciteExcuse.length * Math.random())];
-		excuse.push(capacite);
-		let promesse = tabpromesseExcuse[Math.floor(tabpromesseExcuse.length * Math.random())];
-		excuse.push(promesse);
-
-		 */
 		excuses.push(excuse);
 	}
-	console.log("excuses", excuses);
+
 	res.send(excuses);
 });
 
 /*********************************************************************************************************************/
 /*********************************************************************************************************************/
+/***************** GENERATEUR SEIGNEUR DES ANNEAUX *******************************************************************/
 /*********************************************************************************************************************/
 /*********************************************************************************************************************/
 
