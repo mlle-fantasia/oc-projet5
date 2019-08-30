@@ -14,7 +14,6 @@ $(document).ready(function() {
 			turning: function(e, page, view) {
 				// Gets the range of pages that the book needs right now
 				let range = $(this).turn("range", page);
-				console.log(range);
 				// Check if each page is within the book
 				for (page = range[0]; page <= range[1]; page++) addPage(page, $(this));
 			}
@@ -50,7 +49,6 @@ $(document).ready(function() {
 					phrase = "";
 				}
 
-				console.log(response);
 				if (index > 1) {
 					sujetAUtiliser.genre === "2" ? (phrase += " La ") : (phrase += " Le ");
 					phrase += sujetAUtiliser.mot + " ";
@@ -92,9 +90,10 @@ $(document).ready(function() {
 					}
 				}
 				let $newPhrase = $("<p class='text-livre text-livre" + index + "'></p>");
-				$(".page-text").append($($newPhrase));
+				let currentpage = $("#book").turn("page");
+				$("#page-" + currentpage).append($($newPhrase));
 				$(".text-livre" + index).html(phrase);
-				animationApparitionText(index);
+				//animationApparitionText(index);
 				index++;
 				$("#start-story").html("continuer l'histoire");
 			}
@@ -126,7 +125,6 @@ function addPage(page, book) {
 function animationApparitionText(index) {
 	var textWrapper = document.querySelector(".text-livre" + index);
 	textWrapper.innerHTML = textWrapper.textContent.replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>");
-	console.log(textWrapper);
 	anime
 		.timeline({ loop: false })
 		.add({
@@ -147,6 +145,5 @@ function animationApparitionText(index) {
 }
 
 function animationTournerLaPage() {
-	console.log("page suivante");
 	$("#book").turn("next");
 }
