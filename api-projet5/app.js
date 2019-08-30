@@ -1,339 +1,364 @@
-const express = require('express');
-const cors = require('cors');
+const express = require("express");
+const cors = require("cors");
 const app = express();
-app.use(cors({origin: '*'}));
+app.use(cors({ origin: "*" }));
 
 var histoire1 = require("./histoire1.json");
 var excuse = require("./excuse.json");
 var excuse2 = require("./excuse2.json");
 var sdaDico = require("./sda.json");
 
-const tabsujet =  histoire1.filter((objet)=>{
-    return objet.type === "sujet";
+const tabsujet = histoire1.filter(objet => {
+	return objet.type === "sujet";
 });
-const tablieu =  histoire1.filter((objet)=>{
-    return objet.type === "lieu";
+const tablieu = histoire1.filter(objet => {
+	return objet.type === "lieu";
 });
-const tabqui =  histoire1.filter((objet)=>{
-    return objet.type === "qui";
+const tabqui = histoire1.filter(objet => {
+	return objet.type === "qui";
 });
-const tabverbe =  histoire1.filter((objet)=>{
-    return objet.type === "verbe";
+const tabverbe = histoire1.filter(objet => {
+	return objet.type === "verbe";
 });
-const tabpersonnage =  histoire1.filter((objet)=>{
-    return objet.type === "personnage";
-});
-
-app.get('/histoire/:index/:nbPhrase', function (req, res) {
-    let phrases = [];
-    let index =  parseInt(req.params.index);
-
-    for(let i = 1 ; i <= parseInt(req.params.nbPhrase) ; i++){
-
-        if(i === 1 && index === 1){
-            let phrase =[];
-            phrases.push(choosePhrase1(phrase));
-            index++;
-        }
-        else if( index > 1 && index < 4 ){
-            let phrase =[];
-            phrases.push(choosePhraseInitialisation(phrase));
-            index++;
-        }
-        else if(index === 4  ){
-            let phrase =[];
-            phrases.push(choosePhraseDeclencheur(phrase));
-            index++;
-        }
-        else if(index === 5 ){
-            let phrase =[];
-            phrases.push(choosePhraseAction1(phrase));
-            index++;
-        }
-        else if(index > 5 ){
-            let phrase =[];
-            phrases.push(choosePhraseAction(phrase));
-            index++;
-        }
-
-    }
-
-    //console.log("phrases",phrases);
-    res.send(phrases);
+const tabpersonnage = histoire1.filter(objet => {
+	return objet.type === "personnage";
 });
 
-function choosePhrase1(phrase){
-    let sujet =  tabsujet[Math.floor(tabsujet.length * Math.random())];
-    phrase.push(sujet);
+app.get("/histoire/:index/:nbPhrase", function(req, res) {
+	let phrases = [];
+	let index = parseInt(req.params.index);
 
-    let lieu =  tablieu[Math.floor(tablieu.length * Math.random())];
-    phrase.push(lieu);
+	for (let i = 1; i <= parseInt(req.params.nbPhrase); i++) {
+		if (i === 1 && index === 1) {
+			phrases.push(choosePhrase(["sujet", "lieu", "qui"], index));
+			index++;
+		} else if (index > 1 && index < 4) {
+			phrases.push(choosePhrase(["initialisation"], index));
+			index++;
+		} else if (index === 4) {
+			phrases.push(choosePhrase(["declencheur"], index));
+			index++;
+		} else if (index === 5) {
+			phrases.push(choosePhrase(["verbe3"], index));
+			index++;
+		} else if (index > 5) {
+			phrases.push(choosePhrase(["initialisationaction", "verbe", ["qui", "parole", "objet", "lieu"]], index));
+			index++;
+		}
+	}
 
-    let qui =  tabqui[Math.floor(tabqui.length * Math.random())];
-    phrase.push(qui);
+	//console.log("phrases",phrases);
+	res.send(phrases);
+});
 
-    return phrase;
+function chooseMot(type, dico) {
+	const tabphrase = dico.filter(objet => {
+		return objet.type === type;
+	});
+	let mot = tabphrase[Math.floor(tabphrase.length * Math.random())];
+	return mot;
+}
+function choosePhrase(types, index) {
+	let phrase = [],
+		continuer = true;
+	for (let itype = 0; itype < types.length; itype++) {
+		if (!continuer) break;
+		let type = types[itype];
+		if (Array.isArray(type)) {
+			type = type[Math.floor(type.length * Math.random())];
+		}
+		let mot = chooseMot(type, "histoire1");
+		phrase.push(mot);
+		if (mot.suite) {
+			let suite2 = "";
+			let motActuel = mot;
+			if (index > 5 && motActuel.suite !== "personnage" && type === "verbe") {
+				continuer = false;
+			}
+			while (motActuel.suite) {
+				let motSuite = chooseMot(motActuel.suite);
+				phrase.push(motSuite);
+				motActuel = motSuite;
+
+				if (motSuite.suite2) {
+					suite2 = motSuite.suite2;
+				}
+			}
+			if (suite2.length) {
+				let motSuite2 = chooseMot(suite2);
+				phrase.push(motSuite2);
+			}
+		}
+	}
+	return phrase;
 }
 
-function choosePhraseInitialisation(phrase){
-    const tabinitialisation =  histoire1.filter((objet)=>{
-        return objet.type === "initialisation";
-    });
-    let motinitialisation =  tabinitialisation[Math.floor(tabinitialisation.length * Math.random())];
-    phrase.push(motinitialisation);
-    let suite2 = "";
-    let motActuel = motinitialisation ;
+function choosePhrase1(phrase) {
+	let sujet = tabsujet[Math.floor(tabsujet.length * Math.random())];
+	phrase.push(sujet);
 
-    while (motActuel.suite){
-        let suite = motActuel.suite ;
-        let tabSuite =  histoire1.filter((objet)=>{
-            return objet.type === suite;
-        });
-        let motSuite =  tabSuite[Math.floor(tabSuite.length * Math.random())];
-        phrase.push(motSuite);
-        motActuel = motSuite;
+	let lieu = tablieu[Math.floor(tablieu.length * Math.random())];
+	phrase.push(lieu);
 
-        if(motSuite.suite2){
-            suite2 = motSuite.suite2;
-        }
+	let qui = tabqui[Math.floor(tabqui.length * Math.random())];
+	phrase.push(qui);
 
-    }
-    if(suite2.length)
-    {let tabSuite2 =  histoire1.filter((objet)=>{
-        return objet.type === suite2;
-    });
-    let motSuite2 =  tabSuite2[Math.floor(tabSuite2.length * Math.random())];
-    phrase.push(motSuite2);}
-
-    return phrase;
+	return phrase;
 }
 
-function choosePhraseDeclencheur(phrase){
-    const tabDeclencheur =  histoire1.filter((objet)=>{
-        return objet.type === "declencheur";
-    });
-    let motDeclencheur =  tabDeclencheur[Math.floor(tabDeclencheur.length * Math.random())];
-    phrase.push(motDeclencheur);
+function choosePhraseInitialisation() {
+	let phrase = [];
+	const tabinitialisation = histoire1.filter(objet => {
+		return objet.type === "initialisation";
+	});
+	let motinitialisation = tabinitialisation[Math.floor(tabinitialisation.length * Math.random())];
+	phrase.push(motinitialisation);
+	let suite2 = "";
+	let motActuel = motinitialisation;
 
-    const tabVerbe2 =  histoire1.filter((objet)=>{
-        return objet.type === "verbe2";
-    });
-    let motVerbe2 =  tabVerbe2[Math.floor(tabVerbe2.length * Math.random())];
-    phrase.push(motVerbe2);
+	while (motActuel.suite) {
+		let suite = motActuel.suite;
+		let tabSuite = histoire1.filter(objet => {
+			return objet.type === suite;
+		});
+		let motSuite = tabSuite[Math.floor(tabSuite.length * Math.random())];
+		phrase.push(motSuite);
+		motActuel = motSuite;
 
-    let suite = motVerbe2.suite ;
-    let tabSuite =  histoire1.filter((objet)=>{
-        return objet.type === suite;
-    });
-    let motSuite =  tabSuite[Math.floor(tabSuite.length * Math.random())];
-    phrase.push(motSuite);
+		if (motSuite.suite2) {
+			suite2 = motSuite.suite2;
+		}
+	}
+	if (suite2.length) {
+		let tabSuite2 = histoire1.filter(objet => {
+			return objet.type === suite2;
+		});
+		let motSuite2 = tabSuite2[Math.floor(tabSuite2.length * Math.random())];
+		phrase.push(motSuite2);
+	}
 
-    if(motVerbe2.suite2){
-        let suite2 = motVerbe2.suite2;
-        let tabSuite2 =  histoire1.filter((objet)=>{
-            return objet.type === suite2;
-        });
-        let motSuite2 =  tabSuite2[Math.floor(tabSuite2.length * Math.random())];
-        phrase.push(motSuite2);
-    }
-
-    return phrase;
+	return phrase;
 }
 
-function choosePhraseAction1(phrase){
-    const tabVerbe3 =  histoire1.filter((objet)=>{
-        return objet.type === "verbe3";
-    });
+function choosePhraseDeclencheur(phrase) {
+	const tabDeclencheur = histoire1.filter(objet => {
+		return objet.type === "declencheur";
+	});
+	let motDeclencheur = tabDeclencheur[Math.floor(tabDeclencheur.length * Math.random())];
+	phrase.push(motDeclencheur);
 
-    let verbe3 =  tabVerbe3[Math.floor(tabVerbe3.length * Math.random())];
-    phrase.push(verbe3);
+	const tabVerbe2 = histoire1.filter(objet => {
+		return objet.type === "verbe2";
+	});
+	let motVerbe2 = tabVerbe2[Math.floor(tabVerbe2.length * Math.random())];
+	phrase.push(motVerbe2);
 
-    let motActuel = verbe3;
+	let suite = motVerbe2.suite;
+	let tabSuite = histoire1.filter(objet => {
+		return objet.type === suite;
+	});
+	let motSuite = tabSuite[Math.floor(tabSuite.length * Math.random())];
+	phrase.push(motSuite);
 
-    while (motActuel.suite){
-        let suite = motActuel.suite ;
-        let tabSuite =  histoire1.filter((objet)=>{
-            return objet.type === suite;
-        });
-        let motSuite =  tabSuite[Math.floor(tabSuite.length * Math.random())];
-        phrase.push(motSuite);
-        motActuel = motSuite;
+	if (motVerbe2.suite2) {
+		let suite2 = motVerbe2.suite2;
+		let tabSuite2 = histoire1.filter(objet => {
+			return objet.type === suite2;
+		});
+		let motSuite2 = tabSuite2[Math.floor(tabSuite2.length * Math.random())];
+		phrase.push(motSuite2);
+	}
 
-    }
-    if(verbe3.suite2){
-        let suite2 = verbe3.suite2;
-        let tabSuite2 =  histoire1.filter((objet)=>{
-            return objet.type === suite2;
-        });
-        let motSuite2 =  tabSuite2[Math.floor(tabSuite2.length * Math.random())];
-        phrase.push(motSuite2);
-    }
-
-    return phrase;
+	return phrase;
 }
 
-function choosePhraseAction(phrase){
-    const tabSuite2 = ["qui","parole","objet", "lieu"];
-    const tabDebutAction =  histoire1.filter((objet)=>{
-        return objet.type === "initialisationaction";
-    });
-    let debutAction =  tabDebutAction[Math.floor(tabDebutAction.length * Math.random())];
-    phrase.push(debutAction);
+function choosePhraseAction1(phrase) {
+	const tabVerbe3 = histoire1.filter(objet => {
+		return objet.type === "verbe3";
+	});
 
-    let verbe =  tabverbe[Math.floor(tabverbe.length * Math.random())];
-    phrase.push(verbe);
+	let verbe3 = tabVerbe3[Math.floor(tabVerbe3.length * Math.random())];
+	phrase.push(verbe3);
 
-    let typeSuite2 =  tabSuite2[Math.floor(tabSuite2.length * Math.random())];
+	let motActuel = verbe3;
 
-    if(verbe.suite === "personnage"){
-        let personnage =  tabpersonnage[Math.floor(tabpersonnage.length * Math.random())];
-        phrase.push(personnage);
-        console.log(typeSuite2);
-        const tabsuite =  histoire1.filter((objet)=>{
-            return objet.type === typeSuite2;
-        });
-        let suite2 =  tabsuite[Math.floor(tabsuite.length * Math.random())];
-        phrase.push(suite2);
-        console.log(phrase);
-    }else {
-        let motActuel = verbe;
-        while (motActuel.suite) {
-            let suite = motActuel.suite;
-            let tabSuite = histoire1.filter((objet) => {
-                return objet.type === suite;
-            });
-            let motSuite = tabSuite[Math.floor(tabSuite.length * Math.random())];
-            phrase.push(motSuite);
-            motActuel = motSuite;
-        }
-    }
-    // if(verbe.suite2){
-    //     let suite2 = verbe.suite2;
-    //     let tabSuite2 =  histoire1.filter((objet)=>{
-    //         return objet.type === suite2;
-    //     });
-    //     let motSuite2 =  tabSuite2[Math.floor(tabSuite2.length * Math.random())];
-    //     phrase.push(motSuite2);
-    // }
+	while (motActuel.suite) {
+		let suite = motActuel.suite;
+		let tabSuite = histoire1.filter(objet => {
+			return objet.type === suite;
+		});
+		let motSuite = tabSuite[Math.floor(tabSuite.length * Math.random())];
+		phrase.push(motSuite);
+		motActuel = motSuite;
+	}
+	if (verbe3.suite2) {
+		let suite2 = verbe3.suite2;
+		let tabSuite2 = histoire1.filter(objet => {
+			return objet.type === suite2;
+		});
+		let motSuite2 = tabSuite2[Math.floor(tabSuite2.length * Math.random())];
+		phrase.push(motSuite2);
+	}
 
-    return phrase;
+	return phrase;
 }
 
+function choosePhraseAction(phrase) {
+	const tabSuite2 = ["qui", "parole", "objet", "lieu"];
+	const tabDebutAction = histoire1.filter(objet => {
+		return objet.type === "initialisationaction";
+	});
+	let debutAction = tabDebutAction[Math.floor(tabDebutAction.length * Math.random())];
+	phrase.push(debutAction);
+
+	let verbe = tabverbe[Math.floor(tabverbe.length * Math.random())];
+	phrase.push(verbe);
+
+	let typeSuite2 = tabSuite2[Math.floor(tabSuite2.length * Math.random())];
+
+	if (verbe.suite === "personnage") {
+		let personnage = tabpersonnage[Math.floor(tabpersonnage.length * Math.random())];
+		phrase.push(personnage);
+		const tabsuite = histoire1.filter(objet => {
+			return objet.type === typeSuite2;
+		});
+		let suite2 = tabsuite[Math.floor(tabsuite.length * Math.random())];
+		phrase.push(suite2);
+	} else {
+		let motActuel = verbe;
+		while (motActuel.suite) {
+			let suite = motActuel.suite;
+			let tabSuite = histoire1.filter(objet => {
+				return objet.type === suite;
+			});
+			let motSuite = tabSuite[Math.floor(tabSuite.length * Math.random())];
+			phrase.push(motSuite);
+			motActuel = motSuite;
+		}
+	}
+
+	return phrase;
+}
+
+/*********************************************************************************************************************/
+/*********************************************************************************************************************/
+/************** GENERATEUR EXCUSES ***********************************************************************************/
+/*********************************************************************************************************************/
+/*********************************************************************************************************************/
+
+/* const tabsujetFormule = excuse2.filter(objet => {
+	return objet.type === "formule";
+});
+const tabsujetExcuse = excuse2.filter(objet => {
+	return objet.type === "sujet";
+});
+const tabverbeExcuse = excuse2.filter(objet => {
+	return objet.type === "verbe";
+}); */
+
+/* const tabobjet1Excuse = excuse2.filter(objet => {
+	return objet.type === "objet1";
+});
+const tabobjet2Excuse = excuse2.filter(objet => {
+	return objet.type === "objet2";
+}); */
+/* const tabcalificatiftempsExcuse = excuse2.filter(objet => {
+	return objet.type === "calificatiftemps";
+});
+const tabpromesseExcuse = excuse2.filter(objet => {
+	return objet.type === "promesse";
+});
+const tabtempsExcuse = excuse2.filter(objet => {
+	return objet.type === "temps";
+});
+const tabcapaciteExcuse = excuse2.filter(objet => {
+	return objet.type === "capacite";
+}); */
+
+app.get("/excuse/:index", function(req, res) {
+	let excuses = [];
+	const tabtypes = ["formule", "temps", "calificatiftemps", "sujet", "verbe", "objet", "capacite", "promesse"];
+	let verbe = {};
+	for (let i = 0; i < req.params.index; i++) {
+		let excuse = [];
+		for (let itype = 0; itype < tabtypes.length; itype++) {
+			const type = tabtypes[itype];
+
+			if (type === "objet") {
+				if (verbe.suite) {
+					if (verbe.suite === "objet") {
+						const tabobjetExcuse = excuse2.filter(objet => {
+							return objet.type === "objet1" || objet.type === "objet2";
+						});
+						let objet = tabobjetExcuse[Math.floor(tabobjetExcuse.length * Math.random())];
+						excuse.push(objet);
+					} else {
+						let suite = verbe.suite;
+						excuse.push(chooseMot(suite, excuse2));
+					}
+				}
+			} else {
+				let mot = chooseMot(type, excuse2);
+				if (type === "verbe") {
+					verbe = mot;
+				}
+				excuse.push(mot);
+			}
+		}
+		/* let formule = tabsujetFormule[Math.floor(tabsujetFormule.length * Math.random())];
+		excuse.push(formule);
+		let temps = tabtempsExcuse[Math.floor(tabtempsExcuse.length * Math.random())];
+		excuse.push(temps);
+		let calificatiftemps = tabcalificatiftempsExcuse[Math.floor(tabcalificatiftempsExcuse.length * Math.random())];
+		excuse.push(calificatiftemps);
+		let sujet = tabsujetExcuse[Math.floor(tabsujetExcuse.length * Math.random())];
+		excuse.push(sujet);
+		let verbe = tabverbeExcuse[Math.floor(tabverbeExcuse.length * Math.random())];
+		excuse.push(verbe); */
+
+		/* let capacite = tabcapaciteExcuse[Math.floor(tabcapaciteExcuse.length * Math.random())];
+		excuse.push(capacite);
+		let promesse = tabpromesseExcuse[Math.floor(tabpromesseExcuse.length * Math.random())];
+		excuse.push(promesse);
+
+		 */
+		excuses.push(excuse);
+	}
+	console.log("excuses", excuses);
+	res.send(excuses);
+});
 
 /*********************************************************************************************************************/
 /*********************************************************************************************************************/
 /*********************************************************************************************************************/
 /*********************************************************************************************************************/
 
+app.get("/sda", function(req, res) {
+	const structurePhrasesda = [
+		["debut", "temps", "sujet", "verbe", "mais"],
+		["sujet", "adj", "qui", "verbe", "car"],
+		["temps", "sujet", "qui", "verbeparole", "parole", "lieu"],
+		["debut", "temps", "lieu", "car", "mais"],
+		["temps", "lieu", "sujet", "verbe", "mais", "car"],
+		["lieu", "sujet", "verbe", "pour", "mais"],
+		["sujet", "verbeparole", "parole", "sujet", "verbeparole", "parole", "car"],
+		["lieu", "sujet", "verbeparole", "parole", "car", "mais"]
+	];
+	let sda = "";
+	let structure = structurePhrasesda[Math.floor(structurePhrasesda.length * Math.random())];
 
+	for (let i = 0; i < structure.length; i++) {
+		let tabtype = sdaDico.filter(objet => {
+			return objet.type === structure[i];
+		});
+		let extrait = tabtype[Math.floor(tabtype.length * Math.random())];
+		sda += extrait.mot;
+		sda += " ";
+	}
 
-const tabsujetFormule = excuse2.filter((objet)=>{
-    return objet.type === "formule";
-});
-const tabsujetExcuse =  excuse2.filter((objet)=>{
-    return objet.type === "sujet";
-});
-const tabverbeExcuse =  excuse2.filter((objet)=>{
-    return objet.type === "verbe";
-});
-const tabobjetExcuse =  excuse2.filter((objet)=>{
-    return objet.type === "objet1" || objet.type === "objet2";
-});
-const tabobjet1Excuse =  excuse2.filter((objet)=>{
-    return objet.type === "objet1";
-});
-const tabobjet2Excuse =  excuse2.filter((objet)=>{
-    return objet.type === "objet2";
-});
-const tabcalificatiftempsExcuse =  excuse2.filter((objet)=>{
-    return objet.type === "calificatiftemps";
-});
-const tabpromesseExcuse =  excuse2.filter((objet)=>{
-    return objet.type === "promesse";
-});
-const tabtempsExcuse =  excuse2.filter((objet)=>{
-    return objet.type === "temps";
-});
-const tabcapaciteExcuse =  excuse2.filter((objet)=>{
-    return objet.type === "capacite";
+	res.send(sda);
 });
 
-app.get('/excuse/:index', function (req, res){
-    let excuses = [];
-    for(let i=0; i<req.params.index; i++){
-        let excuse = [];
-        let formule =  tabsujetFormule[Math.floor(tabsujetFormule.length * Math.random())];
-        excuse.push(formule);
-        let temps =  tabtempsExcuse[Math.floor(tabtempsExcuse.length * Math.random())];
-        excuse.push(temps);
-        let calificatiftemps =  tabcalificatiftempsExcuse[Math.floor(tabcalificatiftempsExcuse.length * Math.random())];
-        excuse.push(calificatiftemps);
-        let sujet =  tabsujetExcuse[Math.floor(tabsujetExcuse.length * Math.random())];
-        excuse.push(sujet);
-        let verbe =  tabverbeExcuse[Math.floor(tabverbeExcuse.length * Math.random())];
-        excuse.push(verbe);
-        if(verbe.suite.length){
-            if(verbe.suite === "objet"){
-                let objet =  tabobjetExcuse[Math.floor(tabobjetExcuse.length * Math.random())];
-                excuse.push(objet);
-            }
-            if(verbe.suite === "objet1"){
-                let objet1 =  tabobjet1Excuse[Math.floor(tabobjet1Excuse.length * Math.random())];
-                excuse.push(objet1);
-            }
-            if(verbe.suite === "objet2"){
-                let objet2 =  tabobjet2Excuse[Math.floor(tabobjet2Excuse.length * Math.random())];
-                excuse.push(objet2);
-            }
-        }
-        let capacite =  tabcapaciteExcuse[Math.floor(tabcapaciteExcuse.length * Math.random())];
-        excuse.push(capacite);
-        let promesse =  tabpromesseExcuse[Math.floor(tabpromesseExcuse.length * Math.random())];
-        excuse.push(promesse);
-
-        excuses.push(excuse);
-    }
-    console.log(tabobjetExcuse);
-    res.send(excuses);
-});
-
-
-
-
-/*********************************************************************************************************************/
-/*********************************************************************************************************************/
-/*********************************************************************************************************************/
-/*********************************************************************************************************************/
-
-
-
-app.get('/sda', function (req, res){
-    const structurePhrasesda =[
-        ["debut", "temps", "sujet", "verbe", "mais"],
-        ["sujet", "adj", "qui", "verbe", "car"],
-        ["temps", "sujet", "qui", "verbeparole","parole", "lieu"],
-        ["debut", "temps", "lieu", "car", "mais"],
-        ["temps", "lieu","sujet", "verbe", "mais", "car"],
-        ["lieu", "sujet", "verbe", "pour", "mais"],
-        ["sujet","verbeparole", "parole", "sujet","verbeparole", "parole", "car"],
-        ["lieu", "sujet","verbeparole", "parole", "car", "mais"]
-    ];
-    let sda = "";
-    let structure =  structurePhrasesda[Math.floor(structurePhrasesda.length * Math.random())];
-
-    for (let i = 0; i<structure.length; i++) {
-        let tabtype =  sdaDico.filter((objet)=>{
-            return objet.type === structure[i];
-        });
-        let extrait = tabtype[Math.floor(tabtype.length * Math.random())];
-        sda += extrait.mot;
-        sda += " ";
-    }
-
-    res.send(sda);
-});
-
-
-app.listen(5001, function () {
-    console.log('Example app listening on port 5001!')
+app.listen(5001, function() {
+	console.log("Example app listening on port 5001!");
 });

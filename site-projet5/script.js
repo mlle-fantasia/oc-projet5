@@ -54,22 +54,18 @@ $(document).ready(function() {
 						phrase = phrase1.phrase;
 						sujet1 = phrase1.sujet1;
 						sujetAUtiliser = phrase1.sujet1;
-						index++;
 					} else if (index > 1 && index < 4) {
 						phrase += situationInitiale(tabUnePhrase, sujetAUtiliser);
-						index++;
 					} else if (index === 4) {
 						phrase += elementDeclancheur(tabUnePhrase, sujetAUtiliser);
-						index++;
 					} else if (index > 4) {
 						phrase += elementAction(tabUnePhrase, sujetAUtiliser);
-						index++;
 					}
 
-					if (index > 5 && (index - 1) % 5 === 0) {
+					if (index > 1 && (index - 1) % 4 === 0) {
 						animationTournerLaPage(index);
 					}
-
+					index++;
 					// if (index > 1) {
 					//     console.log("sujetAUtiliser",sujetAUtiliser);
 					//     console.log("sujet1",sujet1);
@@ -128,9 +124,7 @@ $(document).ready(function() {
 		$("#start-story").prop("disabled", true);
 		$("#next-page").prop("disabled", false);
 		let currentPage = $("#book").turn("page");
-		console.log("currentpage : ", currentPage);
 		if (currentPage < 4) {
-			console.log("currentpage2 : ", currentPage);
 			$("#previous-page").prop("disabled", true);
 		}
 		lastPage += 1;
@@ -139,8 +133,6 @@ $(document).ready(function() {
 		$("#book").turn("next");
 		$("#previous-page").prop("disabled", false);
 		let currentPage = $("#book").turn("page");
-		console.log(currentPage);
-		console.log(index);
 		lastPage -= 1;
 		if (lastPage === 0) {
 			$("#start-story").prop("disabled", false);
@@ -333,7 +325,6 @@ function addpointendprase(objMot, phrase) {
 	return phrase;
 }
 function accordercomplement(data, j, sujet, phrase) {
-	console.log(data[j]);
 	if (j === 0) {
 		sujet.genre === "2" ? (phrase += data[j].mot[1]) : (phrase += data[j].mot[0]);
 	} else {

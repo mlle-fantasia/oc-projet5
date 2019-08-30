@@ -197,7 +197,7 @@
 	{ "mot": ["extraodinaire", "extraodinaire", "extraodinaires", "extraodinaires"], "type": "adjectif" },
 	{ "mot": ["magique", "magique", "magiques", "magiques"], "type": "adjectif" },
 	{
-		"mot": ["aux couleurx de l'arc en ciel", "aux couleurx de l'arc en ciel", "aux couleurx de l'arc en ciel", "aux couleurx de l'arc en ciel"],
+		"mot": ["aux couleurs de l'arc en ciel", "aux couleurs de l'arc en ciel", "aux couleurs de l'arc en ciel", "aux couleurs de l'arc en ciel"],
 		"type": "adjectif"
 	},
 	{ "mot": ["fletri", "fletrie", "fletris", "fletrie"], "type": "adjectif" },
