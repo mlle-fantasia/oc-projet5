@@ -1,4 +1,13 @@
+@font-face {
+	font-family: "myFirstFont";
+	src: url("../font/Burbin\ Casual\ NC.ttf");
+}
+
 /********** style général *******/
+h1,
+h2 {
+	font-family: "myFirstFont";
+}
 .btn-primary {
 	border-radius: 20px;
 	background-color: #72b890;
@@ -12,56 +21,57 @@
 .header {
 	background-image: url("../images/histoireFond.jpg");
 	background-size: cover;
-    background-position: center;
+	background-position: center;
 	min-height: 90vh;
 	margin-bottom: 50px;
 	padding-top: 80px;
 }
-.header:after{
+.header:after {
 	position: absolute;
 	right: 0;
 	bottom: 49px;
 	content: "salut";
-	display : inline-block;
-	height : 0;
-	width : 0;
-	border-bottom : 200px solid #fff9e8;
-	border-left : 400px solid transparent;
+	display: inline-block;
+	height: 0;
+	width: 0;
+	border-bottom: 200px solid #fff9e8;
+	border-left: 400px solid transparent;
 }
-.btn-acces-generateur-ex{
+.btn-acces-generateur-ex {
 	position: absolute;
 	right: 20px;
 	bottom: 70px;
 	z-index: 10;
 }
 
-.header-excuse{
+.header-excuse {
 	position: relative;
-    background-image: url("../images/chat.jpg");
-    background-size: cover;
-    background-position: center;
-    min-height: 90vh;
-    margin-bottom: 50px;
+	background-image: url("../images/chat.jpg");
+	background-size: cover;
+	background-position: center;
+	min-height: 90vh;
+	margin-bottom: 50px;
 	padding-top: 80px;
 }
-.header-excuse:after{
+.header-excuse:after {
 	position: absolute;
 	right: 0;
-	top:0;
+	top: 0;
 	content: "salut";
-	display : inline-block;
-	height : 0;
-	width : 0;
-	border-top : 200px solid #fff9e8;
-	border-left : 400px solid transparent;
+	display: inline-block;
+	height: 0;
+	width: 0;
+	border-top: 200px solid #fff9e8;
+	border-left: 400px solid transparent;
 }
-.btn-acces-generateur-hi{
+.btn-acces-generateur-hi {
 	position: absolute;
 	right: 20px;
 	top: 20px;
 	z-index: 10;
 }
-.btn-acces-generateur-hi a, .btn-acces-generateur-ex a  {
+.btn-acces-generateur-hi a,
+.btn-acces-generateur-ex a {
 	color: white;
 }
 .text-header-titre {
@@ -72,7 +82,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-    margin-left: 80px;
+	margin-left: 80px;
 	height: 40vh;
 	padding: 15px;
 	color: #fff;
@@ -117,14 +127,14 @@
 }
 
 /************** livre ***************/
-.background-book{
+.background-book {
 	background-image: url("../images/livreVierge.png");
 	background-repeat: no-repeat;
 	background-size: contain;
 	padding: 16px;
 	background-position: center;
 }
-#histoire{
+#histoire {
 	padding-top: 50px;
 	min-height: 100vh;
 }
@@ -149,13 +159,11 @@
 	-webkit-border-radius: 40px 0 0 40px / 10px 0 0 10px;
 	-moz-border-radius: 40px 0 0 40px / 10px 0 0 10px;
 	border-radius: 40px 0 0 40px / 10px 0 0 10px;
-
 }
 .page-text {
 	-webkit-border-radius: 0 40px 40px 0 / 0 10px 10px 0;
 	-moz-border-radius: 0 40px 40px 0 / 0 10px 10px 0;
 	border-radius: 0 40px 40px 0 / 0 10px 10px 0;
-
 }
 .img-livre {
 	width: 100%;
@@ -172,11 +180,11 @@
 	background-color: #989898;
 	border-color: #989898;
 }
-.btn-end-story{
+.btn-end-story {
 	background-color: #345442;
 	border-color: #345442;
 }
-.select-histoire{
+.select-histoire {
 	border-radius: 20px;
 	background-color: #72b890;
 	border-color: #72b890;
@@ -185,23 +193,22 @@
 	margin-top: 20px;
 }
 
-
 /************** excuse ************************/
-.avantage-excuse{
+.avantage-excuse {
 	background-color: #fff;
 	margin-bottom: 100px;
 	border-bottom: solid 1px gray;
 }
 
-.container-excuse{
+.container-excuse {
 	margin-bottom: 200px;
 	margin-top: 200px;
 }
-.excuse{
-    border: solid 1px gray;
-    min-height: 100px;
+.excuse {
+	border: solid 1px gray;
+	min-height: 100px;
 }
-.select-excuse{
+.select-excuse {
 	border-radius: 20px;
 	background-color: #3380b8;
 	border-color: #3380b8;
@@ -209,7 +216,7 @@
 	padding: 5px 10px;
 	margin-top: 20px;
 }
-.btn-start-excuse{
+.btn-start-excuse {
 	background-color: #3380b8;
 	border-color: #3380b8;
 	padding: 4px 12px;
@@ -230,7 +237,7 @@ footer a {
 .nav-item {
 	padding: 5px;
 }
-.btn-dark{
+.btn-dark {
 	border-radius: 28px;
 	padding: 2px 12px;
 }
