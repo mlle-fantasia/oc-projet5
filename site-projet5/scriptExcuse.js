@@ -10,40 +10,46 @@ $(document).ready(function() {
 				console.log(response);
 
 				for (let i = 0; i < response.length; i++) {
+                    let excuse = response[i];
 					let phraseExcuse = "";
-					console.log(response[i]);
-					let excuse = response[i];
 					for (let i = 0; i < excuse.length; i++) {
-						if (excuse[i].type === "verbe") {
+                        let motExcuse = excuse[i];
+						if (motExcuse.type === "verbe") {
 							if (excuse[i - 1].mot === "j") {
-								excuse[i].avec === "avoir" ? (phraseExcuse += "'ai ") : (phraseExcuse += "e suis ");
+                                motExcuse.avec === "avoir" ? (phraseExcuse += "'ai ") : (phraseExcuse += "e suis ");
+                                if ($("#genre").prop("checked")) {excuse[i - 1].genre = "2"}
 							} else {
-								excuse[i].avec === "avoir" ? (phraseExcuse += "a ") : (phraseExcuse += "est ");
+								if(motExcuse.avec === "avoir"){
+									excuse[i - 1].pluriel === "1" ? phraseExcuse += "ont ": phraseExcuse += "a ";
+								}else {
+                                    excuse[i - 1].pluriel === "1" ? phraseExcuse += "sont " : phraseExcuse += "est ";
+                                }
 							}
+                            phraseExcuse = accorder(motExcuse,phraseExcuse,excuse[i - 1]);
 						}
-						if (excuse[i].type === "capacite") {
+						if (motExcuse.type === "capacite") {
 							phraseExcuse += "ainsi, ";
 						}
-						phraseExcuse += excuse[i].mot;
+						if(motExcuse.type !== "verbe" && motExcuse.type !== "calificatiftemps"){
+							phraseExcuse += motExcuse.mot;
+						}
 
-						if (excuse[i].type === "formule") {
+						if (motExcuse.type === "formule") {
 							if ($("#genre").prop("checked")) {
-								if (excuse[i].feminin === "1") {
+								if (motExcuse.feminin === "1") {
 									phraseExcuse += "e";
 								}
 							}
 							phraseExcuse += ",";
 						}
-						if (excuse[i].type === "temps") {
-							console.log(excuse[i].pluriel);
-							excuse[i].pluriel === "1" ? (phraseExcuse += " ont été pour moi") : (phraseExcuse += " a été pour moi");
+						if (motExcuse.type === "temps") {
+                            motExcuse.pluriel === "1" ? (phraseExcuse += " ont été pour moi") : (phraseExcuse += " a été pour moi");
 						}
-						if (excuse[i].type === "calificatiftemps") {
-							if (excuse[i - 1].genre === "2") phraseExcuse += "e";
-							if (excuse[i - 1].pluriel === "1") phraseExcuse += "s";
+						if (motExcuse.type === "calificatiftemps") {
+                            phraseExcuse = accorder(motExcuse,phraseExcuse,excuse[i - 1]);
 							phraseExcuse += " en effet,";
 						}
-						phraseExcuse += " ";
+                        motExcuse.mot === "j" ? phraseExcuse += "" : phraseExcuse += " " ;
 					}
 					$("#excuse-text").append("<p>" + phraseExcuse + "</p>");
 					$("#downloadExcuse").html("Générer de nouvelles excuses");
@@ -51,6 +57,24 @@ $(document).ready(function() {
 			}
 		});
 	});
+
+	function accorder(motExcuse,phraseExcuse, motExcusePrec){
+        if (motExcusePrec.genre === "1") {
+            if (motExcusePrec.pluriel === "1") {
+                phraseExcuse += motExcuse.mot[2];
+            } else {
+                phraseExcuse += motExcuse.mot[0];
+            }
+        }
+        if (motExcusePrec.genre === "2") {
+            if (motExcusePrec.pluriel === "1") {
+                phraseExcuse += motExcuse.mot[3];
+            } else {
+                phraseExcuse += motExcuse.mot[1];
+            }
+        }
+        return phraseExcuse;
+	}
 
 	$("#btn-sda").click(() => {
 		$.ajax({

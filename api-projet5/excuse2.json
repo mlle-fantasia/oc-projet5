@@ -10,19 +10,19 @@
 	{ "mot": "la soirée d'hier", "type": "temps", "genre": "2", "pluriel": "0" },
 	{ "mot": "ces derniers jours", "type": "temps" ,  "genre": "1", "pluriel": "1" },
 	{ "mot": "cette nuit", "type": "temps", "genre": "2", "pluriel": "0" },
-	{ "mot": "mes activités nocturnes de ses derniers jours", "type": "temps" ,  "genre": "1", "pluriel": "1"},
+	{ "mot": "mes activités nocturnes de ses derniers jours", "type": "temps" ,  "genre": "2", "pluriel": "1"},
 	{ "mot": "mes rêves c'est temps-ci", "type": "temps" ,  "genre": "1", "pluriel": "1"},
 
 
 	{ "mot": "a été pour moi", "type": "" },
 
-	{ "mot": "très sombre", "type": "calificatiftemps" },
-	{ "mot": "très mouvementé", "type": "calificatiftemps" },
-	{ "mot": "riche en émotion", "type": "calificatiftemps" },
-	{ "mot": "interminable", "type": "calificatiftemps" },
-	{ "mot": "épuisant", "type": "calificatiftemps" },
-	{ "mot": "passé au commissariat", "type": "calificatiftemps" },
-	{ "mot": "riche en émotion", "type": "calificatiftemps" },
+	{ "mot": ["très sombre","très sombre","très sombres","très sombres"], "type": "calificatiftemps" },
+	{ "mot": ["très mouvementé","très mouvementée","très mouvementés","très mouvementées"], "type": "calificatiftemps" },
+	{ "mot": ["riche en émotion","riche en émotion","riches en émotion","riches en émotion"], "type": "calificatiftemps" },
+	{ "mot": ["interminable","interminable","interminables","interminables"], "type": "calificatiftemps" },
+	{ "mot": ["épuisant","épuisante","épuisants","épuisantes"], "type": "calificatiftemps" },
+	{ "mot": ["passé au commissariat","passée au commissariat","passés au commissariat","passées au commissariat"], "type": "calificatiftemps" },
+
 
 
 	{ "mot": "en effet", "type": "" },
@@ -35,25 +35,27 @@
 	{ "mot": "ma fille", "genre": "2", "pluriel": "0", "type": "sujet" },
 	{ "mot": "ma grand mère", "genre": "2", "pluriel": "0", "type": "sujet" },
 	{ "mot": "la petite tortue de ma fille", "genre": "2", "pluriel": "0", "type": "sujet" },
-	{ "mot": "j", "genre": "2", "pluriel": "0", "type": "sujet" },
+	{ "mot": "j", "genre": "1", "pluriel": "0", "type": "sujet" },
 
 
-	{ "mot": "fêté son anniversaire", "type": "verbe", "suite": "", "avec": "avoir"},
-	{ "mot": "disparu", "type": "verbe", "suite": "" , "avec": "avoir"  },
-	{ "mot": "malade", "type": "verbe", "suite": "", "avec": "etre"  },
-	{ "mot": "mort#", "type": "verbe", "suite": "", "avec": "etre" },
-	{ "mot": "été arrêté# par la police", "type": "verbe", "suite": "", "avec": "avoir"  },
-	{ "mot": "pas dormi de la nuit", "type": "verbe", "suite": "", "avec": "avoir"  },
+	{ "mot": ["fêté son anniversaire","fêté son anniversaire","fêté leur anniversaire","fêté leur anniversaire"], "type": "verbe", "suite": "", "avec": "avoir"},
+	{ "mot": ["disparu","disparue","disparus","disparues"], "type": "verbe", "suite": "" , "avec": "avoir"  },
+	{ "mot": ["malade","malade","malades","malades"], "type": "verbe", "suite": "", "avec": "etre"  },
+	{ "mot": ["mort","morte","morts","mortes"], "type": "verbe", "suite": "", "avec": "etre" },
+	{ "mot": ["été arrêté par la police","été arrêtée par la police","été arrêtés par la police","été arrêtées par la police"], "type": "verbe", "suite": "", "avec": "avoir"  },
+	{ "mot": ["pas dormi de la nuit","pas dormi de la nuit","pas dormi de la nuit","pas dormi de la nuit"], "type": "verbe", "suite": "", "avec": "avoir"  },
 
-	{ "mot": "brulé", "type": "verbe", "suite": "objet", "avec": "avoir" },
-	{ "mot": "piraté", "type": "verbe", "suite": "objet", "avec": "avoir" },
+	{ "mot": ["brulé","brulé","brulé","brulé"], "type": "verbe", "suite": "objet", "avec": "avoir" },
+	{ "mot": ["piraté","piraté","piraté","piraté"], "type": "verbe", "suite": "objet", "avec": "avoir" },
 
-	{ "mot": "caché", "type": "verbe", "suite": "objet1", "avec": "avoir"  },
-	{ "mot": "renversé", "type": "verbe", "suite": "objet1", "avec": "avoir"  },
-	{ "mot": "cuisiné", "type": "verbe", "suite": "objet1", "avec": "avoir"  },
+	{ "mot": ["caché","caché","caché","caché"], "type": "verbe", "suite": "objet1", "avec": "avoir"  },
+	{ "mot": ["renversé","renversé","renversé","renversé"], "type": "verbe", "suite": "objet1", "avec": "avoir"  },
+	{ "mot": ["cuisiné","cuisiné","cuisiné","cuisiné"], "type": "verbe", "suite": "objet1", "avec": "avoir"  },
 
-	{ "mot": "repeint", "type": "verbe", "suite": "objet2", "avec": "avoir"  },
-	{ "mot": "vandalisé", "type": "verbe", "suite": "objet2", "avec": "avoir"  },
+	{ "mot": ["repeint","repeint","repeint","repeint"], "type": "verbe", "suite": "objet2", "avec": "avoir"  },
+	{ "mot": ["vandalisé","vandalisé","vandalisé","vandalisé"], "type": "verbe", "suite": "objet2", "avec": "avoir"  },
+
+	{ "mot": ["tombé","tombée","tombés","tombées"], "type": "verbe", "suite": "lieu", "avec": "etre"  },
 
 
 	{ "mot": "mes documents", "genre": "2", "pluriel": "0", "type": "objet1" },
@@ -67,6 +69,8 @@
 	{ "mot": "le centre commercial", "genre": "1", "pluriel": "0", "type": "objet2"  },
 	{ "mot": "la mairie du village", "genre": "1", "pluriel": "0", "type": "objet2"  },
 	{ "mot": "la voiture", "genre": "2", "pluriel": "0", "type": "objet2"  },
+
+	{ "mot": "dans un trou", "type": "lieu" },
 
 
 	{ "mot": "ainsi", "type": "" },
