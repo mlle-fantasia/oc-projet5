@@ -4,21 +4,32 @@
 }
 
 /********** style général *******/
-.logo{
+.logo {
 	width: 40px;
 }
-nav{
+.nav {
+	background-color: #2d312fb8;
+	z-index: 10000;
 	position: fixed;
-	width: 100%;
+	border-bottom: 1px solid #72b890;
+	color: #fff;
+}
+.nav a {
+	color: #fff;
+}
+.nav a:hover {
+	color: #72b890;
 }
 h1,
-h2, .titre {
+h2,
+.titre {
 	font-family: "myFirstFont";
 }
-.brand{
+.nav-brand {
 	font-size: 20px;
 }
-.nav-link{
+
+.nav-link {
 	color: black;
 }
 .btn-primary {
@@ -37,18 +48,13 @@ h2, .titre {
 	background-position: center;
 	min-height: 90vh;
 	margin-bottom: 50px;
-	padding-top: 80px;
+	padding-top: 120px;
 }
-.header:after {
-	position: absolute;
-	right: 0;
-	bottom: 49px;
-	content: "salut";
-	display: inline-block;
-	height: 0;
-	width: 0;
-	border-bottom: 200px solid #fff9e8;
-	border-left: 400px solid transparent;
+.brand {
+	font-size: 40px;
+}
+.logo-header {
+	width: 60px;
 }
 .btn-acces-generateur-ex {
 	position: absolute;
@@ -64,18 +70,7 @@ h2, .titre {
 	background-position: center;
 	min-height: 90vh;
 	margin-bottom: 50px;
-	padding-top: 80px;
-}
-.header-excuse:after {
-	position: absolute;
-	right: 0;
-	top: 0;
-	content: "salut";
-	display: inline-block;
-	height: 0;
-	width: 0;
-	border-top: 200px solid #fff9e8;
-	border-left: 400px solid transparent;
+	padding-top: 120px;
 }
 .btn-acces-generateur-hi {
 	position: absolute;

@@ -13,45 +13,43 @@
 </head>
 
 <body>
-<div class="container">
-<nav class="navbar navbar-expand-lg">
-
-    <p ><img class="logo" src="./assets/images/logo.png" alt="logo"><span class="titre brand ml-2">Mon générateur</span></p>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse pull-right" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Générateur d'histoire <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Générateur d'excuses</a>
-            </li>
-
-        </ul>
+    <div class="container-fluid nav">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg">
+                <div><img class="logo" src="./assets/images/logo.png" alt="logo"><span class="titre nav-brand ml-2">Mon
+                        Générateur</span></div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse pull-right" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#top-histoire">Générateur d'histoire <span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#top-excuse">Générateur d'excuses</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
     </div>
-
-</nav>
-</div>
     <header class="header" id="top-histoire">
         <div class="container-fluid">
 
-
-
-                <div class="col-md-4 container-text-header">
-                    <div class="text-header">
-                        <h1 class="text-header-titre">Générateur d'histoires du soir</h1>
-                        <p> Utilisez notre générateur pour créer des histoires originales ! </p>
-                        <button class="btn btn-primary btn-acces-generateur mt-3"><a href="#histoire">accéder au
-                                générateur</a></button>
-                    </div>
+            <div class="col-md-4 container-text-header">
+                <div class="text-header">
+                    <div class="brand titre mb-4"><img class="logo-header mr-3" src="./assets/images/logo.png"
+                            alt="logo">Mon
+                        Générateur</div>
+                    <h1 class="text-header-titre">Générateur d'histoires du soir</h1>
+                    <p> Utilisez notre générateur pour créer des histoires originales ! </p>
+                    <button class="btn btn-primary btn-acces-generateur mt-3"><a href="#histoire">Accéder au
+                            générateur</a></button>
                 </div>
-
-            <button class="btn btn-primary btn-acces-generateur-ex mt-3"><a href="#top-excuse">
-                Générateur d'éxcuse v </a></button>
-
-
+            </div>
 
         </div>
     </header>
@@ -60,35 +58,38 @@
         <div class="container">
             <div class="row avantage">
 
-            <div class="row container-text-avantage">
-                <div class="col-md-8 offset-md-2">
-                    <h2 class="titre-avantage">Les avantages de notre générateur d'histoires: </h2>
-                    <p>Ne soyez jamais à court d'idée pour raconter les histoires du soir à vos enfants ! Notre
-                        générateur vous permet de créer une histoire originale et unique chaque soir.</p>
-                </div>
-            </div>
-            <div class="row d-flex align-items-stretch ">
-                <div class="col-md-4 mb-4">
-                    <div class="actualite d-flex flex-column">
-                        <img class="actualite-img" src="assets/images/fourmie.jpg" alt="une fourmi">
-                        <p class="actualite-titre ">Economique</p>
+                <div class="row container-text-avantage">
+                    <div class="col-md-8 offset-md-2">
+                        <h2 class="titre-avantage">Les avantages de notre générateur d'histoires: </h2>
+                        <p>Ne soyez jamais à court d'idée pour raconter les histoires du soir à vos enfants ! Notre
+                            générateur vous permet de créer une histoire originale et unique chaque soir.</p>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <div class="actualite d-flex flex-column">
-                        <img class="actualite-img" src="assets/images/lievre.jpg" alt="un lièvre">
-                        <p class="actualite-titre ">Rapide</p>
+                <div class="row d-flex align-items-stretch ">
+                    <div class="col-md-4 mb-4">
+                        <div class="actualite d-flex flex-column">
+                            <img class="actualite-img" src="assets/images/fourmie.jpg" alt="une fourmi">
+                            <p class="titre mb-0">Economique</p>
+                            <p>Plus besoin d'acheter de livres</p>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="actualite d-flex flex-column">
-                        <img class="actualite-img" src="assets/images/zebre.jpg"
-                            alt="une mère et sa fille qui rient aux éclats">
-                        <p class="actualite-titre ">Amusant</p>
+                    <div class="col-md-4 mb-4">
+                        <div class="actualite d-flex flex-column">
+                            <img class="actualite-img" src="assets/images/lievre.jpg" alt="un lièvre">
+                            <p class="titre mb-0">Rapide</p>
+                            <p>Histoire générée en un clic</p>
+                        </div>
                     </div>
-                </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="actualite d-flex flex-column">
+                            <img class="actualite-img" src="assets/images/zebre.jpg"
+                                alt="une mère et sa fille qui rient aux éclats">
+                            <p class="titre mb-0">Amusant</p>
+                            <p>Eclats de rire assurés</p>
+                        </div>
+                    </div>
 
-            </div>
+                </div>
 
 
             </div>
@@ -116,11 +117,12 @@
                 </select>
 
             </div>
-            <button id="previous-page" class="btn btn-primary btn-previous-story mt-3" disabled><<</button>
-            <button id="start-story" class="btn btn-primary btn-start-story mt-3"> Commencer l'histoire</button>
+            <button id="previous-page" class="btn btn-primary btn-previous-story mt-3" disabled>
+                <<</button> <button id="start-story" class="btn btn-primary btn-start-story mt-3"> Commencer l'histoire
+            </button>
             <button id="next-page" class="btn btn-primary btn-next-story mt-3" disabled> >></button>
             <div>
-                <button id="end-story" class="btn btn-primary btn-end-story mt-3" >Fin de l'histoire</button>
+                <button id="end-story" class="btn btn-primary btn-end-story mt-3">Fin de l'histoire</button>
 
             </div>
 
@@ -131,42 +133,45 @@
 
 
     <div class="container-fluid header-excuse" id="top-excuse">
-            <div class="col-md-4 container-text-header">
-                <div class="text-header">
-                    <h1 class="text-header-titre">Générateur d'excuse</h1>
-                    <p> Utilisez notre générateur pour créer des excuses imparables ! </p>
-                    <button class="btn btn-primary btn-acces-generateur mt-3"><a href="#excuses">accéder au
-                    générateur</a></button>
-                </div>
+        <div class="col-md-4 container-text-header">
+            <div class="text-header">
+                <div class="brand titre mb-4"><img class="logo-header mr-3" src="./assets/images/logo.png"
+                        alt="logo">Mon
+                    Générateur</div>
+                <h1 class="text-header-titre">Générateur d'excuse</h1>
+                <p> Utilisez notre générateur pour créer des excuses imparables ! </p>
+                <button class="btn btn-primary btn-acces-generateur mt-3"><a href="#excuses">Accéder au
+                        générateur</a></button>
             </div>
-        <button class="btn btn-primary btn-acces-generateur-hi mt-3"><a href="#top-histoire">
-        Générateur d'histoire ^ </a></button>
+        </div>
     </div>
 
     <section class="container avantage-excuse">
 
-            <div class="row container-text-avantage">
-                <div class="col-md-8 offset-md-2">
-                    <h2 class="titre-avantage">Les avantages de notre générateur d'excuses : </h2>
-                    <p>Ne soyez jamais à court d'excuse en cas de retard ou de manquement à vos promesses ! Notre
-                        générateur vous permet de créer des excuses uniques et imparables</p>
+        <div class="row container-text-avantage">
+            <div class="col-md-8 offset-md-2">
+                <h2 class="titre-avantage">Les avantages de notre générateur d'excuses : </h2>
+                <p>Ne soyez jamais à court d'excuse en cas de retard ou de manquement à vos promesses ! Notre
+                    générateur vous permet de créer des excuses uniques et imparables</p>
+            </div>
+        </div>
+        <div class="row d-flex align-items-stretch ">
+            <div class="col-md-4 offset-md-2 mb-4">
+                <div class="actualite d-flex flex-column">
+                    <img class="actualite-img" src="assets/images/guepard.jpg" alt="une fourmi">
+                    <p class="titre mb-0">Rapide</p>
+                    <p>Excuses générées en un clic</p>
                 </div>
             </div>
-            <div class="row d-flex align-items-stretch ">
-                <div class="col-md-4 offset-md-2 mb-4">
-                    <div class="actualite d-flex flex-column">
-                        <img class="actualite-img" src="assets/images/guepard.jpg" alt="une fourmi">
-                        <p class="actualite-titre ">rapide</p>
-                    </div>
+            <div class="col-md-4 mb-4">
+                <div class="actualite d-flex flex-column">
+                    <img class="actualite-img" src="assets/images/elephant.jpg" alt="un lièvre">
+                    <p class="titre mb-0">Imparable</p>
+                    <p>Obtention du pardon assuré</p>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <div class="actualite d-flex flex-column">
-                        <img class="actualite-img" src="assets/images/elephant.jpg" alt="un lièvre">
-                        <p class="actualite-titre ">imparable</p>
-                    </div>
-                </div>
+            </div>
 
-            </div>
+        </div>
 
     </section>
 
@@ -221,7 +226,8 @@
                     </ul>
                 </div>
                 <div>
-                    <button class="btn btn-dark" id="btn-sda">Générateur bonus <img src="assets/images/anneau3.gif" alt="this slowpoke moves"  width=40/></button>
+                    <button class="btn btn-dark" id="btn-sda">Générateur bonus <img src="assets/images/anneau3.gif"
+                            alt="this slowpoke moves" width=40 /></button>
                 </div>
             </div>
 
