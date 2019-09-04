@@ -5,7 +5,7 @@ $(document).ready(function() {
 		let nbExcuse = $("#nbExcuse").val();
 		$.ajax({
 			type: "GET",
-			url: "http://localhost:5001/excuse/" + nbExcuse,
+			url: "https://p5api.herokuapp.com/excuse/" + nbExcuse,
 			success: function(response) {
 				console.log(response);
 

@@ -7,7 +7,7 @@ var histoire1 = require("./histoire1.json");
 var excuse2 = require("./excuse2.json");
 var sdaDico = require("./sda.json");
 
-// fait un tue dans le dictionnaire en fonction du type et choisi un mot au hasard
+// fait un filtre dans le dictionnaire en fonction du type et choisi un mot au hasard
 // renvoie tout l'objet du mot
 function chooseMot(type, dico) {
 	const tabphrase = dico.filter(objet => {
@@ -23,26 +23,26 @@ function chooseMot(type, dico) {
 /*********************************************************************************************************************/
 /*********************************************************************************************************************/
 
-app.get("/histoire/:index/:nbPhrase", function(req, res) {
+app.get("/histoire/:numeroPhrase/:nbPhrase", function(req, res) {
 	let phrases = [];
-	let index = parseInt(req.params.index);
+	let numeroPhrase = parseInt(req.params.numeroPhrase);
 
 	for (let i = 1; i <= parseInt(req.params.nbPhrase); i++) {
-		if (i === 1 && index === 1) {
-			phrases.push(choosePhrase(["sujet", "lieu", "qui"], index));
-			index++;
-		} else if (index > 1 && index < 4) {
-			phrases.push(choosePhrase(["initialisation"], index));
-			index++;
-		} else if (index === 4) {
-			phrases.push(choosePhrase(["declencheur"], index));
-			index++;
-		} else if (index === 5) {
-			phrases.push(choosePhrase(["verbe3"], index));
-			index++;
-		} else if (index > 5) {
-			phrases.push(choosePhrase(["initialisationaction", "verbe", ["qui", "parole", "objet", "lieu"]], index));
-			index++;
+		if (i === 1 && numeroPhrase === 1) {
+			phrases.push(choosePhrase(["sujet", "lieu", "qui"], numeroPhrase));
+            numeroPhrase++;
+		} else if (numeroPhrase > 1 && numeroPhrase < 4) {
+			phrases.push(choosePhrase(["initialisation"], numeroPhrase));
+            numeroPhrase++;
+		} else if (numeroPhrase === 4) {
+			phrases.push(choosePhrase(["declencheur"], numeroPhrase));
+            numeroPhrase++;
+		} else if (numeroPhrase === 5) {
+			phrases.push(choosePhrase(["verbe3"], numeroPhrase));
+            numeroPhrase++;
+		} else if (numeroPhrase > 5) {
+			phrases.push(choosePhrase(["initialisationaction", "verbe", ["qui", "parole", "objet", "lieu"]], numeroPhrase));
+            numeroPhrase++;
 		}
 	}
 
@@ -159,6 +159,7 @@ app.get("/sda", function(req, res) {
 	res.send(sda);
 });
 
-app.listen(5001, function() {
+const port = process.env.PORT || 5001;
+app.listen(port, function() {
 	console.log("Example app listening on port 5001!");
 });

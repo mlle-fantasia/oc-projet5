@@ -215,6 +215,7 @@ h2,
 .excuse {
 	border: solid 1px gray;
 	min-height: 100px;
+	padding: 10px;
 }
 .select-excuse {
 	border-radius: 20px;
