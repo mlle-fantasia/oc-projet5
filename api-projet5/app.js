@@ -3,9 +3,16 @@ const cors = require("cors");
 const app = express();
 app.use(cors({ origin: "*" }));
 
+var fs = require("fs");
+var vm = require("vm");
+
+var content = fs.readFileSync("./phrase.js");
+vm.runInThisContext(content);
+
 var histoire1 = require("./histoire1.json");
 var excuse2 = require("./excuse2.json");
 var sdaDico = require("./sda.json");
+/* var generationphrase = require("./phrase.js"); */
 
 // fait un filtre dans le dictionnaire en fonction du type et choisi un mot au hasard
 // renvoie tout l'objet du mot
@@ -29,24 +36,39 @@ app.get("/histoire/:numeroPhrase/:nbPhrase", function(req, res) {
 
 	for (let i = 1; i <= parseInt(req.params.nbPhrase); i++) {
 		if (i === 1 && numeroPhrase === 1) {
-			phrases.push(choosePhrase(["sujet", "lieu", "qui"], numeroPhrase));
-            numeroPhrase++;
+			let objetphrase = {};
+			objetphrase.numerodelaPhrase = numeroPhrase;
+			objetphrase.phrase = choosePhrase(["sujet", "lieu", "qui"], numeroPhrase);
+			phrases.push(objetphrase);
+			numeroPhrase++;
 		} else if (numeroPhrase > 1 && numeroPhrase < 4) {
-			phrases.push(choosePhrase(["initialisation"], numeroPhrase));
-            numeroPhrase++;
+			let objetphrase = {};
+			objetphrase.numerodelaPhrase = numeroPhrase;
+			objetphrase.phrase = choosePhrase(["initialisation"], numeroPhrase);
+			phrases.push(objetphrase);
+			numeroPhrase++;
 		} else if (numeroPhrase === 4) {
-			phrases.push(choosePhrase(["declencheur"], numeroPhrase));
-            numeroPhrase++;
+			let objetphrase = {};
+			objetphrase.numerodelaPhrase = numeroPhrase;
+			objetphrase.phrase = choosePhrase(["declencheur"], numeroPhrase);
+			phrases.push(objetphrase);
+			numeroPhrase++;
 		} else if (numeroPhrase === 5) {
-			phrases.push(choosePhrase(["verbe3"], numeroPhrase));
-            numeroPhrase++;
+			let objetphrase = {};
+			objetphrase.numerodelaPhrase = numeroPhrase;
+			objetphrase.phrase = choosePhrase(["verbe3"], numeroPhrase);
+			phrases.push(objetphrase);
+			numeroPhrase++;
 		} else if (numeroPhrase > 5) {
-			phrases.push(choosePhrase(["initialisationaction", "verbe", ["qui", "parole", "objet", "lieu"]], numeroPhrase));
-            numeroPhrase++;
+			let objetphrase = {};
+			objetphrase.numerodelaPhrase = numeroPhrase;
+			objetphrase.phrase = choosePhrase(["initialisationaction", "verbe", ["qui", "parole", "objet", "lieu"]], numeroPhrase);
+			phrases.push(objetphrase);
+			numeroPhrase++;
 		}
 	}
-
-	res.send(phrases);
+	let lesPhrases = genererLesPhrases(phrases);
+	res.send(lesPhrases);
 });
 
 function choosePhrase(types, index) {
