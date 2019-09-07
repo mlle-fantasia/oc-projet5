@@ -6,12 +6,14 @@ app.use(cors({ origin: "*" }));
 var fs = require("fs");
 var vm = require("vm");
 
-var content = fs.readFileSync("./phrase.js");
-vm.runInThisContext(content);
+var contentPhrase = fs.readFileSync("./phrase.js");
+vm.runInThisContext(contentPhrase);
+var contentExcuse = fs.readFileSync("./excuse.js");
+vm.runInThisContext(contentExcuse);
 
-var histoire1 = require("./histoire1.json");
-var excuse2 = require("./excuse2.json");
-var sdaDico = require("./sda.json");
+var histoire1 = require("./dictionnaires/histoire1.json");
+var excuse2 = require("./dictionnaires/excuse2.json");
+var sdaDico = require("./dictionnaires/sda.json");
 /* var generationphrase = require("./phrase.js"); */
 
 // fait un filtre dans le dictionnaire en fonction du type et choisi un mot au hasard
@@ -112,8 +114,9 @@ function choosePhrase(types, index) {
 /*********************************************************************************************************************/
 /*********************************************************************************************************************/
 
-app.get("/excuse/:index", function(req, res) {
+app.get("/excuse/:index/:sexe", function(req, res) {
 	let excuses = [];
+	let sexe = req.params.sexe;
 	const tabtypes = ["formule", "temps", "calificatiftemps", "sujet", "verbe", "objet", "capacite", "promesse"];
 	let verbe = {};
 	for (let i = 0; i < req.params.index; i++) {
@@ -145,8 +148,8 @@ app.get("/excuse/:index", function(req, res) {
 
 		excuses.push(excuse);
 	}
-
-	res.send(excuses);
+	let lesExcuses = genererLesExcuses(excuses, sexe);
+	res.send(lesExcuses);
 });
 
 /*********************************************************************************************************************/

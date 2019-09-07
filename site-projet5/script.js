@@ -101,7 +101,6 @@ function recupereDesPhrases(numeroDeLaPhrase, nombrePhrasesDemandees) {
 		type: "GET",
 		url: `${API}/histoire/${numeroDeLaPhrase}/${nombrePhrasesDemandees}`,
 		success: function(response) {
-			console.log("response", response);
 			afficherLesPhrases(response);
 		}
 	});
@@ -171,3 +170,41 @@ function animationApparitionText(index) {
 			easing: "easeOutExpo"
 		});
 }
+
+/*********************************************************************************************************************/
+/*********************************************************************************************************************/
+/***************** PARTIE EXCUSE *************************************************************************************/
+/*********************************************************************************************************************/
+/*********************************************************************************************************************/
+let sexe = "homme";
+$(document).ready(function() {
+	$("#downloadExcuse").click(async function() {
+		if ($("#genre").prop("checked")) {
+			sexe = "femme";
+		}
+		$("#excuse-text").html("");
+
+		let nbExcuse = $("#nbExcuse").val();
+		$.ajax({
+			type: "GET",
+			url: API + "/excuse/" + nbExcuse + "/" + sexe,
+			success: function(response) {
+				for (let i = 0; i < response.length; i++) {
+					let excuse = response[i];
+					$("#excuse-text").append("<p>" + excuse + "</p>");
+					$("#downloadExcuse").html("Générer de nouvelles excuses");
+				}
+			}
+		});
+	});
+});
+
+$("#btn-sda").click(() => {
+	$.ajax({
+		type: "GET",
+		url: API + "/sda",
+		success: function(response) {
+			console.log(response); //ne pas effacer cette ligne, c'est la réponse ;)
+		}
+	});
+});

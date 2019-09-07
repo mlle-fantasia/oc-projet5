@@ -1,13 +1,10 @@
 let sujet = null;
 
 function genererLesPhrases(phrases) {
-	console.log("phrases", phrases);
 	let tabDePhrases = [];
 	phrases.forEach(objetPhrase => {
 		let maPhrase = "";
-		console.log("objetPhrase.numerodelaPhrase", objetPhrase.numerodelaPhrase);
 		let compteurdePhrases = objetPhrase.numerodelaPhrase;
-		console.log("coucou");
 		if (compteurdePhrases === 1) {
 			maPhrase += phraseInitiale(objetPhrase.phrase);
 		}
