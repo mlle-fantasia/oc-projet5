@@ -37,34 +37,20 @@ app.get("/histoire/:numeroPhrase/:nbPhrase", function(req, res) {
 	let numeroPhrase = parseInt(req.params.numeroPhrase);
 
 	for (let i = 1; i <= parseInt(req.params.nbPhrase); i++) {
+		let objetphrase = {};
+		objetphrase.numerodelaPhrase = numeroPhrase;
 		if (i === 1 && numeroPhrase === 1) {
-			let objetphrase = {};
-			objetphrase.numerodelaPhrase = numeroPhrase;
 			objetphrase.phrase = choosePhrase(["sujet", "lieu", "qui"], numeroPhrase);
-			phrases.push(objetphrase);
-			numeroPhrase++;
 		} else if (numeroPhrase > 1 && numeroPhrase < 4) {
-			let objetphrase = {};
-			objetphrase.numerodelaPhrase = numeroPhrase;
 			objetphrase.phrase = choosePhrase(["initialisation"], numeroPhrase);
-			phrases.push(objetphrase);
-			numeroPhrase++;
 		} else if (numeroPhrase === 4) {
-			let objetphrase = {};
-			objetphrase.numerodelaPhrase = numeroPhrase;
 			objetphrase.phrase = choosePhrase(["declencheur"], numeroPhrase);
-			phrases.push(objetphrase);
-			numeroPhrase++;
 		} else if (numeroPhrase === 5) {
-			let objetphrase = {};
-			objetphrase.numerodelaPhrase = numeroPhrase;
 			objetphrase.phrase = choosePhrase(["verbe3"], numeroPhrase);
-			phrases.push(objetphrase);
-			numeroPhrase++;
 		} else if (numeroPhrase > 5) {
-			let objetphrase = {};
-			objetphrase.numerodelaPhrase = numeroPhrase;
 			objetphrase.phrase = choosePhrase(["initialisationaction", "verbe", ["qui", "parole", "objet", "lieu"]], numeroPhrase);
+		}
+		if (objetphrase.phrase) {
 			phrases.push(objetphrase);
 			numeroPhrase++;
 		}
@@ -84,25 +70,26 @@ function choosePhrase(types, index) {
 		}
 		let mot = chooseMot(type, histoire1);
 		phrase.push(mot);
-		if (mot.suite) {
-			let suite2 = "";
-			let motActuel = mot;
-			if (index > 5 && motActuel.suite !== "personnage" && type === "verbe") {
-				continuer = false;
-			}
-			while (motActuel.suite) {
-				let motSuite = chooseMot(motActuel.suite, histoire1);
-				phrase.push(motSuite);
-				motActuel = motSuite;
+		if (!mot.suite) {
+			continue;
+		}
+		let suite2 = "";
+		let motActuel = mot;
+		if (index > 5 && motActuel.suite !== "personnage" && type === "verbe") {
+			continuer = false;
+		}
+		while (motActuel.suite) {
+			let motSuite = chooseMot(motActuel.suite, histoire1);
+			phrase.push(motSuite);
+			motActuel = motSuite;
 
-				if (motSuite.suite2) {
-					suite2 = motSuite.suite2;
-				}
+			if (motSuite.suite2) {
+				suite2 = motSuite.suite2;
 			}
-			if (suite2.length) {
-				let motSuite2 = chooseMot(suite2, histoire1);
-				phrase.push(motSuite2);
-			}
+		}
+		if (suite2.length) {
+			let motSuite2 = chooseMot(suite2, histoire1);
+			phrase.push(motSuite2);
 		}
 	}
 	return phrase;

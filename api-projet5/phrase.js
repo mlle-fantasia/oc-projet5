@@ -1,6 +1,6 @@
 let sujet = null;
 
-function genererLesPhrases(phrases) {
+export function genererLesPhrases(phrases) {
 	let tabDePhrases = [];
 	phrases.forEach(objetPhrase => {
 		let maPhrase = "";
@@ -156,7 +156,7 @@ function addpointendprase(objMot, phrase) {
 }
 
 // fonction qui renvoie le bon index pour accorder à l'objet passé en paramettre
-function accordercomplement(objetsujet) {
+export function accordercomplement(objetsujet) {
 	let index = 0;
 	if (objetsujet.genre === "1") {
 		if (objetsujet.pluriel === "1") {

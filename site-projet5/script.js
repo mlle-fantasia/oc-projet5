@@ -5,6 +5,7 @@ const API = "http://localhost:5001";
 
 let compteurdePhrases = 1;
 let nombrePhrasesDemandees = 0;
+let page = 0;
 
 $(document).ready(function() {
 	let endStory = false;
@@ -33,14 +34,17 @@ $(document).ready(function() {
 		nombrePhrasesDemandees = $("#nbPhrase").val();
 		// Lors du premier click on ouvre le livre.
 		if (compteurdePhrases === 1) {
-			await animationTournerLaPage(compteurdePhrases);
+			await animationTournerLaPage();
 			$("#background-book").addClass("background-book");
 		}
-		// A-t-on une page précédente ?
-		$("#previous-page").prop("disabled", $("#book").turn("page") < 4);
 
-		// On afficher les phrases.
+		// demander les phrases à l'api puis les afficher.
 		recupereDesPhrases(compteurdePhrases, nombrePhrasesDemandees);
+
+		// A-t-on une page précédente ?
+		let currentPage = $("#book").turn("page");
+		console.log("currentPage2", currentPage);
+		$("#previous-page").prop("disabled", page < 2);
 	});
 
 	$("#previous-page").click(() => {
@@ -101,6 +105,7 @@ function recupereDesPhrases(numeroDeLaPhrase, nombrePhrasesDemandees) {
 		type: "GET",
 		url: `${API}/histoire/${numeroDeLaPhrase}/${nombrePhrasesDemandees}`,
 		success: function(response) {
+			console.log("response", response);
 			afficherLesPhrases(response);
 		}
 	});
@@ -108,16 +113,22 @@ function recupereDesPhrases(numeroDeLaPhrase, nombrePhrasesDemandees) {
 
 function afficherLesPhrases(phrases) {
 	for (let i = 0; i < phrases.length; i++) {
-		const phrase = phrases[i];
-		if (compteurdePhrases > 1 && (compteurdePhrases - 1) % 4 === 0) {
-			animationTournerLaPage();
-		}
-		let newPhrase = $("<p class='text-livre text-livre" + compteurdePhrases + "'></p>");
+		setTimeout(function() {
+			const phrase = phrases[i];
+			if (compteurdePhrases > 1 && (compteurdePhrases - 1) % 4 === 0) {
+				animationTournerLaPage();
+			}
+			let newPhrase = $("<p class='text-livre text-livre" + compteurdePhrases + "'></p>");
+			let currentPage = $("#book").turn("page");
+			$("#page-" + currentPage).append($(newPhrase));
+			$(".text-livre" + compteurdePhrases).html(phrase);
+			$("#start-story").html("continuer l'histoire");
+			compteurdePhrases++;
+		}, i * 3000);
+		// A-t-on une page précédente ?
 		let currentPage = $("#book").turn("page");
-		$("#page-" + currentPage).append($(newPhrase));
-		$(".text-livre" + compteurdePhrases).html(phrase);
-		$("#start-story").html("continuer l'histoire");
-		compteurdePhrases++;
+		console.log("currentPage2", currentPage);
+		$("#previous-page").prop("disabled", currentPage < 4);
 	}
 }
 
@@ -144,8 +155,10 @@ function addPage(page, book) {
 }
 
 function animationTournerLaPage() {
+	page++;
 	$("#book").turn("next");
 	let currentPage = $("#book").turn("page");
+	console.log("currentPage", currentPage);
 	$("#page-" + currentPage).html("");
 }
 

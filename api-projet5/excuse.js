@@ -21,12 +21,17 @@ function genererLesExcuses(excuses, sexe) {
 					phraseExcuse += ",";
 				} else {
 					if (motExcuse.type === "verbe") {
-						if (motExcuse.avec === "avoir") {
-							phraseExcuse += objetExcuse[i - 1].mot === "j" ? "'ai " : "";
-							phraseExcuse += objetExcuse[i - 1].pluriel === "1" ? "ont " : "a ";
+						if (objetExcuse[i - 1].mot === "j") {
+							phraseExcuse += motExcuse.avec === "avoir" ? "'ai " : "e suis ";
 						} else {
-							phraseExcuse += objetExcuse[i - 1].mot === "j" ? "e suis " : "";
-							phraseExcuse += objetExcuse[i - 1].pluriel === "1" ? "sont " : "est ";
+							phraseExcuse +=
+								motExcuse.avec === "avoir"
+									? objetExcuse[i - 1].pluriel === "1"
+										? "ont "
+										: "a "
+									: objetExcuse[i - 1].pluriel === "1"
+									? "sont "
+									: "est ";
 						}
 					}
 					let index = accordercomplement(objetExcuse[i - 1]);
@@ -40,6 +45,5 @@ function genererLesExcuses(excuses, sexe) {
 		}
 		tabDExcuses.push(phraseExcuse);
 	});
-	console.log("tabDExcuses", tabDExcuses);
 	return tabDExcuses;
 }
