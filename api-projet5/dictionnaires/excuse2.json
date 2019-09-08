@@ -1,10 +1,22 @@
 [
-	{ "mot": "Je suis désolé", "type": "formule", "feminin": "1" },
-	{ "mot": "Je suis vraiment désolé", "type": "formule", "feminin": "1" },
-	{ "mot": "Je m'excuse", "type": "formule", "feminin": "0" },
-	{ "mot": "Je vous pris de m'excuser", "type": "formule", "feminin": "0" },
-	{ "mot": "Je vous demande pardon", "type": "formule", "feminin": "0" },
-	{ "mot": "Je m'excuse platement", "type": "formule", "feminin": "0" },
+	{ "mot": ["je suis désolé", "je suis désolée", "je suis désolé", "je suis désolé"], "type": "formule" },
+	{ "mot": ["Je m'excuse", "Je m'excuse", "Je m'excuse", "Je m'excuse"], "type": "formule" },
+	{
+		"mot": ["Je suis vraiment désolé", "Je suis vraiment désolée", "Je suis vraiment désolé", "Je suis vraiment désolé"],
+		"type": "formule"
+	},
+	{
+		"mot": ["Je vous pris de m'excuser", "Je vous pris de m'excuser", "Je vous pris de m'excuser", "Je vous pris de m'excuser"],
+		"type": "formule"
+	},
+	{
+		"mot": ["Je vous demande pardon", "Je vous demande pardon", "Je vous demande pardon", "Je vous demande pardon"],
+		"type": "formule"
+	},
+	{
+		"mot": ["Je m'excuse platement", "Je m'excuse platement", "Je m'excuse platement", "Je m'excuse platement"],
+		"type": "formule"
+	},
 
 	{ "mot": "la soirée d'hier", "type": "temps", "genre": "2", "pluriel": "0" },
 	{ "mot": "ces derniers jours", "type": "temps", "genre": "1", "pluriel": "1" },
