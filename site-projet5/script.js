@@ -5,7 +5,6 @@ const API = "http://localhost:5001";
 
 let compteurdePhrases = 1;
 let nombrePhrasesDemandees = 0;
-let page = 0;
 
 $(document).ready(function() {
 	let endStory = false;
@@ -34,38 +33,34 @@ $(document).ready(function() {
 		nombrePhrasesDemandees = $("#nbPhrase").val();
 		// Lors du premier click on ouvre le livre.
 		if (compteurdePhrases === 1) {
-			await animationTournerLaPage();
+			animationTournerLaPage("next", compteurdePhrases, true);
 			$("#background-book").addClass("background-book");
 		}
 
 		// demander les phrases à l'api puis les afficher.
 		recupereDesPhrases(compteurdePhrases, nombrePhrasesDemandees);
-
-		// A-t-on une page précédente ?
-		let currentPage = $("#book").turn("page");
-		console.log("currentPage2", currentPage);
-		$("#previous-page").prop("disabled", page < 2);
 	});
 
 	$("#previous-page").click(() => {
-		$("#book").turn("previous");
+		animationTournerLaPage("previous", compteurdePhrases);
+		/* $("#book").turn("previous"); */
 		$("#start-story").prop("disabled", true);
 		$("#next-page").prop("disabled", false);
 		//let currentPage = $("#book").turn("page");
-		lastPage += 1;
+		/* lastPage += 1;
 		if (lastPage === 1) {
 			$("#previous-page").prop("disabled", true);
-		}
+		} */
 	});
 	$("#next-page").click(() => {
-		$("#book").turn("next");
+		animationTournerLaPage("next", compteurdePhrases);
 		$("#previous-page").prop("disabled", false);
 
-		lastPage -= 1;
+		/* lastPage -= 1;
 		if (lastPage === 0) {
 			$("#start-story").prop("disabled", false);
 			$("#next-page").prop("disabled", true);
-		}
+		} */
 	});
 
 	$("#end-story").click(() => {
@@ -78,6 +73,7 @@ $(document).ready(function() {
 			$("#start-story").html("Commencer l'histoire");
 			$("#start-story").prop("disabled", false);
 			$("#next-page").prop("disabled", true);
+			$("#previous-page").prop("disabled", true);
 			endStory = false;
 			index = 1;
 		} else {
@@ -88,7 +84,7 @@ $(document).ready(function() {
 
 			let currentPage = $("#book").turn("page");
 			for (let i = 1; i < currentPage; i++) {
-				$("#book").turn("previous");
+				animationTournerLaPage("previous", compteurdePhrases);
 			}
 			$("#previous-page").prop("disabled", true);
 			$("#next-page").prop("disabled", true);
@@ -116,7 +112,7 @@ function afficherLesPhrases(phrases) {
 		setTimeout(function() {
 			const phrase = phrases[i];
 			if (compteurdePhrases > 1 && (compteurdePhrases - 1) % 4 === 0) {
-				animationTournerLaPage();
+				animationTournerLaPage("next", compteurdePhrases, true);
 			}
 			let newPhrase = $("<p class='text-livre text-livre" + compteurdePhrases + "'></p>");
 			let currentPage = $("#book").turn("page");
@@ -125,14 +121,30 @@ function afficherLesPhrases(phrases) {
 			$("#start-story").html("continuer l'histoire");
 			compteurdePhrases++;
 		}, i * 3000);
-		// A-t-on une page précédente ?
-		let currentPage = $("#book").turn("page");
-		console.log("currentPage2", currentPage);
-		$("#previous-page").prop("disabled", currentPage < 4);
+	}
+}
+
+function animationTournerLaPage(newpage, compteurdePhrases, story) {
+	$("#book").turn(newpage);
+	let currentPage = $("#book").turn("page");
+	if (newpage === "next" && story) {
+		$("#page-" + currentPage).html("");
+		$("#previous-page").prop("disabled", currentPage < 3);
+	}
+	if (newpage === "next" && !story) {
+		let lastpage = (Math.trunc(compteurdePhrases / 4) + 1) * 2;
+		if (currentPage >= lastpage) {
+			$("#next-page").prop("disabled", true);
+			$("#start-story").prop("disabled", false);
+		}
+	}
+	if (newpage === "previous") {
+		$("#previous-page").prop("disabled", currentPage - 1 < 3);
 	}
 }
 
 function addPage(page, book) {
+	console.log("je passe");
 	let image = tabImages[Math.floor(tabImages.length * Math.random())];
 	// 	First check if the page is already in the book
 	if (!book.turn("hasPage", page)) {
@@ -152,14 +164,6 @@ function addPage(page, book) {
 			elText.html("");
 		}, 1000);
 	}
-}
-
-function animationTournerLaPage() {
-	page++;
-	$("#book").turn("next");
-	let currentPage = $("#book").turn("page");
-	console.log("currentPage", currentPage);
-	$("#page-" + currentPage).html("");
 }
 
 function animationApparitionText(index) {
