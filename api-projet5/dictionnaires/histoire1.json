@@ -60,7 +60,7 @@
 	{ "mot": "les gens", "type": "personnage", "genre": "1", "pluriel": "1" },
 	{ "mot": "sa petite soeur", "type": "personnage", "genre": "2", "pluriel": "0" },
 	{ "mot": "sa maman", "type": "personnage", "genre": "2", "pluriel": "0" },
-	{ "mot": "un grimlins", "type": "personnage", "genre": "1", "pluriel": "0" },
+	{ "mot": "un gremlins", "type": "personnage", "genre": "1", "pluriel": "0" },
 	{ "mot": "un chasseur", "type": "personnage", "genre": "1", "pluriel": "0" },
 
 	{ "mot": "mais un jour", "type": "declencheur", "suite": "verbe2" },
@@ -184,7 +184,7 @@
 	{ "mot": "découvrit", "type": "verbe", "suite": "personnage" },
 	{ "mot": "sauva", "type": "verbe", "suite": "personnage" },
 	{ "mot": "aida", "type": "verbe", "suite": "personnage" },
-	{ "mot": "trouva", "type": "verbe", "suite": "objet", "suite2": "adjectif" },
+	{ "mot": "trouva", "type": "verbe", "suite": "objet" },
 	{ "mot": "demanda de l'aide à", "type": "verbe", "suite": "personnage" },
 
 	{ "mot": "une pierre philosophale", "genre": "2", "pluriel": "0", "type": "objet" },

@@ -3,7 +3,7 @@ const tabCovers = ["couv1.jpg", "couv2.jpg", "couv3.jpg", "couv4.jpg", "couv5.jp
 //const API = "https://p5api.herokuapp.com";
 const API = "http://localhost:5001";
 
-let compteurdePhrases = 1;
+let compteurdePhrases =1;
 let nombrePhrasesDemandees = 0;
 
 $(document).ready(function() {
@@ -55,7 +55,6 @@ $(document).ready(function() {
 	$("#next-page").click(() => {
 		animationTournerLaPage("next", compteurdePhrases);
 		$("#previous-page").prop("disabled", false);
-
 		/* lastPage -= 1;
 		if (lastPage === 0) {
 			$("#start-story").prop("disabled", false);
@@ -66,16 +65,7 @@ $(document).ready(function() {
 	$("#end-story").click(() => {
 		if (endStory) {
 			//clic sur "nouvelle histoire"
-			let cover = tabCovers[Math.floor(tabCovers.length * Math.random())];
-			$("#img-livre").attr("src", "./assets/images/" + cover);
-
-			$("#end-story").html("Fin de l'histoire");
-			$("#start-story").html("Commencer l'histoire");
-			$("#start-story").prop("disabled", false);
-			$("#next-page").prop("disabled", true);
-			$("#previous-page").prop("disabled", true);
-			endStory = false;
-			index = 1;
+			location.reload();
 		} else {
 			//clic sur "fin de l'histoire"
 			// on réintialise les variable de début d'histoire
@@ -101,13 +91,15 @@ function recupereDesPhrases(numeroDeLaPhrase, nombrePhrasesDemandees) {
 		type: "GET",
 		url: `${API}/histoire/${numeroDeLaPhrase}/${nombrePhrasesDemandees}`,
 		success: function(response) {
-			console.log("response", response);
+			//console.log("response", response);
 			afficherLesPhrases(response);
 		}
 	});
 }
 
 function afficherLesPhrases(phrases) {
+    $("#start-story").prop("disabled", true);
+    const compteurdePhrasesOld = compteurdePhrases;
 	for (let i = 0; i < phrases.length; i++) {
 		setTimeout(function() {
 			const phrase = phrases[i];
@@ -120,11 +112,15 @@ function afficherLesPhrases(phrases) {
 			$(".text-livre" + compteurdePhrases).html(phrase);
 			$("#start-story").html("continuer l'histoire");
 			compteurdePhrases++;
+			if(compteurdePhrasesOld+phrases.length === compteurdePhrases){
+                $("#start-story").prop("disabled", false);
+			}
 		}, i * 3000);
 	}
 }
 
 function animationTournerLaPage(newpage, compteurdePhrases, story) {
+	console.log(compteurdePhrases);
 	$("#book").turn(newpage);
 	let currentPage = $("#book").turn("page");
 	if (newpage === "next" && story) {
@@ -144,7 +140,6 @@ function animationTournerLaPage(newpage, compteurdePhrases, story) {
 }
 
 function addPage(page, book) {
-	console.log("je passe");
 	let image = tabImages[Math.floor(tabImages.length * Math.random())];
 	// 	First check if the page is already in the book
 	if (!book.turn("hasPage", page)) {

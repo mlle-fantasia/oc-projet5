@@ -74,20 +74,29 @@ function choosePhrase(types, index) {
 			continue;
 		}
 		let suite2 = "";
+        if (mot.suite2) {
+            console.log("motSuite.suite2",mot.suite2);
+            suite2 = mot.suite2;
+        }
 		let motActuel = mot;
 		if (index > 5 && motActuel.suite !== "personnage" && type === "verbe") {
 			continuer = false;
 		}
 		while (motActuel.suite) {
+            console.log("motActuel.suite",motActuel.suite);
 			let motSuite = chooseMot(motActuel.suite, histoire1);
 			phrase.push(motSuite);
-			motActuel = motSuite;
+            motActuel = motSuite;
 
-			if (motSuite.suite2) {
-				suite2 = motSuite.suite2;
-			}
+            if (motSuite.suite2) {
+                console.log("motSuite.suite2",motSuite.suite2);
+                suite2 = motSuite.suite2;
+            }
+
 		}
+
 		if (suite2.length) {
+			console.log("suite2",suite2);
 			let motSuite2 = chooseMot(suite2, histoire1);
 			phrase.push(motSuite2);
 		}
