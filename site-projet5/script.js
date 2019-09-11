@@ -1,14 +1,13 @@
 const tabImages = ["image1.jpg", "image2.jpg", "image3.jpg", "image4.jpg", "image5.jpg", "image6.jpg"];
 const tabCovers = ["couv1.jpg", "couv2.jpg", "couv3.jpg", "couv4.jpg", "couv5.jpg", "couv6.jpg", "couv7.jpg", "couv8.jpg", "couv9.jpg", "couv10.jpg"];
-//const API = "https://p5api.herokuapp.com";
-const API = "http://localhost:5001";
+const API = "https://p5api.herokuapp.com";
+//const API = "http://localhost:5001";
 
 let compteurdePhrases =1;
 let nombrePhrasesDemandees = 0;
 
 $(document).ready(function() {
 	let endStory = false;
-	let lastPage = 0;
 	let numberOfPages = 1000;
 
 	let cover = tabCovers[Math.floor(tabCovers.length * Math.random())];
@@ -43,23 +42,12 @@ $(document).ready(function() {
 
 	$("#previous-page").click(() => {
 		animationTournerLaPage("previous", compteurdePhrases);
-		/* $("#book").turn("previous"); */
 		$("#start-story").prop("disabled", true);
 		$("#next-page").prop("disabled", false);
-		//let currentPage = $("#book").turn("page");
-		/* lastPage += 1;
-		if (lastPage === 1) {
-			$("#previous-page").prop("disabled", true);
-		} */
 	});
 	$("#next-page").click(() => {
 		animationTournerLaPage("next", compteurdePhrases);
 		$("#previous-page").prop("disabled", false);
-		/* lastPage -= 1;
-		if (lastPage === 0) {
-			$("#start-story").prop("disabled", false);
-			$("#next-page").prop("disabled", true);
-		} */
 	});
 
 	$("#end-story").click(() => {
@@ -68,10 +56,6 @@ $(document).ready(function() {
 			location.reload();
 		} else {
 			//clic sur "fin de l'histoire"
-			// on réintialise les variable de début d'histoire
-			compteurdePhrases = 1;
-			nombrePhrasesDemandees = 0;
-
 			let currentPage = $("#book").turn("page");
 			for (let i = 1; i < currentPage; i++) {
 				animationTournerLaPage("previous", compteurdePhrases);
@@ -128,7 +112,7 @@ function animationTournerLaPage(newpage, compteurdePhrases, story) {
 		$("#previous-page").prop("disabled", currentPage < 3);
 	}
 	if (newpage === "next" && !story) {
-		let lastpage = (Math.trunc(compteurdePhrases / 4) + 1) * 2;
+		let lastpage = (Math.ceil(compteurdePhrases / 4)) * 2;
 		if (currentPage >= lastpage) {
 			$("#next-page").prop("disabled", true);
 			$("#start-story").prop("disabled", false);
