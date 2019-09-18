@@ -3,7 +3,7 @@ const tabCovers = ["couv1.jpg", "couv2.jpg", "couv3.jpg", "couv4.jpg", "couv5.jp
 const API = "https://p5api.herokuapp.com";
 //const API = "http://localhost:5001";
 
-let compteurdePhrases =1;
+let compteurdePhrases = 1;
 let nombrePhrasesDemandees = 0;
 
 $(document).ready(function() {
@@ -77,13 +77,16 @@ function recupereDesPhrases(numeroDeLaPhrase, nombrePhrasesDemandees) {
 		success: function(response) {
 			//console.log("response", response);
 			afficherLesPhrases(response);
+		},
+		error: function(resultat, statut, erreur) {
+			console.log("erreur : ", erreur);
 		}
 	});
 }
 
 function afficherLesPhrases(phrases) {
-    $("#start-story").prop("disabled", true);
-    const compteurdePhrasesOld = compteurdePhrases;
+	$("#start-story").prop("disabled", true);
+	const compteurdePhrasesOld = compteurdePhrases;
 	for (let i = 0; i < phrases.length; i++) {
 		setTimeout(function() {
 			const phrase = phrases[i];
@@ -96,8 +99,8 @@ function afficherLesPhrases(phrases) {
 			$(".text-livre" + compteurdePhrases).html(phrase);
 			$("#start-story").html("continuer l'histoire");
 			compteurdePhrases++;
-			if(compteurdePhrasesOld+phrases.length === compteurdePhrases){
-                $("#start-story").prop("disabled", false);
+			if (compteurdePhrasesOld + phrases.length === compteurdePhrases) {
+				$("#start-story").prop("disabled", false);
 			}
 		}, i * 3000);
 	}
@@ -112,7 +115,7 @@ function animationTournerLaPage(newpage, compteurdePhrases, story) {
 		$("#previous-page").prop("disabled", currentPage < 3);
 	}
 	if (newpage === "next" && !story) {
-		let lastpage = (Math.ceil(compteurdePhrases / 4)) * 2;
+		let lastpage = Math.ceil(compteurdePhrases / 4) * 2;
 		if (currentPage >= lastpage) {
 			$("#next-page").prop("disabled", true);
 			$("#start-story").prop("disabled", false);
