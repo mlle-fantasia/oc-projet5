@@ -1,12 +1,13 @@
 const tabImages = ["image1.jpg", "image2.jpg", "image3.jpg", "image4.jpg", "image5.jpg", "image6.jpg"];
 const tabCovers = ["couv1.jpg", "couv2.jpg", "couv3.jpg", "couv4.jpg", "couv5.jpg", "couv6.jpg", "couv7.jpg", "couv8.jpg", "couv9.jpg", "couv10.jpg"];
-const API = "https://p5api.herokuapp.com";
+//const API = "https://p5api.herokuapp.com";
+const API = "https://ocp5api.marinafront.fr";
 //const API = "http://localhost:5001";
 
 let compteurdePhrases = 1;
 let nombrePhrasesDemandees = 0;
 
-$(document).ready(function() {
+$(document).ready(function () {
 	let endStory = false;
 	let numberOfPages = 1000;
 
@@ -19,16 +20,16 @@ $(document).ready(function() {
 		elevation: 50,
 		gradients: !$.isTouch,
 		when: {
-			turning: function(e, page, view) {
+			turning: function (e, page, view) {
 				// Gets the range of pages that the book needs right now
 				let range = $(this).turn("range", page);
 				// Check if each page is within the book
 				for (page = range[0]; page <= range[1]; page++) addPage(page, $(this));
-			}
-		}
+			},
+		},
 	});
 
-	$("#start-story").click(async function() {
+	$("#start-story").click(async function () {
 		nombrePhrasesDemandees = $("#nbPhrase").val();
 		// Lors du premier click on ouvre le livre.
 		if (compteurdePhrases === 1) {
@@ -74,13 +75,13 @@ function recupereDesPhrases(numeroDeLaPhrase, nombrePhrasesDemandees) {
 	$.ajax({
 		type: "GET",
 		url: `${API}/histoire/${numeroDeLaPhrase}/${nombrePhrasesDemandees}`,
-		success: function(response) {
+		success: function (response) {
 			//console.log("response", response);
 			afficherLesPhrases(response);
 		},
-		error: function(resultat, statut, erreur) {
+		error: function (resultat, statut, erreur) {
 			console.log("erreur : ", erreur);
-		}
+		},
 	});
 }
 
@@ -88,7 +89,7 @@ function afficherLesPhrases(phrases) {
 	$("#start-story").prop("disabled", true);
 	const compteurdePhrasesOld = compteurdePhrases;
 	for (let i = 0; i < phrases.length; i++) {
-		setTimeout(function() {
+		setTimeout(function () {
 			const phrase = phrases[i];
 			if (compteurdePhrases > 1 && (compteurdePhrases - 1) % 4 === 0) {
 				animationTournerLaPage("next", compteurdePhrases, true);
@@ -107,7 +108,6 @@ function afficherLesPhrases(phrases) {
 }
 
 function animationTournerLaPage(newpage, compteurdePhrases, story) {
-	console.log(compteurdePhrases);
 	$("#book").turn(newpage);
 	let currentPage = $("#book").turn("page");
 	if (newpage === "next" && story) {
@@ -133,7 +133,7 @@ function addPage(page, book) {
 		// Create an element for this page
 		var element = $("<div />", {
 			class: "page " + (page % 2 === 0 ? "odd page-text" : "even page-image"),
-			id: "page-" + page
+			id: "page-" + page,
 		}).html('<i class="loader"></i>');
 		let elText = $("<p />", { class: "text-livre", id: "text-livre" });
 		let elImg = $("<img />", { class: "img-livre", id: "img-livre", src: "assets/images/" + image });
@@ -142,7 +142,7 @@ function addPage(page, book) {
 		// If not then add the page
 		book.turn("addPage", element, page);
 		// Let's assum that the data is comming from the server and the request takes 1s.
-		setTimeout(function() {
+		setTimeout(function () {
 			elText.html("");
 		}, 1000);
 	}
@@ -158,15 +158,15 @@ function animationApparitionText(index) {
 			opacity: [0, 1],
 			easing: "easeInOutQuad",
 			duration: 500,
-			delay: function(el, i) {
+			delay: function (el, i) {
 				return 50 * (i + 1);
-			}
+			},
 		})
 		.add({
 			targets: ".text-livre",
 			opacity: 0,
 			duration: Infinity,
-			easing: "easeOutExpo"
+			easing: "easeOutExpo",
 		});
 }
 
@@ -176,8 +176,8 @@ function animationApparitionText(index) {
 /*********************************************************************************************************************/
 /*********************************************************************************************************************/
 let sexe = "homme";
-$(document).ready(function() {
-	$("#downloadExcuse").click(async function() {
+$(document).ready(function () {
+	$("#downloadExcuse").click(async function () {
 		if ($("#genre").prop("checked")) {
 			sexe = "femme";
 		}
@@ -187,13 +187,13 @@ $(document).ready(function() {
 		$.ajax({
 			type: "GET",
 			url: API + "/excuse/" + nbExcuse + "/" + sexe,
-			success: function(response) {
+			success: function (response) {
 				for (let i = 0; i < response.length; i++) {
 					let excuse = response[i];
 					$("#excuse-text").append("<p>" + excuse + "</p>");
 					$("#downloadExcuse").html("Générer de nouvelles excuses");
 				}
-			}
+			},
 		});
 	});
 });
@@ -202,8 +202,8 @@ $("#btn-sda").click(() => {
 	$.ajax({
 		type: "GET",
 		url: API + "/sda",
-		success: function(response) {
+		success: function (response) {
 			console.log(response); //ne pas effacer cette ligne, c'est la réponse ;)
-		}
+		},
 	});
 });

@@ -19,7 +19,7 @@ var sdaDico = require("./dictionnaires/sda.json");
 // fait un filtre dans le dictionnaire en fonction du type et choisi un mot au hasard
 // renvoie tout l'objet du mot
 function chooseMot(type, dico) {
-	const tabphrase = dico.filter(objet => {
+	const tabphrase = dico.filter((objet) => {
 		return objet.type === type;
 	});
 	let mot = tabphrase[Math.floor(tabphrase.length * Math.random())];
@@ -32,7 +32,7 @@ function chooseMot(type, dico) {
 /*********************************************************************************************************************/
 /*********************************************************************************************************************/
 
-app.get("/histoire/:numeroPhrase/:nbPhrase", function(req, res) {
+app.get("/histoire/:numeroPhrase/:nbPhrase", function (req, res) {
 	let phrases = [];
 	let numeroPhrase = parseInt(req.params.numeroPhrase);
 
@@ -74,29 +74,24 @@ function choosePhrase(types, index) {
 			continue;
 		}
 		let suite2 = "";
-        if (mot.suite2) {
-            console.log("motSuite.suite2",mot.suite2);
-            suite2 = mot.suite2;
-        }
+		if (mot.suite2) {
+			suite2 = mot.suite2;
+		}
 		let motActuel = mot;
 		if (index > 5 && motActuel.suite !== "personnage" && type === "verbe") {
 			continuer = false;
 		}
 		while (motActuel.suite) {
-            console.log("motActuel.suite",motActuel.suite);
 			let motSuite = chooseMot(motActuel.suite, histoire1);
 			phrase.push(motSuite);
-            motActuel = motSuite;
+			motActuel = motSuite;
 
-            if (motSuite.suite2) {
-                console.log("motSuite.suite2",motSuite.suite2);
-                suite2 = motSuite.suite2;
-            }
-
+			if (motSuite.suite2) {
+				suite2 = motSuite.suite2;
+			}
 		}
 
 		if (suite2.length) {
-			console.log("suite2",suite2);
 			let motSuite2 = chooseMot(suite2, histoire1);
 			phrase.push(motSuite2);
 		}
@@ -110,7 +105,7 @@ function choosePhrase(types, index) {
 /*********************************************************************************************************************/
 /*********************************************************************************************************************/
 
-app.get("/excuse/:index/:sexe", function(req, res) {
+app.get("/excuse/:index/:sexe", function (req, res) {
 	let excuses = [];
 	let sexe = req.params.sexe;
 	const tabtypes = ["formule", "temps", "calificatiftemps", "sujet", "verbe", "objet", "capacite", "promesse"];
@@ -123,7 +118,7 @@ app.get("/excuse/:index/:sexe", function(req, res) {
 			if (type === "objet") {
 				if (verbe.suite) {
 					if (verbe.suite === "objet") {
-						const tabobjetExcuse = excuse2.filter(objet => {
+						const tabobjetExcuse = excuse2.filter((objet) => {
 							return objet.type === "objet1" || objet.type === "objet2";
 						});
 						let objet = tabobjetExcuse[Math.floor(tabobjetExcuse.length * Math.random())];
@@ -154,7 +149,7 @@ app.get("/excuse/:index/:sexe", function(req, res) {
 /*********************************************************************************************************************/
 /*********************************************************************************************************************/
 
-app.get("/sda", function(req, res) {
+app.get("/sda", function (req, res) {
 	const structurePhrasesda = [
 		["debut", "temps", "sujet", "verbe", "mais"],
 		["sujet", "adj", "qui", "verbe", "car"],
@@ -163,13 +158,13 @@ app.get("/sda", function(req, res) {
 		["temps", "lieu", "sujet", "verbe", "mais", "car"],
 		["lieu", "sujet", "verbe", "pour", "mais"],
 		["sujet", "verbeparole", "parole", "sujet", "verbeparole", "parole", "car"],
-		["lieu", "sujet", "verbeparole", "parole", "car", "mais"]
+		["lieu", "sujet", "verbeparole", "parole", "car", "mais"],
 	];
 	let sda = "";
 	let structure = structurePhrasesda[Math.floor(structurePhrasesda.length * Math.random())];
 
 	for (let i = 0; i < structure.length; i++) {
-		let tabtype = sdaDico.filter(objet => {
+		let tabtype = sdaDico.filter((objet) => {
 			return objet.type === structure[i];
 		});
 		let extrait = tabtype[Math.floor(tabtype.length * Math.random())];
@@ -180,7 +175,7 @@ app.get("/sda", function(req, res) {
 	res.send(sda);
 });
 
-const port = process.env.PORT || 5001;
-app.listen(port, function() {
-	console.log("Example app listening on port 5001!");
+const port = process.env.PORT || 3000;
+app.listen(port, function () {
+	console.log("Example app listening on port 3000!");
 });
