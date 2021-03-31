@@ -1,3 +1,5 @@
 api-projet5/node_modules/
 site-projet5/dist/
 site-projet5/node_modules/
+.DS_Store
+site-projet5/config.js

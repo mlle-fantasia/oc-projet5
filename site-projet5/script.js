@@ -1,7 +1,7 @@
 const tabImages = ["image1.jpg", "image2.jpg", "image3.jpg", "image4.jpg", "image5.jpg", "image6.jpg"];
 const tabCovers = ["couv1.jpg", "couv2.jpg", "couv3.jpg", "couv4.jpg", "couv5.jpg", "couv6.jpg", "couv7.jpg", "couv8.jpg", "couv9.jpg", "couv10.jpg"];
 //const API = "https://p5api.herokuapp.com";
-const API = "https://ocp5api.marinafront.fr";
+//const API = "https://ocp5api.marinafront.fr";
 //const API = "http://localhost:5001";
 
 let compteurdePhrases = 1;
@@ -74,7 +74,7 @@ $(document).ready(function () {
 function recupereDesPhrases(numeroDeLaPhrase, nombrePhrasesDemandees) {
 	$.ajax({
 		type: "GET",
-		url: `${API}/histoire/${numeroDeLaPhrase}/${nombrePhrasesDemandees}`,
+		url: `${MYCONF}/histoire/${numeroDeLaPhrase}/${nombrePhrasesDemandees}`,
 		success: function (response) {
 			//console.log("response", response);
 			afficherLesPhrases(response);
@@ -186,7 +186,7 @@ $(document).ready(function () {
 		let nbExcuse = $("#nbExcuse").val();
 		$.ajax({
 			type: "GET",
-			url: API + "/excuse/" + nbExcuse + "/" + sexe,
+			url: MYCONF + "/excuse/" + nbExcuse + "/" + sexe,
 			success: function (response) {
 				for (let i = 0; i < response.length; i++) {
 					let excuse = response[i];
@@ -201,7 +201,7 @@ $(document).ready(function () {
 $("#btn-sda").click(() => {
 	$.ajax({
 		type: "GET",
-		url: API + "/sda",
+		url: MYCONF + "/sda",
 		success: function (response) {
 			console.log(response); //ne pas effacer cette ligne, c'est la réponse ;)
 		},
