@@ -74,7 +74,7 @@ $(document).ready(function () {
 function recupereDesPhrases(numeroDeLaPhrase, nombrePhrasesDemandees) {
 	$.ajax({
 		type: "GET",
-		url: `${MYCONF}/histoire/${numeroDeLaPhrase}/${nombrePhrasesDemandees}`,
+		url: `${MYCONF.API}/histoire/${numeroDeLaPhrase}/${nombrePhrasesDemandees}`,
 		success: function (response) {
 			//console.log("response", response);
 			afficherLesPhrases(response);
@@ -186,7 +186,7 @@ $(document).ready(function () {
 		let nbExcuse = $("#nbExcuse").val();
 		$.ajax({
 			type: "GET",
-			url: MYCONF + "/excuse/" + nbExcuse + "/" + sexe,
+			url: MYCONF.API + "/excuse/" + nbExcuse + "/" + sexe,
 			success: function (response) {
 				for (let i = 0; i < response.length; i++) {
 					let excuse = response[i];
@@ -201,7 +201,7 @@ $(document).ready(function () {
 $("#btn-sda").click(() => {
 	$.ajax({
 		type: "GET",
-		url: MYCONF + "/sda",
+		url: MYCONF.API + "/sda",
 		success: function (response) {
 			console.log(response); //ne pas effacer cette ligne, c'est la réponse ;)
 		},
