@@ -1,7 +1,16 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-//app.use(cors({ origin: "*" }));
+const corsOption = {
+	origin: true,
+	methods: "GET,PUT,POST,DELETE,OPTIONS",
+	allowedHeaders:
+		"Content-Type, Authorization, Credentials, X-Requested-With, Accept, Content-Length, x-auth-apikey, x-auth-apisecret, x-auth-accesstoken, x-auth-refreshtoken, x-auth-webaccesstoken, x-auth-webrefreshtoken, Access-Control-Allow-Origin",
+	credentials: true,
+	optionsSuccessStatus: 200,
+};
+app.options("*", cors(corsOption));
+app.use(cors(corsOption));
 
 var fs = require("fs");
 var vm = require("vm");
